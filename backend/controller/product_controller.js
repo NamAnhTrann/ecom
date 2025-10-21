@@ -35,9 +35,9 @@ module.exports = {
 
   //delete single chosen product based on params id
   deleteSingleProduct: async function (req, res) {
-    const productId = req.params.id;
+    const product_id = req.params.id;
     try {
-      const deleteProduct = await Product.findByIdAndDelete(productId);
+      const deleteProduct = await Product.findByIdAndDelete(product_id);
       return res.status(200).json({
         message: "product has been deleted",
         deleteProduct,
@@ -51,14 +51,18 @@ module.exports = {
 
   //update single product details
   updateSingleProduct: async function (req, res) {
-    const productId = req.params.id;
+    const product_id = req.params.id;
+    const productData = req.body;
     try {
-      const updateProduct = await Product.findByIdAndUpdate(productId);
+      const updateProduct = await Product.findByIdAndUpdate(product_id, productData, {
+        new: true,
+        runValidators: true,
+      });
       if (!updateProduct) {
-        console.log("cannot update this product id", productId);
+        console.log("cannot update this product id", product_id);
         return res
           .status(400)
-          .json({ message: "error updating product", productId });
+          .json({ message: "error updating product", product_id });
       } else {
         return res
           .status(200)
@@ -92,9 +96,9 @@ module.exports = {
   },
 
   listSingleProduct: async function (req, res) {
-    const productId = req.params.id;
+    const product_id = req.params.id;
     try {
-      const product = await Product.findById(productId);
+      const product = await Product.findById(product_id);
       if (!product) {
         console.log(product);
         return res

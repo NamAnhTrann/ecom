@@ -29,6 +29,12 @@ let productSchema = new mongoose.Schema({
     product_img: {
         type:String,
         required: false,
+    },
+
+    user_id:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true,
     }
 
     // product_category:{
