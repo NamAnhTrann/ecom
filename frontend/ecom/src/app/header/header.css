@@ -1,0 +1,20 @@
+.nav-link {
+  display: inline-block;
+  text-decoration: none;
+  padding-bottom: 4px;
+  background-image: linear-gradient(hsl(0, 0%, 0%), #000000);
+  background-size: 0% 2px;          
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  transition: background-size 0.3s ease;
+}
+
+.nav-link:hover {
+  background-size: 100% 2px;
+}
+
+
+
+.active {
+  background-size: 100% 2px;  
+}
