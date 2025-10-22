@@ -1,14 +1,149 @@
 const User = require("../schema/user_schema");
+const jwt = require("jsonwebtoken");
+const bycrypt = require("bcrypt");
+
+
+//helper functions
+function generateTokens(user) {
+  const accessTokens = jwt.sign(
+    { id: user._id, role: user.user_role },
+    process.env.JWT_SECRET_KEY,
+    { expiresIn: "1h" }
+  );
+
+  const refreshTokens = jwt.sign(
+    { id: user._id, role: user.user_role },
+    process.env.REFRESH_SECRET,
+    { expiresIn: "30d" }
+  );
+
+  return { accessTokens, refreshTokens };
+}
 
 module.exports = {
-  //user signup
-  createUser: async function (req, res) {
+  //signup api
+  registerUser: async function (req, res) {
     try {
-      //TODO
-    } catch (err) {
-      return res.status(500).json({ message: "Internal server error", err });
+      const {
+        user_email,
+        user_password,
+        user_first_name,
+        user_last_name,
+        user_phone_number,
+      } = req.body;
+      const existingUser = await User.findOne({ user_email });
+      if (existingUser) {
+        return res
+          .status(400)
+          .json({ message: "user already exists with that email" });
+      }
+
+      const hashedPassword = await bycrypt.hash(user_password, 10);
+      const newUser = new User({
+        user_email,
+        user_password: hashedPassword,
+        user_first_name,
+        user_last_name,
+        user_phone_number,
+        user_role: user_role || "buyer",
+      });
+
+      await newUser.save();
+      return res.status(201).json({ message: "user registered successfully" });
+    } catch (error) {
+      console.log("error during user registration", error);
+      return res.status(500).json({ message: "Internal server error", error });
     }
   },
+
+  //login route
+  loginUser: async function (req, res) {
+    try {
+      const user = req.user;
+      if (!user) {
+        return res.status(400).json({ message: "No user authenticated" });
+      }
+
+      const { accessTokens, refreshTokens } = generateTokens(user);
+
+      // Fetch full document and save refresh token
+      const dbUser = await User.findById(user._id);
+      dbUser.refreshTokens = refreshTokens;
+      await dbUser.save();
+
+      res.cookie("refreshTokens", refreshTokens, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: process.env.NODE_ENV === "production" ? "Strict" : "Lax",
+        maxAge: 30 * 24 * 60 * 60 * 1000,
+      });
+
+      res.json({
+        accessTokens,
+        user: {
+          id: dbUser._id,
+          user_email: dbUser.user_email,
+          user_first_name: dbUser.user_first_name,
+          user_last_name: dbUser.user_last_name,
+          user_role: dbUser.user_role,
+        },
+      });
+      console.log("user logged in successfully:", dbUser.user_email);
+    } catch (err) {
+      console.error("Error during login:", err);
+      res.status(500).json({ message: "Internal server error", error: err });
+    }
+  },
+
+  refreshAccessToken: async function (req, res) {
+    const refreshToken = req.cookies.refreshTokens;
+    if (!refreshToken) {
+      return res.status(401).json({ message: "no refresh token provided" });
+    }
+
+    try {
+      const decoded = jwt.verify(refreshToken, process.env.REFRESH_SECRET);
+      console.log("decoded refresh token", decoded);
+      const user = await User.findById(decoded.id);
+      console.log("Found user:", user);
+
+      if (!user || user.refreshTokens !== refreshToken) {
+        console.log("invalid refresh token", user, refreshToken);
+        return res.status(403).json({ message: "invalid refresh token" });
+      }
+      const newTokens = generateTokens(user);
+      user.refreshTokens = newTokens.refreshTokens;
+      await user.save();
+
+      res.cookie("refreshTokens", newTokens.refreshTokens, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "Strict",
+        maxAge: 30 * 24 * 60 * 60 * 1000, //30 days
+      });
+      res.json({ accessTokens: newTokens.accessTokens });
+    } catch (error) {
+      return res.status(500).json({ message: "Internal server error", error });
+    }
+  },
+
+  //logout api
+  logoutUser: async function (req, res) {
+    const refreshToken = req.cookies.refreshTokens;
+    if (!refreshToken) {
+      return res.status(401).json({ message: "no refresh token provided" });
+    }
+
+    const user = await User.findOne({ refreshTokens: refreshToken });
+    if (user) {
+      user.refreshTokens = null;
+      await user.save();
+    }
+
+    res.clearCookie("refreshTokens");
+    res.json({ message: "user logged out successfully" });
+  },
+
   //this can be use to list all users on the marketplace if they were to
   //display products from specific users
   getAllUsers: async function (req, res) {
@@ -81,7 +216,8 @@ module.exports = {
     const userData = req.body;
     try {
       const updated_user = await User.findByIdAndUpdate(user_id, userData, {
-        new: true, runValidators: true
+        new: true,
+        runValidators: true,
       });
       if (!updated_user) {
         return res

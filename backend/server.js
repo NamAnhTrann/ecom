@@ -1,54 +1,53 @@
 const express = require("express");
 const cors = require("cors");
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
+const passport = require("passport");
+const cookieParser = require("cookie-parser");
 require("dotenv").config();
+
+require("./utils/passport");
 
 const app = express();
 app.use(express.json());
+app.use(cookieParser()); 
 
-const allowedOrigins = [
-  "http://localhost:4200",
-];
+app.use(passport.initialize());
+
+const allowedOrigins = ["http://localhost:4200"];
 
 app.use(
   cors({
     origin: allowedOrigins,
     methods: "GET, POST, PUT, DELETE",
-    credential: true,
-    allowedHeaders: "Content-Type, Authorization",
+    credentials: true, 
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
-//holders for routers
 const productRouter = require("./router/product_router");
+const userRouter = require("./router/user_router");
 
-//use router
 app.use(productRouter);
+app.use(userRouter);
+
+app.get("/", (req, res) => {
+  res.send("Backend is running");
+});
 
 const db_url = process.env.db_url;
 const port_no = process.env.port_no;
 
-app.listen(port_no, function (err) {
-  if (!err) {
-    console.log(`listens on ${port_no}`);
-  } else {
-    console.log("Error", err);
-  }
-});
-
-app.get("/", function (req, res) {
-  res.send(`backend is running `);
-});
-
 async function connectDB() {
   try {
     await mongoose.connect(db_url);
-    console.log(`Conneted to the database`);
+    console.log("Connected to the database");
   } catch (err) {
-    console.log("Connection Error");
+    console.error("Database connection error:", err);
   }
 }
 
 connectDB();
 
-
+app.listen(port_no, () => {
+  console.log(`Server listening on port ${port_no}`);
+});
