@@ -4,7 +4,6 @@ const user_schema = new mongoose.Schema({
   googleId: {
     type: String,
     required: false,
-    unique: true,
   },
 
   // hashed before stored
@@ -27,12 +26,10 @@ const user_schema = new mongoose.Schema({
   user_email: {
     type: String,
     required: true,
-    unique: true,
   },
   user_phone_number: {
     type: String,
     required: false,
-    unique: true,
   },
 
   user_address: {
