@@ -15,11 +15,11 @@ export class Header {
   constructor(private router: Router) {}
 
   signUpButton() {
-    this.router.navigate(['/signup-page']);
+    this.router.navigate(['/signup']);
   }
 
   loginButton() {
-    this.router.navigate(['/login-page']);
+    this.router.navigate(['/login']);
   }
 
   @HostListener('window:scroll')

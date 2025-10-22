@@ -12,7 +12,14 @@ router.post("/login", passport.authenticate("local", { session: false }), userCo
 
 // Google OAuth
 router.get("/auth/google", passport.authenticate("google", { scope: ["profile", "email"] }));
-router.get("/auth/google/callback", passport.authenticate("google", { session: false }), userController.loginUser);
+router.get(
+  "/auth/google/callback",
+  passport.authenticate("google", { session: false, failureRedirect: "/" }),
+  (req, res) => {
+    // Success — user is now authenticated via Google
+    res.redirect("http://localhost:4200/");
+  }
+);
 
 // Refresh + Logout
 router.get("/refresh", userController.refreshAccessToken);
