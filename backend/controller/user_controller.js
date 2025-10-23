@@ -2,7 +2,6 @@ const User = require("../schema/user_schema");
 const jwt = require("jsonwebtoken");
 const bycrypt = require("bcrypt");
 
-
 //helper functions
 function generateTokens(user) {
   const accessTokens = jwt.sign(
@@ -125,6 +124,44 @@ module.exports = {
       res.json({ accessTokens: newTokens.accessTokens });
     } catch (error) {
       return res.status(500).json({ message: "Internal server error", error });
+    }
+  },
+
+  //google stuff
+
+  //initiate google oauth
+  googleAuth: (req, res, next) => {
+    const passport = require("passport");
+    passport.authenticate("google", { scope: ["profile", "email"] })(
+      req,
+      res,
+      next
+    );
+  },
+
+  //google callback with jwt tokens
+  googleAuthCallback: async (req, res) => {
+    try {
+      const user = req.user;
+      const { accessTokens, refreshTokens } = generateTokens(user);
+
+      user.refreshTokens = refreshTokens;
+      await user.save();
+
+      const isLocal = req.hostname.includes("localhost");
+
+      res.cookie("refreshTokens", refreshTokens, {
+        httpOnly: true,
+        secure: !isLocal,
+        sameSite: isLocal ? "Lax" : "Strict",
+        maxAge: 30 * 24 * 60 * 60 * 1000,
+      });
+
+      const redirectURL = `http://localhost:4200/#/auth/callback?access_token=${accessTokens}&user_role=${user.user_role}`;
+      res.redirect(redirectURL);
+    } catch (error) {
+      console.error("Error during Google OAuth callback:", error);
+      res.redirect("http://localhost:4200/login?error=google");
     }
   },
 

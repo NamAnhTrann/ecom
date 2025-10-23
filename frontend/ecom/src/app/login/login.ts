@@ -8,16 +8,15 @@ import { Router, RouterLink } from '@angular/router';
   selector: 'app-login',
   imports: [FormsModule, CommonModule, RouterLink],
   templateUrl: './login.html',
-  styleUrl: './login.css'
+  styleUrl: './login.css',
 })
 export class Login {
-
   creds = {
     user_email: '',
-    user_password: ''
-  }
+    user_password: '',
+  };
 
-  constructor(private auth: Auth, private router:Router){}
+  constructor(private auth: Auth, private router: Router) {}
 
   onLogin() {
     this.auth.login(this.creds).subscribe({
@@ -26,14 +25,10 @@ export class Login {
         const role = res.user.user_role;
 
         if (role === 'seller') {
-          // Redirect sellers to seller dashboard
           this.router.navigate(['/seller-dashboard']);
-
-          if(role === 'admin'){
-            this.router.navigate(['/admin-dashboard']);
-          }
+        } else if (role === 'admin') {
+          this.router.navigate(['/admin-dashboard']);
         } else {
-          // Redirect everyone else to main/home/dashboard
           this.router.navigate(['/']);
         }
       },
@@ -43,4 +38,3 @@ export class Login {
     });
   }
 }
-

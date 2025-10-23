@@ -1,5 +1,7 @@
 const express = require("express");
 const passport = require("passport");
+const jwt = require("jsonwebtoken");
+
 const userController = require("../controller/user_controller");
 // const { verifyToken } = require("../middleware/auth");
 // const { authorizeRoles } = require("../middleware/authorizeRole");
@@ -11,14 +13,11 @@ router.post("/register", userController.registerUser);
 router.post("/login", passport.authenticate("local", { session: false }), userController.loginUser);
 
 // Google OAuth
-router.get("/auth/google", passport.authenticate("google", { scope: ["profile", "email"] }));
+router.get("/auth/google", userController.googleAuth);
 router.get(
   "/auth/google/callback",
   passport.authenticate("google", { session: false, failureRedirect: "/" }),
-  (req, res) => {
-    // Success — user is now authenticated via Google
-    res.redirect("http://localhost:4200/");
-  }
+  userController.googleAuthCallback
 );
 
 // Refresh + Logout

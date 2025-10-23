@@ -7,14 +7,29 @@ import { tap } from 'rxjs';
   providedIn: 'root',
 })
 export class Auth {
-  private apiUrl = 'http://localhost:3030'
+  private apiUrl = 'http://localhost:3030';
   isLoggedIn = signal<boolean>(!!localStorage.getItem('access_token'));
   userRole = signal<string | null>(localStorage.getItem('user_role'));
 
-  constructor(private db: DbService, private router: Router) {}
+  constructor(private db: DbService, private router: Router) {
+    const token = localStorage.getItem('access_token');
+    if (!token) {
+      this.isLoggedIn.set(false);
+      this.userRole.set(null);
+    }
+     window.addEventListener('storage', () => {
+      this.userRole.set(localStorage.getItem('user_role'));
+    });
+    console.log('AuthService initialized — userRole:', this.userRole());
 
+  }
 
-  register(userData:any){
+  setUserRole(role: string) {
+    localStorage.setItem('user_role', role);
+    this.userRole.set(role);
+  }
+
+  register(userData: any) {
     return this.db.registerUser(userData);
   }
 
@@ -23,7 +38,7 @@ export class Auth {
   }
   //1. call backend to login
   //2. store the token in localStorage
-  //3. update the signals 
+  //3. update the signals
   login(credentials: any) {
     return this.db.loginUser(credentials).pipe(
       tap((res: any) => {
@@ -33,7 +48,7 @@ export class Auth {
         this.userRole.set(res.user.user_role);
       })
     );
-  } 
+  }
 
   //1. logout user
   //2. calls the backend to clear cookie
@@ -59,7 +74,7 @@ export class Auth {
     return !!localStorage.getItem('access_token');
   }
 
-  //return the user role 
+  //return the user role
   getUserRole(): string | null {
     return localStorage.getItem('user_role');
   }

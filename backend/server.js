@@ -26,9 +26,10 @@ app.use(
 
 const productRouter = require("./router/product_router");
 const userRouter = require("./router/user_router");
-
+const contactRouter = require("./router/contact_us_router")
 app.use(productRouter);
 app.use(userRouter);
+app.use(contactRouter);
 
 app.get("/", (req, res) => {
   res.send("Backend is running");
