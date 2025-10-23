@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { Auth } from '../services/auth';
 
 @Component({
   selector: 'app-header',
@@ -12,7 +13,7 @@ export class Header {
  scrolled = false;
   mobileOpen= false;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, public auth:Auth) {}
 
   signUpButton() {
     this.router.navigate(['/signup']);
@@ -20,6 +21,10 @@ export class Header {
 
   loginButton() {
     this.router.navigate(['/login']);
+  }
+
+  logoutButton(){
+    this.auth.logout()
   }
 
   @HostListener('window:scroll')
