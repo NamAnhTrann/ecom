@@ -10,6 +10,7 @@ export class Auth {
   private apiUrl = 'http://localhost:3030';
   isLoggedIn = signal<boolean>(!!localStorage.getItem('access_token'));
   userRole = signal<string | null>(localStorage.getItem('user_role'));
+  
 
   constructor(private db: DbService, private router: Router) {
     const token = localStorage.getItem('access_token');

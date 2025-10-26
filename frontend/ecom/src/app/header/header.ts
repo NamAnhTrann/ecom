@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener } from '@angular/core';
+import { Component, effect, HostListener } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { Auth } from '../services/auth';
 
@@ -13,7 +13,19 @@ export class Header {
  scrolled = false;
   mobileOpen= false;
 
-  constructor(private router: Router, public auth:Auth) {}
+  //auth listner
+  isLoggedIn: any;
+  userRole: any;
+
+  constructor(private router: Router, public auth:Auth) {
+    this.isLoggedIn = this.auth.isLoggedIn;
+    this.userRole = this.auth.userRole;
+
+    //debugging purposes, listen for change
+    effect(() => {
+      console.log('Auth changed:', this.isLoggedIn(), this.userRole());
+    });
+  }
 
   signUpButton() {
     this.router.navigate(['/signup']);

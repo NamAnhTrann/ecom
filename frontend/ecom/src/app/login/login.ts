@@ -29,7 +29,7 @@ export class Login {
         } else if (role === 'admin') {
           this.router.navigate(['/admin-dashboard']);
         } else {
-          this.router.navigate(['/']);
+          this.router.navigate(['/marketplace-page']);
         }
       },
       error: (err) => {

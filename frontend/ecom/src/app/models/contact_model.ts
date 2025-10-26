@@ -10,7 +10,7 @@ export class Contact {
   contact_last_name?: string;
   contact_email?: string;
   contact_phone_number?: string;
-  contact_enquiry_type?: string;
+  contact_enquiry_type: string = 'General_enquiry';
   contact_message?: string;
   contact_createdAt?: Date;
   contact_updatedAt?: Date;
@@ -20,7 +20,7 @@ export class Contact {
     this.contact_last_name = '';
     this.contact_email = '';
     this.contact_phone_number = '';
-    this.contact_enquiry_type = '';
+     this.contact_enquiry_type = 'General_enquiry';
     this.contact_message = '';
     this.contact_createdAt = new Date();
     this.contact_updatedAt = new Date();

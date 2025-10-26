@@ -30,6 +30,7 @@ module.exports = {
         user_last_name,
         user_phone_number,
         user_role,
+
       } = req.body;
       const existingUser = await User.findOne({ user_email });
       if (existingUser) {
@@ -128,7 +129,6 @@ module.exports = {
   },
 
   //google stuff
-
   //initiate google oauth
   googleAuth: (req, res, next) => {
     const passport = require("passport");
