@@ -1,4 +1,5 @@
 const Product = require("../schema/products_schema");
+const User = require("../schema/user_schema.js");
 
 module.exports = {
   //below are business logic operations apis
@@ -6,15 +7,46 @@ module.exports = {
   //add products
   addProduct: async function (req, res) {
     try {
-      const newProduct = new Product({
-        ...req.body,
+      const {
+        product_title,
+        product_price,
+        product_desc,
+        product_quantity,
+        product_img,
+      } = req.body;
+
+      const user = req.user;
+      if (!user) {
+        console.log("No user found in req.user");
+        return res.status(401).json({ message: "User not authenticated" });
+      }
+
+      if (user.user_role !== "seller") {
+        console.log("Unauthorized role:", user.user_role);
+        return res
+          .status(403)
+          .json({ message: "Only sellers can add products" });
+      }
+
+      const product = new Product({
+        product_title,
+        product_price,
+        product_desc,
+        product_quantity,
+        product_img,
+        user_id: user.id,
       });
 
-      await newProduct.save();
-
-      return res.status(200).json(newProduct);
+      const newProduct = await product.save();
+      return res.status(201).json({
+        message: "Product added successfully",
+        product: newProduct,
+      });
     } catch (err) {
-      return res.status(500).json({ message: "Internal error", err });
+      console.error("Error adding product:", err);
+      return res
+        .status(500)
+        .json({ message: "Internal error", error: err.message });
     }
   },
 
@@ -54,10 +86,14 @@ module.exports = {
     const product_id = req.params.id;
     const productData = req.body;
     try {
-      const updateProduct = await Product.findByIdAndUpdate(product_id, productData, {
-        new: true,
-        runValidators: true,
-      });
+      const updateProduct = await Product.findByIdAndUpdate(
+        product_id,
+        productData,
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
       if (!updateProduct) {
         console.log("cannot update this product id", product_id);
         return res
@@ -80,25 +116,40 @@ module.exports = {
   //belows are internal user facing REST APIs
   listAllProduct: async function (req, res) {
     try {
-      const products = await Product.find({});
-      console.log(products);
+      const products = await Product.find({}).populate({
+        path: "user_id",
+        select:
+          "user_first_name user_last_name user_profile_img user_email user_role",
+        match: { user_role: "seller" },
+      });
 
-      if (!products) {
-        return res
-          .status(400)
-          .json({ message: "cannot list product", products });
-      } else {
-        return res.status(200).json(products);
+      // Filter out products whose user_id didn't match (null)
+      const filteredProducts = products.filter((p) => p.user_id !== null);
+
+      if (!filteredProducts.length) {
+        return res.status(404).json({ message: "No products found" });
       }
+
+      console.log("Listed products:", filteredProducts.length);
+      return res.status(200).json(filteredProducts);
     } catch (err) {
-      return res.status(500).json({ message: "internal error" }, err);
+      console.error("Error listing products:", err);
+      return res
+        .status(500)
+        .json({ message: "Internal server error", error: err.message });
     }
   },
 
   listSingleProduct: async function (req, res) {
     const product_id = req.params.id;
     try {
-      const product = await Product.findById(product_id);
+      const product = await Product.findById(product_id)
+        .populate({
+          path: "user_id",
+          select: "user_first_name user_last_name user_profile_img user_role",
+        })
+        .exec();
+
       if (!product) {
         console.log(product);
         return res

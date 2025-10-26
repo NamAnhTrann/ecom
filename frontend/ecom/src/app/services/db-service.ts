@@ -15,6 +15,16 @@ export class DbService {
 
   constructor(private http: HttpClient) {}
 
+  private authHeader(){
+    const token = localStorage.getItem('access_token');
+    return {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      }),
+      withCredentials: true,
+    }
+  }
 
 // User Auth APIs//
   registerUser(userData:any){
@@ -45,5 +55,17 @@ export class DbService {
   listSingleContact(contactId: string){
     return this.http.get(`${this.localUrl}/get/single/contact/api/${contactId}`, httpOptions);
   }
+
+  //add Product
+  addProduct(product_data:any){
+    return this.http.post(`${this.localUrl}/post/product/api`, product_data, this.authHeader())
+  }
+
+  //list all products that being to that user
+  listAllProducts(){
+    return this.http.get(`${this.localUrl}/get/all/product/api`, this.authHeader())
+  }
+
+
 
 }

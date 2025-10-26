@@ -9,116 +9,195 @@
   [class.border-gray-200]="scrolled"
   [class.dark:border-neutral-800]="scrolled"
 >
-  <nav class="relative max-w-7xl w-full h-full flex items-center px-4 md:px-6 lg:px-8 mx-auto">
+  <nav
+    class="relative max-w-7xl w-full h-full flex items-center px-4 md:px-6 lg:px-8 mx-auto"
+  >
     <!-- Logo -->
-    <a href="/" aria-label="Scrappy" class="shrink-0 flex items-center font-semibold focus:outline-hidden focus:opacity-80">
-      <svg class="h-8 lg:h-9 w-auto text-black dark:text-white" viewBox="0 0 640 120" xmlns="http://www.w3.org/2000/svg" role="img">
+    <a
+      href="/"
+      aria-label="Scrappy"
+      class="shrink-0 flex items-center font-semibold focus:outline-hidden focus:opacity-80"
+    >
+      <svg
+        class="h-8 lg:h-9 w-auto text-black dark:text-white"
+        viewBox="0 0 640 120"
+        xmlns="http://www.w3.org/2000/svg"
+        role="img"
+      >
         <title>Scrappy</title>
-        <text x="0" y="85" font-weight="700" font-size="80" fill="currentColor">Scrappy</text>
+        <text
+          x="0"
+          y="85"
+          font-weight="700"
+          font-size="80"
+          fill="currentColor"
+        >
+          Scrappy
+        </text>
       </svg>
     </a>
-    
-    <!-- Desktop links -->
-    <div class="hidden lg:flex grow items-center justify-end gap-x-7 ms-auto">
-      <a routerLink="contact-page" routerLinkActive="active" class="nav-link inline-block text-black">Forums</a>
-      <a routerLink="pricing-page" routerLinkActive="active" class="nav-link inline-block text-black">Marketplace</a>
-      <a routerLink="contact-us" routerLinkActive="active" class="nav-link inline-block text-black">Contact Us</a>
-      <a routerLink="aboutUs-page" routerLinkActive="active" class="nav-link inline-block text-black">About Scrappy</a>
-      
-      <!-- Vertical divider -->
-      <div class="h-6 w-px bg-gray-900 dark:bg-neutral-700 mx-1"></div>
 
-    <!-- Desktop Button -->
-    @if (!auth.isLoggedIn()) {
-      <!-- Not logged in -->
-      <button
-        (click)="loginButton()"
-        class="nav-link relative inline-block text-black after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-black after:transition-all after:duration-300 hover:after:w-full"
-      >
-        Join Scrappy
-      </button>
+    <!-- =================== DESKTOP NAV =================== -->
+    <div
+      class="hidden lg:flex grow items-center justify-end gap-x-7 ms-auto"
+    >
+      @if (!auth.isLoggedIn()) {
+        <!-- Public nav links -->
+        <a
+          routerLink="/"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="nav-link inline-block text-black"
+          (click)="closeMobile()"
+        >
+          Home
+        </a>
+        <a
+          routerLink="aboutUs-page"
+          routerLinkActive="active"
+          class="nav-link inline-block text-black"
+          (click)="closeMobile()"
+        >
+          About Scrappy
+        </a>
+        <a
+          routerLink="contact-us"
+          routerLinkActive="active"
+          class="nav-link inline-block text-black"
+          (click)="closeMobile()"
+        >
+          Contact Us
+        </a>
+      } @else {
+        <!-- Logged-in nav links -->
+        <a
+          routerLink="chat"
+          routerLinkActive="active"
+          class="nav-link inline-block text-black"
+          (click)="closeMobile()"
+        >
+          Chat
+        </a>
+        <a
+          routerLink="/marketplace-page"
+          routerLinkActive="active"
+          class="nav-link inline-block text-black"
+          (click)="closeMobile()"
+        >
+          Marketplace
+        </a>
+        <a
+          routerLink="forums"
+          routerLinkActive="active"
+          class="nav-link inline-block text-black"
+          (click)="closeMobile()"
+        >
+          Forums
+        </a>
+                  <a
+          routerLink="chat"
+          routerLinkActive="active"
+          class="nav-link inline-block text-black"
+          (click)="closeMobile()"
+        >
+          My Cart
+        </a>
+      }
 
-    } @else {
-      <!-- Logged in: show dropdown for ALL roles -->
+      <!-- Divider -->
       <div
-        class="hs-dropdown [--strategy:static] md:[--strategy:fixed] [--adaptive:none] md:[--adaptive:adaptive] [--is-collapse:true] md:[--is-collapse:false]"
-      >
-        <!-- Toggle Button -->
+        class="h-6 w-px bg-gray-900 dark:bg-neutral-700 mx-1"
+      ></div>
+
+      <!-- =================== AUTH BUTTON / DROPDOWN =================== -->
+      @if (!auth.isLoggedIn()) {
+        <!-- Not logged in -->
         <button
-          id="hs-header-auth-dropdown"
-          type="button"
-          class="nav-link relative inline-block text-black after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-black after:transition-all after:duration-300 hover:after:w-full hs-dropdown-toggle flex items-center gap-1"
-          aria-haspopup="menu"
-          aria-expanded="false"
+          (click)="loginButton()"
+          class="nav-link relative inline-block text-black after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-black after:transition-all after:duration-300 hover:after:w-full"
         >
-          My Account
-          <svg
-            class="inline-block ms-1 size-4 transition-transform hs-dropdown-open:-rotate-180"
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="m6 9 6 6 6-6" />
-          </svg>
+          Join Scrappy
         </button>
-
-        <!-- Dropdown Menu -->
+      } @else {
+        <!-- Logged in: dropdown -->
         <div
-          class="hs-dropdown-menu transition-[opacity,margin] duration-150 hs-dropdown-open:opacity-100 opacity-0 hidden md:w-44 z-10 mt-2 bg-white rounded-lg shadow-md dark:bg-neutral-800"
-          role="menu"
-          aria-labelledby="hs-header-auth-dropdown"
+          class="hs-dropdown [--strategy:static] md:[--strategy:fixed] [--adaptive:none] md:[--adaptive:adaptive] [--is-collapse:true] md:[--is-collapse:false]"
         >
-          <div class="p-1 space-y-0.5">
+          <!-- Dropdown Toggle -->
+          <button
+            id="hs-header-auth-dropdown"
+            type="button"
+            class="nav-link relative inline-block text-black after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-black after:transition-all after:duration-300 hover:after:w-full hs-dropdown-toggle flex items-center gap-1"
+            aria-haspopup="menu"
+            aria-expanded="false"
+          >
+            My Account
+            <svg
+              class="inline-block ms-1 size-4 transition-transform hs-dropdown-open:-rotate-180"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </button>
 
-            @if (auth.userRole() === 'seller') {
+          <!-- Dropdown Menu -->
+          <div
+            class="hs-dropdown-menu transition-[opacity,margin] duration-150 hs-dropdown-open:opacity-100 opacity-0 hidden md:w-44 z-10 mt-2 bg-white rounded-lg shadow-md dark:bg-neutral-800"
+            role="menu"
+            aria-labelledby="hs-header-auth-dropdown"
+          >
+            <div class="p-1 space-y-0.5">
+              @if (auth.userRole() === 'seller') {
+                <a
+                  routerLink="/seller-dashboard"
+                  class="block px-3 py-2 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:text-neutral-300 dark:hover:bg-neutral-700"
+                >
+                  Dashboard
+                </a>
+              }
+
               <a
-                routerLink="/seller-dashboard"
+                routerLink="#"
                 class="block px-3 py-2 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:text-neutral-300 dark:hover:bg-neutral-700"
               >
-                Dashboard
+                My Profile
               </a>
-            }
 
-            <a
-              routerLink="#"
-              class="block px-3 py-2 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:text-neutral-300 dark:hover:bg-neutral-700"
-            >
-              My Profile
-            </a>
+              <a
+                routerLink="#"
+                class="block px-3 py-2 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:text-neutral-300 dark:hover:bg-neutral-700"
+              >
+                Settings
+              </a>
 
-            <a
-              routerLink="#"
-              class="block px-3 py-2 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:text-neutral-300 dark:hover:bg-neutral-700"
-            >
-              Settings
-            </a>
+              <a
+                routerLink="#"
+                class="block px-3 py-2 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:text-neutral-300 dark:hover:bg-neutral-700"
+              >
+                Billing
+              </a>
 
-            <a
-              routerLink="#"
-              class="block px-3 py-2 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:text-neutral-300 dark:hover:bg-neutral-700"
-            >
-              Billing
-            </a>
-
-            <button
-              (click)="logoutButton()"
-              class="w-full text-left px-3 py-2 text-sm text-red-600 rounded-lg hover:bg-red-50 dark:hover:bg-neutral-700 dark:text-red-400"
-            >
-              Log out
-            </button>
+              <button
+                (click)="logoutButton()"
+                class="w-full text-left px-3 py-2 text-sm text-red-600 rounded-lg hover:bg-red-50 dark:hover:bg-neutral-700 dark:text-red-400"
+              >
+                Log out
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    }
+      }
     </div>
 
-    <!-- Mobile toggle (right) -->
+    <!-- =================== MOBILE TOGGLE (Hamburger/Close) =================== -->
     <button
       type="button"
       class="lg:hidden ms-auto flex items-center justify-center p-2 text-black dark:text-white"
@@ -129,28 +208,42 @@
     >
       @if (!mobileOpen) {
         <!-- Hamburger -->
-        <svg class="w-6 h-6 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none"
-             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="3" x2="21" y1="6" y2="6"/>
-          <line x1="3" x2="21" y1="12" y2="12"/>
-          <line x1="3" x2="21" y1="18" y2="18"/>
+        <svg
+          class="w-6 h-6 shrink-0"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <line x1="3" x2="21" y1="6" y2="6" />
+          <line x1="3" x2="21" y1="12" y2="12" />
+          <line x1="3" x2="21" y1="18" y2="18" />
         </svg>
       } @else {
         <!-- Close -->
-        <svg class="w-6 h-6 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none"
-             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M18 6 6 18"/>
-          <path d="m6 6 12 12"/>
+        <svg
+          class="w-6 h-6 shrink-0"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M18 6 6 18" />
+          <path d="m6 6 12 12" />
         </svg>
       }
     </button>
   </nav>
 </header>
 
-<!-- Viewport spacer for fixed header -->
+<!-- Spacer for fixed header -->
 <div class="h-16 lg:h-20"></div>
 
-<!-- MOBILE PANEL -->
+<!-- =================== MOBILE PANEL =================== -->
 @if (mobileOpen) {
   <div
     id="mobile-panel"
@@ -159,31 +252,81 @@
            border-t border-gray-200/70 dark:border-neutral-800/70
            shadow-sm px-4 md:px-6 py-5 lg:hidden overflow-y-auto"
   >
-    <nav class="flex flex-col items-center justify-center gap-6 text-lg text-center">
-      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
-         class="text-black dark:text-white w-full" (click)="closeMobile()">Home</a>
-      <a routerLink="contact-us" routerLinkActive="active"
-         class="text-black dark:text-white w-full" (click)="closeMobile()">Contact Us</a>
-      <a routerLink="pricing-page" routerLinkActive="active"
-         class="text-black dark:text-white w-full" (click)="closeMobile()">Our Pricing</a>
-      <a routerLink="aboutUs-page" routerLinkActive="active"
-         class="text-black dark:text-white w-full" (click)="closeMobile()">What We Do</a>
+    <nav
+      class="flex flex-col items-center justify-center gap-6 text-lg text-center"
+    >
+      @if (!auth.isLoggedIn()) {
+        <!-- Public mobile links -->
+        <a
+          routerLink="/"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="text-black dark:text-white w-full"
+          (click)="closeMobile()"
+          >Home</a
+        >
+        <a
+          routerLink="contact-us"
+          routerLinkActive="active"
+          class="text-black dark:text-white w-full"
+          (click)="closeMobile()"
+          >Contact Us</a
+        >
+        <a
+          routerLink="aboutUs-page"
+          routerLinkActive="active"
+          class="text-black dark:text-white w-full"
+          (click)="closeMobile()"
+          >About Scrappy</a
+        >
+      } @else {
+        <!-- Logged-in mobile links -->
+        <a
+          routerLink="chat"
+          routerLinkActive="active"
+          class="text-black dark:text-white w-full"
+          (click)="closeMobile()"
+          >Chat</a
+        >
+        <a
+          routerLink="/marketplace-page"
+          routerLinkActive="active"
+          class="text-black dark:text-white w-full"
+          (click)="closeMobile()"
+          >Marketplace</a
+        >
+        <a
+          routerLink="forums"
+          routerLinkActive="active"
+          class="text-black dark:text-white w-full"
+          (click)="closeMobile()"
+          >Forums</a
+        >
+      }
+
+      <!-- Divider -->
+      <div
+        class="w-full h-px bg-gray-300 dark:bg-neutral-700 my-3"
+      ></div>
 
       <!-- Mobile-only actions -->
       <div class="pt-4 flex flex-col gap-3 w-full max-w-xs">
-  @if (!auth.isLoggedIn()) {
-    <button (click)="loginButton(); closeMobile()"
-            class="py-3 rounded-xl bg-black text-white text-sm font-medium hover:bg-gray-800 transition w-full">
-      Log in
-    </button>
-  } @else {
-    <button (click)="logoutButton(); closeMobile()"
-            class="py-3 rounded-xl bg-red-600 text-white text-sm font-medium hover:bg-red-700 transition w-full">
-      Log out
-    </button>
-  }
-</div>
-
+        @if (!auth.isLoggedIn()) {
+          <button
+            (click)="loginButton(); closeMobile()"
+            class="py-3 rounded-xl bg-black text-white text-sm font-medium hover:bg-gray-800 transition w-full"
+          >
+            Log in
+          </button>
+        } @else {
+          <button
+            (click)="logoutButton(); closeMobile()"
+            class="py-3 rounded-xl bg-red-600 text-white text-sm font-medium hover:bg-red-700 transition w-full"
+          >
+            Log out
+          </button>
+        }
+      </div>
     </nav>
   </div>
 }
