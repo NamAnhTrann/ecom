@@ -2,14 +2,11 @@
   <div class="mx-auto max-w-[110rem] w-full px-0">
     @for (seller of groupedProducts; track seller.user_email) {
     <div class="mb-8">
+      <!-- Seller Header -->
       <div class="flex items-center justify-between mb-4">
-        <!-- Left side: Profile -->
         <div class="flex items-center space-x-3">
           <img
-            [src]="
-              seller.user_profile_img ||
-              'https://cdn-icons-png.flaticon.com/512/847/847969.png'
-            "
+            [src]="seller.user_profile_img || 'https://cdn-icons-png.flaticon.com/512/847/847969.png'"
             class="w-12 h-12 rounded-full object-cover"
             alt="Seller"
           />
@@ -21,26 +18,17 @@
           </div>
         </div>
 
-        <!-- Right side: 3-dot menu -->
-        <div class="relative mr-4">
-          <button
-            class="text-gray-500 hover:text-gray-800 focus:outline-none"
-            title="More options"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-              class="w-6 h-6"
-            >
-              <circle cx="5" cy="12" r="1.5" />
-              <circle cx="12" cy="12" r="1.5" />
-              <circle cx="19" cy="12" r="1.5" />
-            </svg>
-          </button>
-        </div>
+        <!-- 3-dot menu -->
+        <button class="text-gray-500 hover:text-gray-800 focus:outline-none" title="More options">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6">
+            <circle cx="5" cy="12" r="1.5" />
+            <circle cx="12" cy="12" r="1.5" />
+            <circle cx="19" cy="12" r="1.5" />
+          </svg>
+        </button>
       </div>
 
+      <!-- Product Swiper -->
       <swiper-container
         slides-per-view="3"
         pagination="true"
@@ -53,30 +41,22 @@
       >
         @for (product of seller.products; track product._id) {
         <swiper-slide>
-          <a
-            routerLink="#"
-            class="mb-8 ml-4 mr-4 group block overflow-hidden rounded-xl bg-white"
-          >
+          <div class="mb-8 ml-4 mr-4 group block overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-md transition">
+            <!-- Product Image -->
             <img
-              [src]="
-                product.product_img ||
-                'https://via.placeholder.com/350x250?text=No+Image'
-              "
+              [src]="product.product_img || 'https://via.placeholder.com/350x250?text=No+Image'"
               alt="{{ product.product_title }}"
               class="h-[350px] w-full object-cover transition duration-500 group-hover:scale-105 sm:h-[450px]"
             />
 
+            <!-- Product Info -->
             <div class="relative bg-white p-4">
-              <h3
-                class="text-sm text-gray-700 font-medium group-hover:underline group-hover:underline-offset-4"
-              >
+              <h3 class="text-sm text-gray-700 font-medium group-hover:underline group-hover:underline-offset-4">
                 {{ product.product_title }}
               </h3>
-
               <p class="mt-2 text-gray-900 font-semibold text-base">
                 ${{ product.product_price }}
               </p>
-
               <p class="mt-1 text-xs text-gray-500 line-clamp-2">
                 {{ product.product_desc }}
               </p>
@@ -85,17 +65,14 @@
               <div class="mt-3 flex items-center justify-between">
                 <div class="flex items-center space-x-3">
                   <!-- Like -->
-                  <button
-                    (click)="toggleLike(product)"
-                    class="focus:outline-none"
-                  >
+                  <button (click)="toggleLike(product)" class="focus:outline-none transition transform hover:scale-110">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       [attr.fill]="product.liked ? 'red' : 'gray'"
                       viewBox="0 0 24 24"
                       stroke-width="1.5"
                       stroke="none"
-                      class="w-6 h-6"
+                      class="w-6 h-6 transition-transform"
                     >
                       <path
                         fill-rule="evenodd"
@@ -106,7 +83,7 @@
                   </button>
 
                   <!-- Comment -->
-                  <button class="focus:outline-none">
+                  <button (click)="listComments(product)" class="focus:outline-none transition transform hover:scale-110">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -124,7 +101,7 @@
                   </button>
 
                   <!-- Share -->
-                  <button class="focus:outline-none">
+                  <button class="focus:outline-none transition transform hover:scale-110">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -133,21 +110,51 @@
                       stroke="currentColor"
                       class="w-6 h-6"
                     >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M8.25 9.75L12 6l3.75 3.75M12 6v12"
-                      />
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9.75L12 6l3.75 3.75M12 6v12" />
                     </svg>
                   </button>
                 </div>
-
-                <p class="text-sm font-semibold text-gray-900">
-                  {{ product.likes_count }} likes
-                </p>
+                <p class="text-sm font-semibold text-gray-900">{{ product.likes_count }} likes</p>
               </div>
+
+              <!-- Lazy Comments -->
+              @if (product.comments) {
+              <div class="mt-3 border-t border-gray-200 pt-3">
+                @for (comment of product.comments; track comment._id) {
+                <div class="text-sm text-gray-700 mb-2">
+                  <span class="font-semibold text-gray-900">
+                    {{ comment.user_id.user_first_name }}:
+                  </span>
+                  {{ comment.text }}
+                </div>
+                }
+                <!-- Add Comment -->
+                <div class="flex items-center mt-2">
+                  <input
+                    [(ngModel)]="new_comment"
+                    placeholder="Add a comment..."
+                    class="flex-1 border border-gray-300 rounded-lg px-3 py-1 text-sm focus:ring focus:ring-blue-200"
+                  />
+                  <button
+                    (click)="addComment(product)"
+                    class="ml-2 text-blue-500 text-sm font-semibold hover:underline"
+                  >
+                    Post
+                  </button>
+                </div>
+              </div>
+              } @else {
+              <div class="mt-3">
+                <button
+                  (click)="listComments(product)"
+                  class="text-sm text-gray-500 hover:text-blue-600 hover:underline"
+                >
+                  View comments
+                </button>
+              </div>
+              }
             </div>
-          </a>
+          </div>
         </swiper-slide>
         }
       </swiper-container>

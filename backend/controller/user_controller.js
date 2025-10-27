@@ -167,20 +167,46 @@ module.exports = {
 
   //logout api
   logoutUser: async function (req, res) {
+  try {
     const refreshToken = req.cookies.refreshTokens;
+
+    // 1️ If no cookie, just return OK
     if (!refreshToken) {
-      return res.status(401).json({ message: "no refresh token provided" });
+      return res.status(200).json({ message: "No refresh token found — already logged out" });
     }
 
+    // 2️ Find user by that token
     const user = await User.findOne({ refreshTokens: refreshToken });
     if (user) {
       user.refreshTokens = null;
       await user.save();
     }
 
-    res.clearCookie("refreshTokens");
-    res.json({ message: "user logged out successfully" });
-  },
+    // 3️ Invalidate cookie explicitly (overwrite)
+    res.cookie("refreshTokens", "", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production" ? true : false,
+      sameSite: process.env.NODE_ENV === "production" ? "Strict" : "Lax",
+      expires: new Date(0),
+      path: "/", // this is CRUCIAL
+    });
+
+    // 4️ Also clear cookie with same options just to be sure
+    res.clearCookie("refreshTokens", {
+      path: "/",
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production" ? true : false,
+      sameSite: process.env.NODE_ENV === "production" ? "Strict" : "Lax",
+    });
+
+    console.log("[LOGOUT] Cookie + DB cleared successfully");
+    return res.status(200).json({ message: "user logged out successfully" });
+  } catch (err) {
+    console.error("[LOGOUT ERROR]", err);
+    return res.status(500).json({ message: "internal server error", error: err });
+  }
+},
+
 
   //this can be use to list all users on the marketplace if they were to
   //display products from specific users
