@@ -1,5 +1,5 @@
 const Product = require("../schema/products_schema");
-const User = require("../schema/user_schema.js");
+const Like = require("../schema/like_schema");
 
 module.exports = {
   //below are business logic operations apis
@@ -114,20 +114,35 @@ module.exports = {
   //TODO - may require BATCH update for products, TBD
 
   //belows are internal user facing REST APIs
-  listAllProduct: async function (req, res) {
+ listAllProduct: async function (req, res) {
     try {
-      const products = await Product.find({}).populate({
-        path: "user_id",
-        select:
-          "user_first_name user_last_name user_profile_img user_email user_role",
-        match: { user_role: "seller" },
-      });
+      const user = req.user; 
+      const userId = user ? user.id : null;
 
-      // Filter out products whose user_id didn't match (null)
+
+      const products = await Product.find({})
+        .populate({
+          path: "user_id",
+          select: "user_first_name user_last_name user_profile_img user_email user_role",
+          match: { user_role: "seller" },
+        })
+        .lean(); 
       const filteredProducts = products.filter((p) => p.user_id !== null);
 
       if (!filteredProducts.length) {
         return res.status(404).json({ message: "No products found" });
+      }
+
+      if (userId) {
+        const likedProducts = await Like.find({ user_id: userId }).select("product_id");
+
+        const likedProductIds = new Set(likedProducts.map((like) => like.product_id.toString()));
+
+        filteredProducts.forEach((product) => {
+          product.liked = likedProductIds.has(product._id.toString());
+        });
+      } else {
+        filteredProducts.forEach((product) => (product.liked = false));
       }
 
       console.log("Listed products:", filteredProducts.length);

@@ -54,7 +54,7 @@
         @for (product of seller.products; track product._id) {
         <swiper-slide>
           <a
-            routerLink="product-detail"
+            routerLink="#"
             class="mb-8 ml-4 mr-4 group block overflow-hidden rounded-xl bg-white"
           >
             <img
@@ -85,10 +85,13 @@
               <div class="mt-3 flex items-center justify-between">
                 <div class="flex items-center space-x-3">
                   <!-- Like -->
-                  <button class="focus:outline-none">
+                  <button
+                    (click)="toggleLike(product)"
+                    class="focus:outline-none"
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      fill="gray"
+                      [attr.fill]="product.liked ? 'red' : 'gray'"
                       viewBox="0 0 24 24"
                       stroke-width="1.5"
                       stroke="none"
@@ -139,7 +142,9 @@
                   </button>
                 </div>
 
-                <p class="text-sm font-semibold text-gray-900">3,974 likes</p>
+                <p class="text-sm font-semibold text-gray-900">
+                  {{ product.likes_count }} likes
+                </p>
               </div>
             </div>
           </a>

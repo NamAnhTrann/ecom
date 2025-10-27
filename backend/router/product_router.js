@@ -2,8 +2,14 @@ const express = require("express");
 const router = express.Router();
 const productController = require("../controller/product_controller");
 const passport = require("passport");
+const auth = require("../middleware/auth");
 
-router.get("/get/all/product/api", productController.listAllProduct);
+
+router.get(
+  "/get/all/product/api",
+  passport.authenticate("jwt", { session: false }),
+  productController.listAllProduct
+);
 router.get("/get/single/product/api/:id/", productController.listSingleProduct)
 
 router.post('/post/product/api', passport.authenticate("jwt", { session: false }), productController.addProduct)

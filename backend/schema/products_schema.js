@@ -35,7 +35,12 @@ let productSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
         required: false,
-    }
+    },
+
+    likes_count: {
+    type: Number,
+    default: 0,
+  },
 
     // product_category:{
     //     type:String,
