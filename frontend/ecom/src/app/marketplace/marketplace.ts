@@ -29,6 +29,7 @@ export class Marketplace {
 
   listAllProduct() {
     this.db.listAllProducts().subscribe((data: any) => {
+        console.log('API Response:', data);
       this.products = data;
 
       const grouped = this.products.reduce((acc: any, product: any) => {
@@ -52,4 +53,25 @@ export class Marketplace {
       this.groupedProducts = Object.values(grouped);
     });
   }
+
+toggleLike(product: any) {
+  this.db.toggleLike(product._id).subscribe({
+    next: (res: any) => {
+      console.log(res.message);
+
+      if (res.liked) {
+        product.liked = true;
+        product.likes_count = (product.likes_count || 0) + 1;
+      } else {
+        product.liked = false;
+        product.likes_count = Math.max(0, (product.likes_count || 0) - 1);
+      }
+    },
+    error: (err) => {
+      console.error('Like toggle failed:', err);
+    },
+  });
+}
+
+
 }

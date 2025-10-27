@@ -1,4 +1,5 @@
 import { User } from './user_model';
+import { Like } from './like_model';
 
 export class Product {
   _id?: string;
@@ -8,7 +9,10 @@ export class Product {
   product_quantity: number;
   product_img?: string;
   productUpdated?: Date;
-  user_id?: User; 
+  user_id?: User;
+  likes?: Like[];
+  likes_count?: number = 0;
+  liked?: boolean = false; // ✅ crucial for UI state
 
   constructor(
     product_title: string = '',
@@ -16,7 +20,10 @@ export class Product {
     product_desc: string = '',
     product_quantity: number = 1,
     product_img: string = '',
-    user_id?: User
+    user_id?: User,
+    likes: Like[] = [],
+    likes_count: number = 0,
+    liked: boolean = false // ✅ include param
   ) {
     this._id = undefined;
     this.product_title = product_title;
@@ -26,5 +33,8 @@ export class Product {
     this.product_img = product_img;
     this.productUpdated = new Date();
     this.user_id = user_id;
+    this.likes = likes;
+    this.likes_count = likes_count;
+    this.liked = liked;
   }
 }

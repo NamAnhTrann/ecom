@@ -66,6 +66,14 @@ export class DbService {
     return this.http.get(`${this.localUrl}/get/all/product/api`, this.authHeader())
   }
 
+  //--MEDIA--//
+
+  //toggleLikes
+  toggleLike(productId: string){
+    return this.http.post(`${this.localUrl}/like/api/${productId}`, this.authHeader, {})
+
+  }
+
 
 
 }

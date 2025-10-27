@@ -1,0 +1,6 @@
+svg {
+  transition: transform 0.15s ease, fill 0.15s ease, filter 0.15s ease;
+}
+svg:hover {
+  transform: scale(1.1);
+}
