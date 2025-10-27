@@ -70,8 +70,17 @@ export class DbService {
 
   //toggleLikes
   toggleLike(productId: string){
-    return this.http.post(`${this.localUrl}/like/api/${productId}`, this.authHeader, {})
+    return this.http.post(`${this.localUrl}/like/api/${productId}`, this.authHeader(), {})
 
+  }
+
+  //add comments
+  addComment(product_id: string, comment_data: any) {
+    return this.http.post(`${this.localUrl}/add/comment/api/${product_id}`, comment_data, this.authHeader());
+  }
+
+  listComment(product_id: string) {
+    return this.http.get(`${this.localUrl}/list/comments/api/${product_id}`, this.authHeader());
   }
 
 

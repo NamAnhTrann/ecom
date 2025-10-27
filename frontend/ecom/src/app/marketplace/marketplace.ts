@@ -8,28 +8,31 @@ import { register } from 'swiper/element/bundle';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-register(); 
+register();
 
 @Component({
   selector: 'app-marketplace',
-  imports: [RouterLink, CommonModule],
+  imports: [RouterLink, CommonModule, FormsModule],
   templateUrl: './marketplace.html',
   styleUrl: './marketplace.css',
-  schemas: [CUSTOM_ELEMENTS_SCHEMA], 
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class Marketplace {
   products: Product[] = [];
   groupedProducts: any[] = [];
+  comments: Comment[] = [];
+  new_comment: string = '';
 
   constructor(private db: DbService, private router: Router) {}
 
   ngOnInit() {
+    //dont call lis comment here due to dual API calls --> bad performance
     this.listAllProduct();
   }
 
   listAllProduct() {
     this.db.listAllProducts().subscribe((data: any) => {
-        console.log('API Response:', data);
+      console.log('API Response:', data);
       this.products = data;
 
       const grouped = this.products.reduce((acc: any, product: any) => {
@@ -54,24 +57,45 @@ export class Marketplace {
     });
   }
 
-toggleLike(product: any) {
-  this.db.toggleLike(product._id).subscribe({
-    next: (res: any) => {
-      console.log(res.message);
+  toggleLike(product: any) {
+    this.db.toggleLike(product._id).subscribe({
+      next: (res: any) => {
+        console.log(res.message);
 
-      if (res.liked) {
-        product.liked = true;
-        product.likes_count = (product.likes_count || 0) + 1;
-      } else {
-        product.liked = false;
-        product.likes_count = Math.max(0, (product.likes_count || 0) - 1);
-      }
-    },
-    error: (err) => {
-      console.error('Like toggle failed:', err);
-    },
-  });
-}
+        if (res.liked) {
+          product.liked = true;
+          product.likes_count = (product.likes_count || 0) + 1;
+        } else {
+          product.liked = false;
+          product.likes_count = Math.max(0, (product.likes_count || 0) - 1);
+        }
+      },
+      error: (err) => {
+        console.error('Like toggle failed:', err);
+      },
+    });
+  }
 
+  listComments(product: any) {
+    this.db.listComment(product._id).subscribe({
+      next: (res: any) => {
+        product.comments = res.comments;
+      },
+      error: (err) => {
+        console.error('failed to load comments', err);
+      },
+    });
+  }
 
+  addComment(product: any) {
+    this.db.addComment(product._id, {text:this.new_comment}).subscribe({
+      next: (res: any) => {
+        this.comments.unshift(res.comment);
+        this.new_comment = '';
+      },
+      error: (err) => {
+        console.error('failed to post comment', err);
+      },
+    });
+  }
 }

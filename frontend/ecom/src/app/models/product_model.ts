@@ -1,5 +1,6 @@
 import { User } from './user_model';
 import { Like } from './like_model';
+import { Comment } from './comment_model';
 
 export class Product {
   _id?: string;
@@ -12,7 +13,9 @@ export class Product {
   user_id?: User;
   likes?: Like[];
   likes_count?: number = 0;
-  liked?: boolean = false; // ✅ crucial for UI state
+  liked?: boolean = false;
+  comments?: Comment[];
+  comments_count?: number;
 
   constructor(
     product_title: string = '',
@@ -23,7 +26,9 @@ export class Product {
     user_id?: User,
     likes: Like[] = [],
     likes_count: number = 0,
-    liked: boolean = false // ✅ include param
+    liked: boolean = false,
+    comments: Comment[] = [],
+    comments_count: number = 0
   ) {
     this._id = undefined;
     this.product_title = product_title;
@@ -36,5 +41,7 @@ export class Product {
     this.likes = likes;
     this.likes_count = likes_count;
     this.liked = liked;
+    this.comments = comments;
+    this.comments_count = comments_count;
   }
 }

@@ -114,19 +114,19 @@ module.exports = {
   //TODO - may require BATCH update for products, TBD
 
   //belows are internal user facing REST APIs
- listAllProduct: async function (req, res) {
+  listAllProduct: async function (req, res) {
     try {
-      const user = req.user; 
+      const user = req.user;
       const userId = user ? user.id : null;
-
 
       const products = await Product.find({})
         .populate({
           path: "user_id",
-          select: "user_first_name user_last_name user_profile_img user_email user_role",
+          select:
+            "user_first_name user_last_name user_profile_img user_email user_role",
           match: { user_role: "seller" },
         })
-        .lean(); 
+        .lean();
       const filteredProducts = products.filter((p) => p.user_id !== null);
 
       if (!filteredProducts.length) {
@@ -134,9 +134,13 @@ module.exports = {
       }
 
       if (userId) {
-        const likedProducts = await Like.find({ user_id: userId }).select("product_id");
+        const likedProducts = await Like.find({ user_id: userId }).select(
+          "product_id"
+        );
 
-        const likedProductIds = new Set(likedProducts.map((like) => like.product_id.toString()));
+        const likedProductIds = new Set(
+          likedProducts.map((like) => like.product_id.toString())
+        );
 
         filteredProducts.forEach((product) => {
           product.liked = likedProductIds.has(product._id.toString());
@@ -145,7 +149,6 @@ module.exports = {
         filteredProducts.forEach((product) => (product.liked = false));
       }
 
-      console.log("Listed products:", filteredProducts.length);
       return res.status(200).json(filteredProducts);
     } catch (err) {
       console.error("Error listing products:", err);
