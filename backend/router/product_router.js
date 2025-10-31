@@ -4,16 +4,27 @@ const productController = require("../controller/product_controller");
 const passport = require("passport");
 const auth = require("../middleware/auth");
 
-
+router.get("/get/all/product/api", auth, productController.listAllProduct);
 router.get(
-  "/get/all/product/api",
-  passport.authenticate("jwt", { session: false }),
-  productController.listAllProduct
+  "/get/single/product/api/:id/",
+  auth,
+  productController.listSingleProduct
 );
-router.get("/get/single/product/api/:id/", productController.listSingleProduct)
 
-router.post('/post/product/api', passport.authenticate("jwt", { session: false }), productController.addProduct)
-router.delete("/delete/many/products/api", passport.authenticate("jwt", { session: false }), productController.deleteAllProduct)
-router.delete("/delete/single/product/api/:id", passport.authenticate("jwt", { session: false }), productController.deleteSingleProduct)
-router.put("/update/single/product/api/:id", passport.authenticate("jwt", { session: false }), productController.updateSingleProduct)
+router.post("/post/product/api", auth, productController.addProduct);
+router.delete(
+  "/delete/many/products/api",
+  auth,
+  productController.deleteAllProduct
+);
+router.delete(
+  "/delete/single/product/api/:id",
+  auth,
+  productController.deleteSingleProduct
+);
+router.put(
+  "/update/single/product/api/:id",
+  auth,
+  productController.updateSingleProduct
+);
 module.exports = router;

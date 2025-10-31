@@ -15,17 +15,14 @@ module.exports = {
           .json({ message: "User not authenticated", user });
       }
 
-      //check if this user already liked
+      // check if this user already liked
       const existingLike = await Like.findOne({
         user_id: user.id,
         product_id: productId,
       });
 
       if (existingLike) {
-        //then we can unlike if we want by re-triggering
-        await Like.deleteOne({
-          _id: existingLike._id,
-        });
+        await Like.deleteOne({ _id: existingLike._id });
         await Product.findByIdAndUpdate(productId, {
           $inc: { likes_count: -1 },
         });
@@ -35,21 +32,18 @@ module.exports = {
         });
       }
 
-      //we can make a new like
+      // create new like
       await Like.create({
         user_id: user.id,
         product_id: productId,
       });
 
-      await Product.findByIdAndUpdate(productId, {
-        $inc: {
-          likes_count: 1,
-        },
-      });
+      await Product.findByIdAndUpdate(productId, { $inc: { likes_count: 1 } });
 
       return res.status(200).json({
         liked: true,
         message: "product liked",
+        user: user, // return user info so you can also see it in frontend
       });
     } catch (err) {
       return res.status(500).json({
@@ -83,13 +77,18 @@ module.exports = {
         text: text.trim(),
       });
 
+      const populatedComment = await newComment.populate(
+        "user_id",
+        "user_first_name user_last_name user_email user_profile_img"
+      );
+
       await Product.findByIdAndUpdate(product_id, {
         $inc: {
           comments_count: 1,
         },
       });
 
-      return res.status(201).json(newComment);
+      return res.status(201).json(populatedComment);
     } catch (err) {
       return res.status(500).json({ message: "error adding comments", err });
     }
@@ -108,12 +107,13 @@ module.exports = {
           createdAt: -1, //earliest comment appear first
         });
 
-        console.log(comments)
       return res
         .status(200)
         .json({ message: "Comment added", count: comments.length, comments });
     } catch (err) {
-      return res.status(500).json({message: "error adding comments", error: err.message})
+      return res
+        .status(500)
+        .json({ message: "error adding comments", error: err.message });
     }
   },
 };

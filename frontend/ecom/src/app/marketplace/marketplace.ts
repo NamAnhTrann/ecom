@@ -2,7 +2,6 @@ import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { Product } from '../models/product_model';
 import { DbService } from '../services/db-service';
-import Swiper from 'swiper/bundle';
 import 'swiper/css/bundle';
 import { register } from 'swiper/element/bundle';
 import { FormsModule } from '@angular/forms';
@@ -12,7 +11,7 @@ register();
 
 @Component({
   selector: 'app-marketplace',
-  imports: [RouterLink, CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './marketplace.html',
   styleUrl: './marketplace.css',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -32,7 +31,6 @@ export class Marketplace {
 
   listAllProduct() {
     this.db.listAllProducts().subscribe((data: any) => {
-      console.log('API Response:', data);
       this.products = data;
 
       const grouped = this.products.reduce((acc: any, product: any) => {
@@ -60,8 +58,6 @@ export class Marketplace {
   toggleLike(product: any) {
     this.db.toggleLike(product._id).subscribe({
       next: (res: any) => {
-        console.log(res.message);
-
         if (res.liked) {
           product.liked = true;
           product.likes_count = (product.likes_count || 0) + 1;
@@ -87,15 +83,40 @@ export class Marketplace {
     });
   }
 
-  addComment(product: any) {
-    this.db.addComment(product._id, {text:this.new_comment}).subscribe({
+  addComment(product: any) {  
+    const commentText = product.new_comment?.trim();
+    // prevent posting empty or blank comments
+    this.db.addComment(product._id, { text: commentText }).subscribe({
       next: (res: any) => {
-        this.comments.unshift(res.comment);
-        this.new_comment = '';
+        const comment = res?.comment || res;
+        if (comment) {
+          product.comments.unshift(comment); 
+        }
+        // clear only this product’s input
+        product.new_comment = '';
       },
       error: (err) => {
-        console.error('failed to post comment', err);
+        console.error('[addComment] Failed to post comment:', err);
       },
     });
   }
+
+  toggleComments(product: any) {
+  product.showComments = !product.showComments;
+
+  if (product.showComments && !product.comments) {
+    this.db.listComment(product._id).subscribe({
+      next: (res: any) => {
+        product.comments = res.comments || [];
+      },
+      error: (err) => console.error('[toggleComments] Failed to load comments:', err),
+    });
+  }
+}
+  buyNow(product_id: string){
+    //TODO later
+
+  }
+
+
 }

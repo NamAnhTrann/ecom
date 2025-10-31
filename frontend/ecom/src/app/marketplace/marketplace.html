@@ -1,12 +1,15 @@
 <section class="py-10 px-4 sm:px-6 lg:px-8">
   <div class="mx-auto max-w-[110rem] w-full px-0">
-    @for (seller of groupedProducts; track seller.user_email) {
+    @for (seller of groupedProducts; track seller?.user_email) {
     <div class="mb-8">
       <!-- Seller Header -->
       <div class="flex items-center justify-between mb-4">
         <div class="flex items-center space-x-3">
           <img
-            [src]="seller.user_profile_img || 'https://cdn-icons-png.flaticon.com/512/847/847969.png'"
+            src="
+              seller.user_profile_img ||
+              'https://cdn-icons-png.flaticon.com/512/847/847969.png'
+            "
             class="w-12 h-12 rounded-full object-cover"
             alt="Seller"
           />
@@ -19,8 +22,16 @@
         </div>
 
         <!-- 3-dot menu -->
-        <button class="text-gray-500 hover:text-gray-800 focus:outline-none" title="More options">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6">
+        <button
+          class="text-gray-500 hover:text-gray-800 focus:outline-none"
+          title="More options"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+            class="w-6 h-6"
+          >
             <circle cx="5" cy="12" r="1.5" />
             <circle cx="12" cy="12" r="1.5" />
             <circle cx="19" cy="12" r="1.5" />
@@ -39,19 +50,51 @@
           "1024": { "slidesPerView": 3 }
         }'
       >
-        @for (product of seller.products; track product._id) {
+        @for (product of seller.products; track product?._id) {
         <swiper-slide>
-          <div class="mb-8 ml-4 mr-4 group block overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-md transition">
-            <!-- Product Image -->
-            <img
-              [src]="product.product_img || 'https://via.placeholder.com/350x250?text=No+Image'"
-              alt="{{ product.product_title }}"
-              class="h-[350px] w-full object-cover transition duration-500 group-hover:scale-105 sm:h-[450px]"
-            />
+          <div
+            class="mb-8 ml-4 mr-4 group block overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-md transition"
+          >
+            <!-- ✅ FIXED: Product Image + Overlay now isolated -->
+            <div class="relative">
+              <!-- Product Image -->
+              <img
+                [src]="
+                  product.product_img ||
+                  'https://via.placeholder.com/350x250?text=No+Image'
+                "
+                alt="{{ product.product_title }}"
+                class="h-[350px] w-full object-cover transition duration-500 group-hover:scale-105 sm:h-[450px]"
+              />
+
+              <!-- Dark Overlay + Vertical Buttons -->
+              <div
+                class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-60 transition-all duration-300 flex items-center justify-center"
+              >
+                <div
+                  class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col gap-3 items-center w-1/3"
+                >
+                  <button
+                    class="w-full py-2 bg-transparent border-2 border-white text-white font-semibold rounded-md hover:bg-white hover:text-gray-900 transition-all"
+                    (click)="buyNow(product)"
+                  >
+                    Buy Now
+                  </button>
+                  <a
+                    [routerLink]="['/view-detail-page', product._id]"
+                    class="w-full text-center py-2 bg-transparent border-2 border-white text-white font-semibold rounded-md hover:bg-white hover:text-gray-900 transition-all"
+                  >
+                    View Detail
+                  </a>
+                </div>
+              </div>
+            </div>
 
             <!-- Product Info -->
             <div class="relative bg-white p-4">
-              <h3 class="text-sm text-gray-700 font-medium group-hover:underline group-hover:underline-offset-4">
+              <h3
+                class="text-sm text-gray-700 font-medium group-hover:underline group-hover:underline-offset-4"
+              >
                 {{ product.product_title }}
               </h3>
               <p class="mt-2 text-gray-900 font-semibold text-base">
@@ -65,7 +108,10 @@
               <div class="mt-3 flex items-center justify-between">
                 <div class="flex items-center space-x-3">
                   <!-- Like -->
-                  <button (click)="toggleLike(product)" class="focus:outline-none transition transform hover:scale-110">
+                  <button
+                    (click)="toggleLike(product)"
+                    class="focus:outline-none transition transform hover:scale-110"
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       [attr.fill]="product.liked ? 'red' : 'gray'"
@@ -83,7 +129,10 @@
                   </button>
 
                   <!-- Comment -->
-                  <button (click)="listComments(product)" class="focus:outline-none transition transform hover:scale-110">
+                  <button
+                    (click)="toggleComments(product)"
+                    class="focus:outline-none transition transform hover:scale-110"
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -99,60 +148,58 @@
                       />
                     </svg>
                   </button>
-
-                  <!-- Share -->
-                  <button class="focus:outline-none transition transform hover:scale-110">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                      class="w-6 h-6"
-                    >
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9.75L12 6l3.75 3.75M12 6v12" />
-                    </svg>
-                  </button>
                 </div>
-                <p class="text-sm font-semibold text-gray-900">{{ product.likes_count }} likes</p>
+                <p class="text-sm font-semibold text-gray-900">
+                  {{ product.likes_count }} likes
+                </p>
               </div>
 
-              <!-- Lazy Comments -->
-              @if (product.comments) {
+              <!-- Comments Section -->
               <div class="mt-3 border-t border-gray-200 pt-3">
-                @for (comment of product.comments; track comment._id) {
-                <div class="text-sm text-gray-700 mb-2">
-                  <span class="font-semibold text-gray-900">
-                    {{ comment.user_id.user_first_name }}:
-                  </span>
-                  {{ comment.text }}
+                <button
+                  (click)="toggleComments(product)"
+                  class="text-sm text-gray-500 hover:underline"
+                >
+                  @if (product.showComments) { Hide comments } @else if
+                  ((product.comments_count || 0) === 0) { No comments yet! Click
+                  To leave a comment! } @else if ((product.comments_count || 0)
+                  > 50) { View 50+ comments } @else { View
+                  {{ product.comments_count || 0 }} comments }
+                </button>
+
+                @if (product.showComments) {
+                <div
+                  class="mt-3 max-h-60 overflow-y-auto border rounded-lg p-3 bg-gray-50 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100"
+                >
+                  @for (comment of product.comments; track comment._id) {
+                  <div class="text-sm text-gray-700 mb-2">
+                    <span class="font-semibold text-gray-900">
+                      {{ comment.user_id?.user_first_name }}:
+                    </span>
+                    {{ comment.text }}
+                  </div>
+                  }
+
+                  <!-- Add Comment -->
+                  <div class="flex items-center mt-2">
+                    <input
+                      [(ngModel)]="product.new_comment"
+                      placeholder="Add a comment..."
+                      class="flex-1 border border-gray-300 rounded-lg px-3 py-1 text-sm focus:ring focus:ring-blue-200"
+                    />
+                    <button
+                      (click)="addComment(product)"
+                      [disabled]="
+                        !product.new_comment || !product.new_comment.trim()
+                      "
+                      class="ml-2 text-blue-500 text-sm font-semibold hover:underline disabled:text-gray-400 disabled:cursor-not-allowed"
+                    >
+                      Post
+                    </button>
+                  </div>
                 </div>
                 }
-                <!-- Add Comment -->
-                <div class="flex items-center mt-2">
-                  <input
-                    [(ngModel)]="new_comment"
-                    placeholder="Add a comment..."
-                    class="flex-1 border border-gray-300 rounded-lg px-3 py-1 text-sm focus:ring focus:ring-blue-200"
-                  />
-                  <button
-                    (click)="addComment(product)"
-                    class="ml-2 text-blue-500 text-sm font-semibold hover:underline"
-                  >
-                    Post
-                  </button>
-                </div>
               </div>
-              } @else {
-              <div class="mt-3">
-                <button
-                  (click)="listComments(product)"
-                  class="text-sm text-gray-500 hover:text-blue-600 hover:underline"
-                >
-                  View comments
-                </button>
-              </div>
-              }
             </div>
           </div>
         </swiper-slide>

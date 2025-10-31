@@ -52,6 +52,15 @@ module.exports = {
 
   //delete all products
   deleteAllProduct: async function (req, res) {
+    const user = req.user;
+    if (!user) {
+      return res.status(500).json({ message: "user is not authenticated" });
+    }
+
+    if (user.user_role !== "seller") {
+      return res.status(500).json({ message: "User is not seller" });
+    }
+
     try {
       const products = await Product.deleteMany({});
       return res.status(200).json({
@@ -68,7 +77,34 @@ module.exports = {
   //delete single chosen product based on params id
   deleteSingleProduct: async function (req, res) {
     const product_id = req.params.id;
+    const user = req.user;
+
+    //check if user is logged in
+    if (!user) {
+      return res
+        .status(401)
+        .json({ message: "user is not authenticated", user });
+    }
+
+    //check if user role is a seller
+    if (user.user_role !== "seller") {
+      return res
+        .status(401)
+        .json({ message: "user is not a seller, thus cannot sell" });
+    }
+
     try {
+      //check if this product belong to "this seller"
+      const product = await Product.findById(product_id);
+
+      if (product.user_id.toString() !== user.id) {
+        return res
+          .status(500)
+          .json({
+            message: "you cannot delete a product that doesn't belong to you",
+          });
+      }
+
       const deleteProduct = await Product.findByIdAndDelete(product_id);
       return res.status(200).json({
         message: "product has been deleted",
@@ -85,7 +121,27 @@ module.exports = {
   updateSingleProduct: async function (req, res) {
     const product_id = req.params.id;
     const productData = req.body;
+    const user = req.user;
+
+    if (!user) {
+      return res.status(500).json({ message: "User is not authenticated" });
+    }
+
+    if (user.user_role !== "seller") {
+      return res.status(500).json({ message: "User is not selller" });
+    }
     try {
+      //find product_id and do a quick check if that product belong to this specific user
+      const product = await Product.findById(product_id);
+
+      if (product.user_id.toString() !== user.id) {
+        return res
+          .status(500)
+          .json({
+            message: "you cannot update a product that doesn't belong to you",
+          });
+      }
+
       const updateProduct = await Product.findByIdAndUpdate(
         product_id,
         productData,
@@ -159,7 +215,14 @@ module.exports = {
   },
 
   listSingleProduct: async function (req, res) {
+    const user = req.user;
+    if(!user){
+      return res.status(401).json({message:"user is not authenticated"});
+    }
     const product_id = req.params.id;
+    if(!product_id){
+      return res.status(401).json({message:"Product cannot be found"}); 
+    }
     try {
       const product = await Product.findById(product_id)
         .populate({

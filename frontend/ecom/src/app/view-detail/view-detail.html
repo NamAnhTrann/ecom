@@ -1,0 +1,46 @@
+<section class="mt-32 py-10 px-4 sm:px-6 lg:px-8 min-h-screen">
+  <div class="max-w-5xl mx-auto  rounded-xl shadow-md overflow-hidden">
+    
+    <!-- Product Image -->
+    <div class="relative">
+      <img
+        src="product?.product_img"
+        alt="{{ product?.product_title }}"
+        class="w-full h-[400px] object-cover"
+      />
+
+      <!-- Overlay Info -->
+      <div class="absolute bottom-4 left-4 bg-black bg-opacity-60 text-white px-4 py-2 rounded-md">
+        <p class="text-sm">Seller: {{ product?.user_id?.user_first_name }} {{ product?.user_id?.user_last_name }}</p>
+      </div>
+    </div>
+
+    <!-- Product Details -->
+    <div class="p-6 space-y-4">
+      <h1 class="text-2xl font-bold text-gray-900">
+        {{ product?.product_title }}
+      </h1>
+
+      <p class="text-lg text-gray-700">
+        {{ product?.product_desc }}
+      </p>
+
+      <p class="text-2xl font-semibold text-green-600">
+        ${{ product?.product_price }}
+      </p>
+
+      <div class="flex items-center space-x-3 mt-4">
+        <button
+          class="px-5 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
+        >
+          Buy Now
+        </button>
+        <button
+          class="px-5 py-2 border border-gray-400 rounded-md hover:bg-gray-100 transition"
+        >
+          Add to Cart
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

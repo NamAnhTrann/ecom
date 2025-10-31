@@ -64,6 +64,8 @@ module.exports = {
       if (!user) {
         return res.status(400).json({ message: "No user authenticated" });
       }
+     console.log(user)
+
 
       const { accessTokens, refreshTokens } = generateTokens(user);
 
