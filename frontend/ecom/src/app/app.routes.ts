@@ -9,12 +9,14 @@ import { AuthCallbackComponent } from './auth-callback.component';
 import { ContactUs } from './contact-us/contact-us';
 import { ForumPage } from './forum-page/forum-page';
 import { Marketplace } from './marketplace/marketplace';
+import { ViewDetail } from './view-detail/view-detail';
 
 export const routes: Routes = [
     {path: "", component:Homepage},
     {path: "contact-us", component:ContactUs},
     {path: "forum-page", component:ForumPage},
     {path: "marketplace-page", component:Marketplace},
+    { path: "view-detail-page/:id", component: ViewDetail},
     {path: "login", component:Login},
     {path: "signup", component:Signup},
     {path: 'seller-dashboard', component: SellerDashboard, data: { roles: ['seller'] }, canActivate: [authGuard]},

@@ -14,5 +14,13 @@ import 'preline/dist/preline';
 export class App {
   protected readonly title = signal('ecom');
 
+  constructor(private router:Router){
+
+  }
+  hideHeader(): boolean {
+    const hiddenRoutes = ['/seller-dashboard'];
+    return hiddenRoutes.includes(this.router.url);
+  }
+
 
 }

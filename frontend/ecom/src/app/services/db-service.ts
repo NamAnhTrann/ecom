@@ -56,6 +56,8 @@ export class DbService {
     return this.http.get(`${this.localUrl}/get/single/contact/api/${contactId}`, httpOptions);
   }
 
+
+  //--PRODUCT--//
   //add Product
   addProduct(product_data:any){
     return this.http.post(`${this.localUrl}/post/product/api`, product_data, this.authHeader())
@@ -66,11 +68,26 @@ export class DbService {
     return this.http.get(`${this.localUrl}/get/all/product/api`, this.authHeader())
   }
 
+  listSingleProduct(product_id: string){
+    return this.http.get(`${this.localUrl}/get/single/product/api/${product_id}`, this.authHeader())
+  }
+
+  //delete single product internal api
+  deleteSingleProduct(product_id:string){
+    return this.http.delete(`${this.localUrl}/delete/single/product/api/${product_id}`, this.authHeader())
+  }
+
+  //update single product
+  updateSingleProduct(product_id: string, product_data:any){
+    return this.http.put(`${this.localUrl}/update/single/product/api/${product_id}`, product_data, this.authHeader())
+  }
+
+
   //--MEDIA--//
 
   //toggleLikes
   toggleLike(productId: string){
-    return this.http.post(`${this.localUrl}/like/api/${productId}`, this.authHeader(), {})
+return this.http.post(`${this.localUrl}/like/api/${productId}`, {}, this.authHeader());
 
   }
 
