@@ -6,24 +6,28 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-  <!-- Pre-bootstrap loader -->
-  <app-root>
+  <app-root ng-cloak>
     <div id="loader" class="flex h-screen items-center justify-center bg-slate-900">
       <div class="h-10 w-10 animate-spin rounded-full border-4 border-slate-300 border-t-emerald-400"></div>
     </div>
   </app-root>
 
-  <!-- Remove loader once Angular is ready -->
   <script>
+    // Remove loader when Angular signals it's ready
     window.addEventListener('AngularReady', () => {
       const loader = document.getElementById('loader');
       if (loader) {
         loader.style.opacity = '0';
         setTimeout(() => loader.remove(), 200);
       }
+
+      // Manually remove ng-cloak (needed in dev mode)
+      const root = document.querySelector('[ng-cloak]');
+      if (root) root.removeAttribute('ng-cloak');
     });
   </script>
 </body>

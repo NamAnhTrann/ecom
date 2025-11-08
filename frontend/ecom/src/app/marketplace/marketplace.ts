@@ -7,6 +7,7 @@ import { register } from 'swiper/element/bundle';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Cart } from '../models/cart_model';
+import { Skeleton } from '../skeleton/skeleton';
 
 register();
 
@@ -22,6 +23,7 @@ export class Marketplace {
   groupedProducts: any[] = [];
   comments: Comment[] = [];
   new_comment: string = '';
+  loading = true;
 
   //carts
   cart: Cart | null = null;

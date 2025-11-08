@@ -4,7 +4,7 @@ import { Skeleton } from "../skeleton/skeleton";
 
 @Component({
   selector: 'app-homepage',
-  imports: [Skeleton],
+  imports: [],
   templateUrl: './homepage.html',
   styleUrl: './homepage.css'
 })

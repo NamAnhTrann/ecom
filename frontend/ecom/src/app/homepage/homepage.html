@@ -1,32 +1,3 @@
-@if (loading) {
-  <section class="banner mt-8 animate-pulse">
-    <div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid md:grid-cols-2 gap-4 md:gap-8 xl:gap-20 md:items-center">
-        <!-- Left Skeleton -->
-        <div class="space-y-4">
-          <app-skeleton width="80%" height="3rem"></app-skeleton>
-          <app-skeleton width="60%" height="1.25rem"></app-skeleton>
-          <app-skeleton width="100%" height="2.5rem"></app-skeleton>
-
-          <div class="mt-7 space-y-2">
-            <app-skeleton width="40%" height="2.5rem"></app-skeleton>
-            <app-skeleton width="35%" height="2.5rem"></app-skeleton>
-          </div>
-
-          <div class="mt-8 grid grid-cols-2 gap-3">
-            <app-skeleton width="100%" height="5rem"></app-skeleton>
-            <app-skeleton width="100%" height="5rem"></app-skeleton>
-          </div>
-        </div>
-
-        <!-- Right Skeleton -->
-        <div class="relative ms-4 hidden md:block">
-          <app-skeleton width="100%" height="30rem" rounded="0.75rem"></app-skeleton>
-        </div>
-      </div>
-    </div>
-  </section>
-} @else {
   <section class="banner mt-8">
     <!-- Hero -->
     <div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8">
@@ -113,7 +84,7 @@
       </div>
     </div>
   </section>
-}
+
 
 
 
