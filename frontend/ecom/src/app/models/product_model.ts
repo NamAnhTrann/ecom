@@ -3,7 +3,7 @@ import { Like } from './like_model';
 import { Comment } from './comment_model';
 
 export class Product {
-  _id?: string;
+  _id: string;
   product_title: string;
   product_price: number;
   product_desc: string;
@@ -30,7 +30,7 @@ export class Product {
     comments: Comment[] = [],
     comments_count: number = 0
   ) {
-    this._id = undefined;
+    this._id = '';
     this.product_title = product_title;
     this.product_price = product_price;
     this.product_desc = product_desc;

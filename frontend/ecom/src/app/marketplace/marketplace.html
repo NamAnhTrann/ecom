@@ -8,7 +8,7 @@
           <img
             src="
               seller.user_profile_img ||
-              'https://cdn-icons-png.flaticon.com/512/847/847969.png'
+              'https://fastly.picsum.photos/id/472/600/400.jpg?hmac=MjZdXzKzW_Fvh1CRuLQ8InG-aVPeisNuvihMyq2cAAQ'
             "
             class="w-12 h-12 rounded-full object-cover"
             alt="Seller"
@@ -55,7 +55,6 @@
           <div
             class="mb-8 ml-4 mr-4 group block overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-md transition"
           >
-            <!-- ✅ FIXED: Product Image + Overlay now isolated -->
             <div class="relative">
               <!-- Product Image -->
               <img
@@ -76,7 +75,7 @@
                 >
                   <button
                     class="w-full py-2 bg-transparent border-2 border-white text-white font-semibold rounded-md hover:bg-white hover:text-gray-900 transition-all"
-                    (click)="buyNow(product)"
+                    (click)="addToCart(product._id)"
                   >
                     Buy Now
                   </button>

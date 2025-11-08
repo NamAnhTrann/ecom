@@ -14,7 +14,5 @@ export interface User {
   refreshTokens?: string;
   user_createdAt?: Date;
   user_updatedAt?: Date;
-
-  /** 🔹 Array of product IDs or populated Product objects (for sellers) */
   products?: (string | Product)[];
 }

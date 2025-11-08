@@ -1,6 +1,16 @@
-<router-outlet></router-outlet>
+<section class="flex flex-col min-h-screen">
+  <!-- Header -->
+  @if(!hideHeader()){
+    <app-header class="z-50 w-full"></app-header>
+  }
 
-@if(!hideHeader()){
-<app-header></app-header>
-<app-footer></app-footer>
-}
+  <!-- Main content -->
+  <main class="mt-4">
+    <router-outlet></router-outlet>
+  </main>
+
+  <!-- Footer -->
+  @if(!hideHeader()){
+    <app-footer class="mt-4"></app-footer>
+  }
+</section>

@@ -78,6 +78,7 @@
         >
           Chat
         </a>
+        
         <a
           routerLink="/marketplace-page"
           routerLinkActive="active"
@@ -86,6 +87,7 @@
         >
           Marketplace
         </a>
+        
         <a
           routerLink="forum-page"
           routerLinkActive="active"
@@ -95,7 +97,7 @@
           Forums
         </a>
                   <a
-          routerLink="chat"
+          routerLink="cart-page"
           routerLinkActive="active"
           class="nav-link inline-block text-black"
           (click)="closeMobile()"
@@ -169,6 +171,12 @@
                 class="block px-3 py-2 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:text-neutral-300 dark:hover:bg-neutral-700"
               >
                 My Profile
+              </a>
+              <a
+                routerLink="/order-summary-page"
+                class="block px-3 py-2 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:text-neutral-300 dark:hover:bg-neutral-700"
+              >
+                Testing Order Summary
               </a>
 
               <a
@@ -294,6 +302,13 @@
           class="text-black dark:text-white w-full"
           (click)="closeMobile()"
           >Marketplace</a
+        >
+        <a
+          routerLink="/order-summary-page"
+          routerLinkActive="active"
+          class="text-black dark:text-white w-full"
+          (click)="closeMobile()"
+          >Testing Order Summary</a
         >
         <a
           routerLink="forum-page"

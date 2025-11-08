@@ -1,0 +1,81 @@
+<section class="p-6 max-w-4xl mx-auto">
+  <!-- If cart has items -->
+  @if (cartItems && cartItems.length > 0) {
+  <div class="space-y-4">
+    @for (item of cartItems; track item?.product_id?._id) {
+    <div
+      class="flex flex-col sm:flex-row sm:items-center justify-between border border-gray-200 p-4 rounded-xl shadow-sm bg-white hover:shadow-md transition-all duration-200"
+    >
+      <!-- Product Info -->
+      <div class="flex items-center space-x-4 mb-4 sm:mb-0">
+        <img
+          [src]="
+            item.product_id?.product_img || 'https://via.placeholder.com/80'
+          "
+          alt="Product image"
+          class="w-20 h-20 object-cover rounded-lg border border-gray-100"
+        />
+        <div>
+          <h2 class="text-lg font-semibold text-gray-900">
+            {{ item.product_id?.product_title }}
+          </h2>
+          <p class="text-gray-500 text-sm">
+            ${{ item.product_id?.product_price }} × {{ item.quantity }}
+          </p>
+        </div>
+      </div>
+
+      <!-- Price + Remove -->
+      <div class="text-right">
+        <p class="text-lg font-semibold text-gray-800">
+          ${{ item.product_id?.product_price * item.quantity }}
+        </p>
+        <button 
+          (click)="deleteCartItem(item.product_id && item.product_id._id)"
+          class="mt-2 text-sm text-gray-500 border border-gray-300 px-4 py-1 rounded-md hover:bg-gray-100 hover:text-gray-700 transition-colors duration-200"
+        >
+          Remove
+        </button>
+      </div>
+    </div>
+    }
+  </div>
+
+  <!-- Cart summary -->
+  <div
+    class="mt-8 p-5 border-t border-gray-200 flex flex-col sm:flex-row justify-between items-center gap-4"
+  >
+    <p class="text-lg font-semibold text-gray-800">
+      Total: ${{ cart?.total_price }}
+    </p>
+    <button
+      [disabled]="!cartItems.length || isLoading"
+      (click)="proceedToCheckout()"
+      class="w-full sm:w-auto px-6 py-3 bg-blue-600 text-white font-medium rounded-lg shadow-md hover:bg-blue-700 transition-all duration-200 disabled:bg-gray-400 disabled:cursor-not-allowed"
+    >
+      {{ isLoading ? "Processing..." : "Proceed to Checkout" }}
+    </button>
+  </div>
+
+  } @else {
+  <!-- Empty cart state -->
+  <div
+    class="flex flex-col items-center justify-center min-h-[65vh] text-center px-4"
+  >
+    <h2 class="text-2xl font-semibold text-gray-800 mb-2">
+      Your cart is empty!
+    </h2>
+    <p class="text-gray-500 mb-6 max-w-md">
+      Looks like you haven’t added anything yet. Start exploring our
+      marketplace for something you’ll love.
+    </p>
+
+    <a
+      routerLink="/marketplace-page"
+      class="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 hover:shadow-lg transition-all duration-200"
+    >
+      Browse Marketplace
+    </a>
+  </div>
+  }
+</section>

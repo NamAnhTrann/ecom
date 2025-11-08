@@ -6,6 +6,7 @@ import 'swiper/css/bundle';
 import { register } from 'swiper/element/bundle';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Cart } from '../models/cart_model';
 
 register();
 
@@ -22,11 +23,29 @@ export class Marketplace {
   comments: Comment[] = [];
   new_comment: string = '';
 
+  //carts
+  cart: Cart | null = null;
+  cartItems: any[] = [];
+  quantity: number = 1;
+
   constructor(private db: DbService, private router: Router) {}
 
   ngOnInit() {
     //dont call lis comment here due to dual API calls --> bad performance
     this.listAllProduct();
+  }
+
+  addToCart(product_id: string) {
+    this.db.addToCart(product_id, this.quantity).subscribe({
+      next: (res: any) => {
+        console.log('Added:', res.message);
+        alert('Product added to cart successfully!');
+      },
+      error: (err) => {
+        console.error('Add to cart error:', err);
+        alert('FAILED');
+      },
+    });
   }
 
   listAllProduct() {
@@ -83,14 +102,16 @@ export class Marketplace {
     });
   }
 
-  addComment(product: any) {  
+  addComment(product: any) {
     const commentText = product.new_comment?.trim();
     // prevent posting empty or blank comments
     this.db.addComment(product._id, { text: commentText }).subscribe({
       next: (res: any) => {
         const comment = res?.comment || res;
         if (comment) {
-          product.comments.unshift(comment); 
+          product.comments.unshift(comment);
+          //update count locally for instant change
+          product.comments_count = product.comments_count + 1;
         }
         // clear only this product’s input
         product.new_comment = '';
@@ -102,21 +123,16 @@ export class Marketplace {
   }
 
   toggleComments(product: any) {
-  product.showComments = !product.showComments;
+    product.showComments = !product.showComments;
 
-  if (product.showComments && !product.comments) {
-    this.db.listComment(product._id).subscribe({
-      next: (res: any) => {
-        product.comments = res.comments || [];
-      },
-      error: (err) => console.error('[toggleComments] Failed to load comments:', err),
-    });
+    if (product.showComments && !product.comments) {
+      this.db.listComment(product._id).subscribe({
+        next: (res: any) => {
+          product.comments = res.comments || [];
+        },
+        error: (err) =>
+          console.error('[toggleComments] Failed to load comments:', err),
+      });
+    }
   }
-}
-  buyNow(product_id: string){
-    //TODO later
-
-  }
-
-
 }

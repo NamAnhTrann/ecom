@@ -5,9 +5,8 @@ const { Strategy: JwtStrategy, ExtractJwt } = require("passport-jwt");
 const bcrypt = require("bcrypt");
 const User = require("../schema/user_schema");
 
-// ==========================
+
 // Local Strategy
-// ==========================
 passport.use(
   new LocalStrategy(
     {
@@ -30,9 +29,8 @@ passport.use(
   )
 );
 
-// ==========================
+
 // Google Strategy
-// ==========================
 passport.use(
   new GoogleStrategy(
     {

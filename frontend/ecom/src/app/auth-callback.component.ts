@@ -14,7 +14,7 @@ export class AuthCallbackComponent implements OnInit {
     private router: Router,
     private auth: Auth
   ) {
-      console.log('✅ AuthCallbackComponent constructed');
+      console.log(' AuthCallbackComponent constructed');
 
   }
 
@@ -23,7 +23,7 @@ export class AuthCallbackComponent implements OnInit {
       const token = params['access_token'];
       const role  = params['user_role'];
 
-      console.log('📥 Google OAuth callback params:', { token, role });
+      console.log(' Google OAuth callback params:', { token, role });
 
       if (token && role) {
         // Save token + role
