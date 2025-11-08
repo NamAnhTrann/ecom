@@ -25,7 +25,7 @@ app.use(cookieParser());
 app.use(passport.initialize());
 
 //  CORS configuration
-const allowedOrigins = ["http://localhost:4200"];
+const allowedOrigins = ["http://localhost:4200",'https://ecom-six-eosin.vercel.app'];
 app.use(
   cors({
     origin: allowedOrigins,

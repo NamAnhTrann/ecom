@@ -5,4 +5,8 @@ import 'preline/preline';
 
 
 bootstrapApplication(App, appConfig)
+  .then(() => {
+    window.dispatchEvent(new Event('AngularReady'));
+  })
   .catch((err) => console.error(err));
+

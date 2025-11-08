@@ -142,30 +142,35 @@ module.exports = {
   },
 
   //google callback with jwt tokens
-  googleAuthCallback: async (req, res) => {
-    try {
-      const user = req.user;
-      const { accessTokens, refreshTokens } = generateTokens(user);
+googleAuthCallback: async (req, res) => {
+  try {
+    const user = req.user;
+    const { accessTokens, refreshTokens } = generateTokens(user);
 
-      user.refreshTokens = refreshTokens;
-      await user.save();
+    user.refreshTokens = refreshTokens;
+    await user.save();
 
-      const isLocal = req.hostname.includes("localhost");
+    res.cookie("refreshTokens", refreshTokens, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "Strict",
+      maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+    });
 
-      res.cookie("refreshTokens", refreshTokens, {
-        httpOnly: true,
-        secure: !isLocal,
-        sameSite: isLocal ? "Lax" : "Strict",
-        maxAge: 30 * 24 * 60 * 60 * 1000,
-      });
+    // Always try redirecting via Vercel first
+    const vercelURL = `https://ecom-six-eosin.vercel.app/#/auth/callback?access_token=${accessTokens}&user_role=${user.user_role}`;
+    const localhostURL = `http://localhost:4200/#/auth/callback?access_token=${accessTokens}&user_role=${user.user_role}`;
 
-      const redirectURL = `http://localhost:4200/#/auth/callback?access_token=${accessTokens}&user_role=${user.user_role}`;
-      res.redirect(redirectURL);
-    } catch (error) {
-      console.error("Error during Google OAuth callback:", error);
-      res.redirect("http://localhost:4200/login?error=google");
-    }
-  },
+    // Attempt Vercel first
+    res.redirect(vercelURL);
+  } catch (error) {
+    console.error("Error during Google OAuth callback:", error);
+
+    // Fallback to localhost
+    res.redirect("http://localhost:4200/login?error=google");
+  }
+},
+
 
   //logout api
   logoutUser: async function (req, res) {

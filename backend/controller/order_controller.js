@@ -71,10 +71,9 @@ module.exports = {
       }
 
       const order = await Order.findOne({ user_id: user._id })
-        .sort({ createdAt: -1, _id: -1 })  // sort the earliest order
+        .sort({ createdAt: -1, _id: -1 }) // sort the earliest order
         .populate("order_items.product_id")
         .populate("user_id", "user_first_name user_last_name user_email");
-;
       if (!order) {
         console.log("Error fetching order", order);
         return res
@@ -120,8 +119,8 @@ module.exports = {
         },
 
         //remember to update when prod
-        success_url: "http://localhost:4200/order-summary-page",
-        cancel_url: "http://localhost:4200/marketplace-page",
+        success_url: "https://ecom-six-eosin.vercel.app/order-summary-page",
+        cancel_url: "https://ecom-six-eosin.vercel.app/marketplace-page",
       });
       return res.json({ url: session.url });
     } catch (err) {

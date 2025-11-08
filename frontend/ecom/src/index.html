@@ -8,6 +8,19 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
-  <app-root></app-root>
+  <!-- Pre-bootstrap loader -->
+  <app-root>
+    <div id="loader" class="flex h-screen items-center justify-center bg-slate-900">
+      <div class="h-10 w-10 animate-spin rounded-full border-4 border-slate-300 border-t-emerald-400"></div>
+    </div>
+  </app-root>
+
+  <!-- Remove loader when Angular finishes bootstrapping -->
+  <script>
+    window.addEventListener('AngularReady', () => {
+      const loader = document.getElementById('loader');
+      if (loader) loader.remove();
+    });
+  </script>
 </body>
 </html>
