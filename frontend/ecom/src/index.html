@@ -6,6 +6,14 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <!-- Preload and detect when Tailwind CSS is fully loaded -->
+  <link
+    rel="preload"
+    as="style"
+    href="styles.css"
+    onload="this.onload=null;this.rel='stylesheet';window.tailwindReady=true;">
+  <noscript><link rel="stylesheet" href="styles.css"></noscript>
 </head>
 <body>
   <!-- Pre-bootstrap loader -->
@@ -15,7 +23,7 @@
     </div>
   </app-root>
 
-  <!-- Remove loader when Angular finishes bootstrapping -->
+  <!-- Remove loader after Angular + Tailwind are ready -->
   <script>
     window.addEventListener('AngularReady', () => {
       const loader = document.getElementById('loader');
