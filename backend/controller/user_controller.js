@@ -98,37 +98,47 @@ module.exports = {
     }
   },
 
-  refreshAccessToken: async function (req, res) {
-    const refreshToken = req.cookies.refreshTokens;
-    if (!refreshToken) {
-      return res.status(401).json({ message: "no refresh token provided" });
+ refreshAccessToken: async function (req, res) {
+  const refreshToken = req.cookies.refreshTokens;
+
+  if (!refreshToken) {
+    console.warn("[REFRESH] No token, not authenticated");
+    return res
+      .status(401)
+      .json({ message: "Not authenticated. Please log in again." });
+  }
+
+  try {
+    const decoded = jwt.verify(refreshToken, process.env.REFRESH_SECRET);
+    const user = await User.findById(decoded.id);
+
+    if (!user || user.refreshTokens !== refreshToken) {
+      console.warn("[REFRESH] Invalid or mismatched token for user:", decoded.id);
+      return res
+        .status(403)
+        .json({ message: "Invalid refresh token. Please log in again." });
     }
 
-    try {
-      const decoded = jwt.verify(refreshToken, process.env.REFRESH_SECRET);
-      console.log("decoded refresh token", decoded);
-      const user = await User.findById(decoded.id);
-      console.log("Found user:", user);
+    const newTokens = generateTokens(user);
+    user.refreshTokens = newTokens.refreshTokens;
+    await user.save();
 
-      if (!user || user.refreshTokens !== refreshToken) {
-        console.log("invalid refresh token", user, refreshToken);
-        return res.status(403).json({ message: "invalid refresh token" });
-      }
-      const newTokens = generateTokens(user);
-      user.refreshTokens = newTokens.refreshTokens;
-      await user.save();
+    res.cookie("refreshTokens", newTokens.refreshTokens, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "Strict" : "Lax",
+      maxAge: 30 * 24 * 60 * 60 * 1000,
+    });
 
-      res.cookie("refreshTokens", newTokens.refreshTokens, {
-        httpOnly: true,
-        secure: true,
-        sameSite: "Strict",
-        maxAge: 30 * 24 * 60 * 60 * 1000, //30 days
-      });
-      res.json({ accessTokens: newTokens.accessTokens });
-    } catch (error) {
-      return res.status(500).json({ message: "Internal server error", error });
-    }
-  },
+    return res.json({ accessTokens: newTokens.accessTokens });
+  } catch (error) {
+    console.error("[REFRESH ERROR]", error.message);
+    return res
+      .status(403)
+      .json({ message: "Session expired. Please log in again." });
+  }
+},
+
 
   //google stuff
   //initiate google oauth
@@ -157,19 +167,20 @@ googleAuthCallback: async (req, res) => {
       maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
     });
 
-    // Always try redirecting via Vercel first
-    const vercelURL = `https://ecom-six-eosin.vercel.app/#/auth/callback?access_token=${accessTokens}&user_role=${user.user_role}`;
-    const localhostURL = `http://localhost:4200/#/auth/callback?access_token=${accessTokens}&user_role=${user.user_role}`;
+    // Detect environment dynamically
+    const isProd = process.env.NODE_ENV === "production";
+    const baseURL = isProd
+      ? "https://ecom-six-eosin.vercel.app"
+      : "http://localhost:4200";
 
-    // Attempt Vercel first
-    res.redirect(vercelURL);
+    const redirectURL = `${baseURL}/#/auth/callback?access_token=${accessTokens}&user_role=${user.user_role}`;
+    res.redirect(redirectURL);
   } catch (error) {
     console.error("Error during Google OAuth callback:", error);
-
-    // Fallback to localhost
     res.redirect("http://localhost:4200/login?error=google");
   }
 },
+
 
 
   //logout api

@@ -16,7 +16,7 @@
       class="shrink-0 flex items-center font-semibold focus:outline-hidden focus:opacity-80"
     >
       <svg
-        class="h-8 lg:h-9 w-auto text-black dark:text-white"
+        class="h-8 lg:h-9 w-auto text-black dark:text-neutral-100"
         viewBox="0 0 640 120"
         xmlns="http://www.w3.org/2000/svg"
         role="img"
@@ -38,13 +38,14 @@
     <div
       class="hidden lg:flex grow items-center justify-end gap-x-7 ms-auto"
     >
+    
       @if (!auth.isLoggedIn()) {
         <!-- Public nav links -->
         <a
           routerLink="/"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"
-          class="nav-link inline-block text-black"
+          class="nav-link inline-block text-black dark:text-neutral-200"
           (click)="closeMobile()"
         >
           Home
@@ -52,7 +53,7 @@
         <a
           routerLink="/about-us-page"
           routerLinkActive="active"
-          class="nav-link inline-block text-black"
+          class="nav-link inline-block text-black dark:text-neutral-200"
           (click)="closeMobile()"
         >
           About Scrappy
@@ -60,7 +61,7 @@
         <a
           routerLink="contact-us"
           routerLinkActive="active"
-          class="nav-link inline-block text-black"
+          class="nav-link inline-block text-black dark:text-neutral-200"
           (click)="closeMobile()"
         >
           Contact Us
@@ -70,7 +71,7 @@
         <a
           routerLink="/chat-page"
           routerLinkActive="active"
-          class="nav-link inline-block text-black"
+          class="nav-link inline-block text-black dark:text-neutral-200"
           (click)="closeMobile()"
         >
           Chat
@@ -79,7 +80,7 @@
         <a
           routerLink="/marketplace-page"
           routerLinkActive="active"
-          class="nav-link inline-block text-black"
+          class="nav-link inline-block text-black dark:text-neutral-200"
           (click)="closeMobile()"
         >
           Marketplace
@@ -88,7 +89,7 @@
         <a
           routerLink="/forum-page"
           routerLinkActive="active"
-          class="nav-link inline-block text-black"
+          class="nav-link inline-block text-black dark:text-neutral-200"
           (click)="closeMobile()"
         >
           Forums
@@ -96,12 +97,37 @@
                   <a
           routerLink="cart-page"
           routerLinkActive="active"
-          class="nav-link inline-block text-black"
+          class="nav-link inline-block text-black dark:text-neutral-200"
           (click)="closeMobile()"
         >
           My Cart
         </a>
       }
+      <!-- =================== DARK MODE TOGGLE =================== -->
+<button
+  (click)="toggleTheme()"
+  class="relative flex items-center justify-center w-10 h-10 rounded-full border border-gray-300 dark:border-neutral-700
+         bg-gray-100 dark:bg-neutral-800 text-gray-700 dark:text-neutral-200 hover:bg-gray-200 dark:hover:bg-neutral-700
+         transition-all duration-300"
+  aria-label="Toggle dark mode"
+>
+  @if (!isDarkMode) {
+    <!-- Sun Icon -->
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+         fill="none" stroke="currentColor" stroke-width="2"
+         stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+      <circle cx="12" cy="12" r="5"/>
+      <path d="M12 1v2m0 18v2m11-11h-2M3 12H1m17.66 5.66l-1.41-1.41M5.76 5.76L4.34 4.34m15.32 0l-1.42 1.42M5.76 18.24l-1.42 1.42"/>
+    </svg>
+  } @else {
+    <!-- Moon Icon -->
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+         fill="currentColor" class="w-5 h-5">
+      <path d="M21.752 15.002A9.718 9.718 0 0112 22a9.72 9.72 0 01-9.752-8.998A9.72 9.72 0 0112 2a9.72 9.72 0 019.752 8.998z"/>
+    </svg>
+  }
+</button>
+
 
       <!-- Divider -->
       <div
@@ -113,7 +139,7 @@
         <!-- Not logged in -->
         <button
           (click)="loginButton()"
-          class="nav-link relative inline-block text-black after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-black after:transition-all after:duration-300 hover:after:w-full"
+          class="nav-link relative inline-block text-black dark:text-neutral-100 after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-black after:transition-all after:duration-300 hover:after:w-full"
         >
           Join Scrappy
         </button>
@@ -126,7 +152,7 @@
           <button
             id="hs-header-auth-dropdown"
             type="button"
-            class="nav-link relative inline-block text-black after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-black after:transition-all after:duration-300 hover:after:w-full hs-dropdown-toggle flex items-center gap-1"
+            class="nav-link relative inline-block text-black dark:text-neutral-100 after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-black after:transition-all after:duration-300 hover:after:w-full hs-dropdown-toggle flex items-center gap-1"
             aria-haspopup="menu"
             aria-expanded="false"
           >
@@ -205,7 +231,7 @@
     <!-- =================== MOBILE TOGGLE (Hamburger/Close) =================== -->
     <button
       type="button"
-      class="lg:hidden ms-auto flex items-center justify-center p-2 text-black dark:text-white"
+      class="lg:hidden ms-auto flex items-center justify-center p-2 text-black dark:text-neutral-100"
       (click)="toggleMobile()"
       [attr.aria-expanded]="mobileOpen"
       aria-controls="mobile-panel"
@@ -266,20 +292,20 @@
           routerLink="/"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"
-          class="text-black dark:text-white w-full"
+          class="text-black dark:text-neutral-100 w-full"
           (click)="closeMobile()"
           >Home</a
         >
         <a
           routerLink="contact-us"
           routerLinkActive="active"
-          class="text-black dark:text-white w-full"
+          class="text-black dark:text-neutral-100 w-full"
           (click)="closeMobile()"
           >Contact Us</a
         >
         <a
     routerLink="/about-us-page"          routerLinkActive="active"
-          class="text-black dark:text-white w-full"
+          class="text-black dark:text-neutral-100 w-full"
           (click)="closeMobile()"
           >About Scrappy</a
         >
@@ -288,28 +314,28 @@
         <a
           routerLink="/chat-page"
           routerLinkActive="active"
-          class="text-black dark:text-white w-full"
+          class="text-black dark:text-neutral-100 w-full"
           (click)="closeMobile()"
           >Chat</a
         >
         <a
           routerLink="/marketplace-page"
           routerLinkActive="active"
-          class="text-black dark:text-white w-full"
+          class="text-black dark:text-neutral-100 w-full"
           (click)="closeMobile()"
           >Marketplace</a
         >
         <a
           routerLink="/order-summary-page"
           routerLinkActive="active"
-          class="text-black dark:text-white w-full"
+          class="text-black dark:text-neutral-100 w-full"
           (click)="closeMobile()"
           >Testing Order Summary</a
         >
         <a
           routerLink="forum-page"
           routerLinkActive="active"
-          class="text-black dark:text-white w-full"
+          class="text-black dark:text-neutral-100 w-full"
           (click)="closeMobile()"
           >Forums</a
         >

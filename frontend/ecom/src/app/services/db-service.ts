@@ -76,7 +76,7 @@ export class DbService {
   listAllProducts() {
     return this.http.get(
       `${this.localUrl}/get/all/product/api`,
-      this.authHeader()
+      
     );
   }
 

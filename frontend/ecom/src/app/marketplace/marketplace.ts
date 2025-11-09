@@ -7,7 +7,6 @@ import { register } from 'swiper/element/bundle';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Cart } from '../models/cart_model';
-import { Skeleton } from '../skeleton/skeleton';
 
 register();
 

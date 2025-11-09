@@ -1,3 +1,4 @@
+<!-- Scrappy — Banner -->
 <section
   class="mt-8 mb-8 relative h-[80vh] w-[95%] mx-auto overflow-hidden rounded-2xl shadow-lg"
 >
@@ -34,7 +35,7 @@
         </p>
         <a
           href="#1"
-          class="inline-block bg-white text-black font-semibold px-6 py-3 rounded-full hover:bg-gray-100 transition-all duration-300"
+          class="inline-block bg-white text-black font-semibold px-6 py-3 rounded-full shadow-md transition-all duration-300 hover:bg-[#4F46E5] hover:text-white dark:hover:bg-[#FFE135] dark:hover:text-black hover:scale-[1.05]"
         >
           Start Planning
         </a>
@@ -64,7 +65,7 @@
         </p>
         <a
           href="#1"
-          class="inline-block bg-white text-black font-semibold px-6 py-3 rounded-full hover:bg-gray-100 transition-all duration-300"
+          class="inline-block bg-white text-black font-semibold px-6 py-3 rounded-full shadow-md transition-all duration-300 hover:bg-[#4F46E5] hover:text-white dark:hover:bg-[#FFE135] dark:hover:text-black hover:scale-[1.05]"
         >
           Learn More
         </a>
@@ -94,7 +95,7 @@
         </p>
         <a
           href="#1"
-          class="inline-block bg-white text-black font-semibold px-6 py-3 rounded-full hover:bg-gray-100 transition-all duration-300"
+          class="inline-block bg-white text-black font-semibold px-6 py-3 rounded-full shadow-md transition-all duration-300 hover:bg-[#4F46E5] hover:text-white dark:hover:bg-[#FFE135] dark:hover:text-black hover:scale-[1.05]"
         >
           Explore Strategies
         </a>
@@ -103,8 +104,11 @@
   </swiper-container>
 </section>
 
-<section id="1" class="mt-20 mb-20 fade-up">
-  <div class="bg-gray-50 dark:bg-neutral-900 py-24 sm:py-32">
+<!-- Scrappy — Succeed -->
+<section id="1" class="mb-20 fade-up">
+  <div
+    class="bg-gray-50 dark:bg-neutral-950 py-24 sm:py-32 transition-colors duration-300"
+  >
     <div class="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
       <!-- Header -->
       <p
@@ -125,10 +129,10 @@
       >
         <!-- Mobile-Friendly -->
         <div
-          class="relative lg:row-span-2 group transition-transform duration-500 hover:-translate-y-1"
+          class="relative lg:row-span-2 group transition-transform duration-500 hover:-translate-y-1 hover:shadow-lg hover:border-[#4F46E5] dark:hover:border-[#FFE135] border border-transparent rounded-2xl"
         >
           <div
-            class="absolute inset-px rounded-2xl bg-white dark:bg-neutral-800"
+            class="absolute inset-px rounded-2xl bg-white dark:bg-neutral-900 transition-all duration-300 group-hover:bg-[#4F46E5]/5 dark:group-hover:bg-[#FFE135]/10"
           ></div>
           <div
             class="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)]"
@@ -148,31 +152,78 @@
               </p>
             </div>
             <div
-              class="@container relative min-h-120 w-full grow max-lg:mx-auto max-lg:max-w-sm"
+              class="@container relative min-h-120 w-full grow max-lg:mx-auto max-lg:max-w-sm flex items-center justify-center"
             >
               <div
-                class="absolute inset-x-10 top-10 bottom-0 overflow-hidden rounded-t-[12cqw] border-x-[3cqw] border-t-[3cqw] border-gray-700 bg-gray-900 shadow-2xl"
+                class="relative w-48 h-[22rem] bg-gray-100 dark:bg-neutral-800 border-[3px] border-gray-300 dark:border-neutral-700 rounded-[1.5rem] shadow-2xl overflow-hidden flex flex-col items-center p-3"
               >
-                <img
-                  src="https://images.unsplash.com/photo-1607082349566-187342175e2b?w=800&q=80"
-                  alt="Mobile friendly shop"
-                  class="size-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                />
+                <!-- Top Notch -->
+                <div
+                  class="absolute top-2 w-16 h-3 bg-gray-300 dark:bg-neutral-600 rounded-full"
+                ></div>
+
+                <!-- Screen content -->
+                <div class="mt-6 w-full flex-1 px-3 space-y-3">
+                  <!-- Image placeholder -->
+                  <div
+                    class="w-full h-24 bg-gradient-to-br from-[#4F46E5]/80 to-indigo-500/70 dark:from-[#FFE135]/80 dark:to-amber-400/70 rounded-xl animate-pulse"
+                  ></div>
+
+                  <!-- Product text -->
+                  <div
+                    class="h-3 w-3/4 bg-gray-300 dark:bg-neutral-600 rounded"
+                  ></div>
+                  <div
+                    class="h-3 w-1/3 bg-[#4F46E5]/70 dark:bg-[#FFE135]/70 rounded"
+                  ></div>
+
+                  <!-- Button -->
+                  <div
+                    class="w-full h-8 mt-4 rounded-full bg-[#4F46E5] dark:bg-[#FFE135] shadow-md hover:scale-[1.03] transition-transform duration-300"
+                  ></div>
+
+                  <!-- Text lines -->
+                  <div class="space-y-2 mt-6">
+                    <div
+                      class="h-3 w-2/3 bg-gray-300 dark:bg-neutral-600 rounded"
+                    ></div>
+                    <div
+                      class="h-3 w-3/4 bg-gray-300 dark:bg-neutral-600 rounded"
+                    ></div>
+                    <div
+                      class="h-3 w-1/2 bg-gray-300 dark:bg-neutral-600 rounded"
+                    ></div>
+                  </div>
+                </div>
+
+                <!-- Bottom dots -->
+                <div class="flex justify-center gap-2 mt-4 pb-2">
+                  <div
+                    class="w-3 h-3 bg-gray-400 dark:bg-neutral-500 rounded-full animate-bounce"
+                  ></div>
+                  <div
+                    class="w-3 h-3 bg-[#4F46E5] dark:bg-[#FFE135] rounded-full animate-bounce delay-150"
+                  ></div>
+                  <div
+                    class="w-3 h-3 bg-gray-400 dark:bg-neutral-500 rounded-full animate-bounce delay-300"
+                  ></div>
+                </div>
               </div>
             </div>
           </div>
           <div
-            class="pointer-events-none absolute inset-px rounded-2xl shadow-sm outline outline-black/5 dark:outline-white/5"
+            class="pointer-events-none absolute inset-px rounded-2xl shadow-sm outline outline-black/5 dark:outline-white/10"
           ></div>
         </div>
 
         <!-- Fast Performance -->
         <div
-          class="relative max-lg:row-start-1 group transition-transform duration-500 hover:-translate-y-1"
+          class="relative max-lg:row-start-1 group transition-transform duration-500 hover:-translate-y-1 hover:shadow-lg hover:border-[#4F46E5] dark:hover:border-[#FFE135] border border-transparent rounded-2xl"
         >
           <div
-            class="absolute inset-px rounded-2xl bg-white dark:bg-neutral-800"
+            class="absolute inset-px rounded-2xl bg-white dark:bg-neutral-900 transition-all duration-300 group-hover:bg-[#4F46E5]/5 dark:group-hover:bg-[#FFE135]/10"
           ></div>
+
           <div
             class="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)]"
           >
@@ -189,85 +240,106 @@
                 in seconds — keeping your buyers happy and coming back.
               </p>
             </div>
+
+            <!-- Visual speed chart -->
             <div
               class="flex flex-1 items-center justify-center px-8 max-lg:pt-10 max-lg:pb-12 sm:px-10 lg:pb-2"
             >
-              <img
-                src="https://tailwindcss.com/plus-assets/img/component-images/bento-03-performance.png"
-                alt="Fast performance"
-                class="w-full max-lg:max-w-xs rounded-lg shadow-md "
-              />
+              <div
+                class="relative flex items-end justify-center h-24 w-48 space-x-2"
+              >
+                <!-- Bars -->
+                <div
+                  class="w-3 rounded-full bg-[#4F46E5] dark:bg-[#FFE135] animate-bar1"
+                  style="height: 30%"
+                ></div>
+                <div
+                  class="w-3 rounded-full bg-[#4F46E5]/90 dark:bg-[#FFE135]/90 animate-bar2"
+                  style="height: 60%"
+                ></div>
+                <div
+                  class="w-3 rounded-full bg-[#4F46E5]/80 dark:bg-[#FFE135]/80 animate-bar3"
+                  style="height: 90%"
+                ></div>
+                <div
+                  class="w-3 rounded-full bg-[#4F46E5]/70 dark:bg-[#FFE135]/70 animate-bar4"
+                  style="height: 75%"
+                ></div>
+                <div
+                  class="w-3 rounded-full bg-[#4F46E5]/60 dark:bg-[#FFE135]/60 animate-bar5"
+                  style="height: 45%"
+                ></div>
+              </div>
             </div>
           </div>
+
           <div
-            class="pointer-events-none absolute inset-px rounded-2xl shadow-sm outline outline-black/5 dark:outline-white/5"
+            class="pointer-events-none absolute inset-px rounded-2xl shadow-sm outline outline-black/5 dark:outline-white/10"
           ></div>
         </div>
 
- <!-- Secure Payments -->
-<div
-  class="relative max-lg:row-start-3 lg:col-start-2 lg:row-start-2 group transition-transform duration-500 hover:-translate-y-1"
->
-  <!-- Background -->
-  <div
-    class="absolute inset-px rounded-2xl bg-white dark:bg-neutral-800"
-  ></div>
-
-  <!-- Card content -->
-  <div
-    class="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)]"
-  >
-    <div class="mx-auto lg:mx-0">
-      <!-- Credit Card Visual -->
-      <div
-        class="relative mx-auto mt-6 mb-4 w-60 h-36 rounded-xl bg-gradient-to-br from-blue-500 via-indigo-500 to-purple-600 shadow-lg p-5 flex flex-col justify-between text-white transition-transform duration-300 group-hover:scale-[1.03]"
-       >
-        <div class="flex justify-between text-xs opacity-90">
-          <span class="font-semibold tracking-wider">SCRAPPY PAY</span>
-          <span class="font-semibold">VISA</span>
-        </div>
-        <div class="font-mono tracking-widest text-lg">
-          **** **** **** 3924
-        </div>
-        <div class="flex justify-between text-[10px] opacity-80">
-          <span>VALID 12/29</span>
-          <span>NAME SURNAME</span>
-        </div>
-      </div>
-
-      <!-- Text -->
-      <div class="mb-4 px-8 pt-2 sm:px-10 sm:pt-3 text-center lg:text-left">
-        <p
-          class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white"
+        <!-- Secure Payments -->
+        <div
+          class="relative max-lg:row-start-3 lg:col-start-2 lg:row-start-2 group transition-transform duration-500 hover:-translate-y-1 hover:shadow-lg hover:border-[#4F46E5] dark:hover:border-[#FFE135] border border-transparent rounded-2xl"
         >
-          Safe, secure payments
-        </p>
-        <p
-          class="mt-2 max-w-lg text-sm leading-6 text-gray-600 dark:text-neutral-400"
-        >
-          Every transaction is protected by
-          <span class="font-medium text-gray-900 dark:text-white"
-            >Stripe</span
-          >. Sellers get paid fast; buyers checkout with encrypted,
-          fraud-protected payments.
-        </p>
-      </div>
-    </div>
-  </div>
+          <div
+            class="absolute inset-px rounded-2xl bg-white dark:bg-neutral-900 transition-all duration-300 group-hover:bg-[#4F46E5]/5 dark:group-hover:bg-[#FFE135]/10"
+          ></div>
 
-  <!-- Outline -->
-  <div
-    class="pointer-events-none absolute inset-px rounded-2xl shadow-sm outline outline-black/5 dark:outline-white/5"
-  ></div>
-</div>
+          <div
+            class="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)]"
+          >
+            <div class="mx-auto lg:mx-0">
+              <!-- Scrappy Pay Card -->
+              <div
+                class="relative mx-auto mt-6 mb-4 w-60 h-36 rounded-xl bg-gradient-to-br from-[#4F46E5] via-indigo-600 to-purple-600 dark:from-[#FFE135] dark:via-amber-400 dark:to-orange-400 shadow-lg p-5 flex flex-col justify-between text-white transition-all duration-500 group-hover:scale-[1.05] group-hover:shadow-2xl"
+              >
+                <div class="flex justify-between text-xs opacity-90">
+                  <span class="font-semibold tracking-wider">SCRAPPY PAY</span>
+                  <span class="font-semibold">VISA</span>
+                </div>
+                <div class="font-mono tracking-widest text-lg">
+                  **** **** **** 3924
+                </div>
+                <div class="flex justify-between text-[10px] opacity-80">
+                  <span>VALID 12/29</span>
+                  <span>NAME SURNAME</span>
+                </div>
+              </div>
 
+              <!-- Payment Text -->
+              <div
+                class="mb-4 px-8 pt-2 sm:px-10 sm:pt-3 text-center lg:text-left"
+              >
+                <p
+                  class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white"
+                >
+                  Safe, secure payments
+                </p>
+                <p
+                  class="mt-2 max-w-lg text-sm leading-6 text-gray-600 dark:text-neutral-400"
+                >
+                  Every transaction is protected by
+                  <span class="font-medium text-gray-900 dark:text-white"
+                    >Stripe</span
+                  >. Sellers get paid fast; buyers checkout with encrypted,
+                  fraud-protected payments.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="pointer-events-none absolute inset-px rounded-2xl shadow-sm outline outline-black/5 dark:outline-white/10"
+          ></div>
+        </div>
 
         <!-- Analytics & Growth -->
         <div
-          class="relative lg:row-span-2 group transition-transform duration-500 hover:-translate-y-1"
+          class="relative lg:row-span-2 group transition-transform duration-500 hover:-translate-y-1 hover:shadow-lg hover:border-[#4F46E5] dark:hover:border-[#FFE135] border border-transparent rounded-2xl"
         >
           <div
-            class="absolute inset-px rounded-2xl bg-white dark:bg-neutral-800"
+            class="absolute inset-px rounded-2xl bg-white dark:bg-neutral-900 transition-all duration-300 group-hover:bg-[#4F46E5]/5 dark:group-hover:bg-[#FFE135]/10"
           ></div>
           <div
             class="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)]"
@@ -276,7 +348,8 @@
               <p
                 class="mt-2 text-xl font-semibold tracking-tight text-gray-900 dark:text-white max-lg:text-center"
               >
-                You're a Seller? <br> We have insights that help you grow
+                You're a Seller? <br />
+                We have insights that help you grow
               </p>
               <p
                 class="mt-2 max-w-lg text-sm leading-6 text-gray-600 dark:text-neutral-400 max-lg:text-center"
@@ -287,31 +360,74 @@
             </div>
             <div class="relative min-h-120 w-full grow">
               <div
-                class="absolute top-10 right-0 bottom-0 left-10 overflow-hidden rounded-tl-xl bg-gray-900 dark:bg-neutral-900 shadow-2xl outline outline-white/10"
+                class="relative min-h-120 w-full grow flex items-center justify-center"
               >
                 <div
-                  class="px-6 pt-6 pb-14 flex flex-col items-center justify-center text-center text-gray-300"
+                  class="mt-8 relative w-[85%] h-[22rem] bg-gradient-to-br from-[#4F46E5]/90 to-indigo-600/70 dark:from-[#FFE135]/80 dark:to-amber-400/60 rounded-2xl shadow-2xl p-6 text-white overflow-hidden"
                 >
-                  <p class="text-lg font-semibold mb-3">Sales Summary</p>
-                  <div class="flex items-center justify-center space-x-4">
-                    <div class="flex flex-col items-center">
-                      <p class="text-2xl font-bold text-white">$12.4K</p>
-                      <p class="text-sm text-gray-400">Total Revenue</p>
+                  <!-- Subtle animated background -->
+                  <div
+                    class="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,rgba(255,255,255,0.15),transparent_60%)] animate-pulse"
+                  ></div>
+
+                  <!-- Header -->
+                  <div class="relative flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-semibold tracking-wide">
+                      Revenue Overview
+                    </h3>
+                    <p class="text-sm text-white/70">Last 30 days</p>
+                  </div>
+
+                  <!-- Chart grid -->
+                  <div
+                    class="relative grid grid-cols-6 gap-3 items-end h-32 mb-6"
+                  >
+                    <div
+                      class="h-[30%] bg-white/40 rounded-md animate-[pulse_3s_ease-in-out_infinite]"
+                    ></div>
+                    <div
+                      class="h-[50%] bg-white/50 rounded-md animate-[pulse_3s_ease-in-out_infinite_200ms]"
+                    ></div>
+                    <div
+                      class="h-[70%] bg-white/60 rounded-md animate-[pulse_3s_ease-in-out_infinite_400ms]"
+                    ></div>
+                    <div
+                      class="h-[90%] bg-white/70 rounded-md animate-[pulse_3s_ease-in-out_infinite_600ms]"
+                    ></div>
+                    <div
+                      class="h-[65%] bg-white/50 rounded-md animate-[pulse_3s_ease-in-out_infinite_800ms]"
+                    ></div>
+                    <div
+                      class="h-[85%] bg-white/60 rounded-md animate-[pulse_3s_ease-in-out_infinite_1000ms]"
+                    ></div>
+                  </div>
+
+                  <!-- Stats summary -->
+                  <div class="relative grid grid-cols-3 gap-4 text-center">
+                    <div>
+                      <p class="text-2xl font-bold">$12.8K</p>
+                      <p class="text-sm text-white/70">Total Sales</p>
                     </div>
-                    <div class="flex flex-col items-center">
-                      <p class="text-2xl font-bold text-green-400">+18%</p>
-                      <p class="text-sm text-gray-400">This Month</p>
+                    <div>
+                      <p class="text-2xl font-bold text-green-300">+18%</p>
+                      <p class="text-sm text-white/70">Growth</p>
+                    </div>
+                    <div>
+                      <p class="text-2xl font-bold">1.2K</p>
+                      <p class="text-sm text-white/70">Orders</p>
                     </div>
                   </div>
-                  <p class="mt-4 text-sm text-gray-400">
-                    Track what’s working — and scale it fast.
-                  </p>
+
+                  <!-- Footer -->
+                  <div class="absolute bottom-4 left-6 text-sm text-white/60">
+                    Updated 2 mins ago
+                  </div>
                 </div>
               </div>
             </div>
           </div>
           <div
-            class="pointer-events-none absolute inset-px rounded-2xl shadow-sm outline outline-black/5 dark:outline-white/5"
+            class="pointer-events-none absolute inset-px rounded-2xl shadow-sm outline outline-black/5 dark:outline-white/10"
           ></div>
         </div>
       </div>
@@ -319,7 +435,8 @@
   </div>
 </section>
 
-<section class="fade-up mt-20 mb-20">
+<!-- Explore -->
+<section class="fade-up mt-20 mb-20 bg-white dark:bg-neutral-950">
   <!-- Header -->
   <div class="text-center mb-12">
     <h2
@@ -328,124 +445,117 @@
       Explore Scrappy Features
     </h2>
     <p
-      class="mt-4 text-lg text-gray-600 dark:text-neutral-300 max-w-2xl mx-auto"
+      class="mt-4 text-lg text-gray-600 dark:text-neutral-400 max-w-2xl mx-auto"
     >
-      Everything your creative team needs — organized, automated, and built for
-      collaboration.
+      From real-time dashboards to social-commerce synergy — everything designed
+      to grow together.
     </p>
   </div>
 
-  <!-- Features -->
   <div
     class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto text-center"
   >
     <!-- Tab Nav -->
     <nav
-      class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-center items-center gap-y-4 sm:gap-x-6"
-      aria-label="Tabs"
+      class="flex flex-wrap justify-center items-center text-center gap-4 sm:gap-6 mx-auto max-w-6xl"
       role="tablist"
     >
       <!-- Tab 1 -->
       <button
         type="button"
-        class="hs-tab-active:bg-gray-100 hs-tab-active:hover:border-transparent flex flex-col items-center text-center hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 p-4 md:p-6 rounded-xl transition-all duration-300 dark:hs-tab-active:bg-neutral-800 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800 active"
         id="tabs-with-card-item-1"
-        aria-selected="true"
         data-hs-tab="#tabs-with-card-1"
-        aria-controls="tabs-with-card-1"
         role="tab"
+        aria-selected="true"
+        class="flex flex-col items-center justify-center text-center w-56 h-40 p-5 sm:p-6 rounded-xl transition-all duration-300 bg-transparent hover:bg-gray-100 dark:hover:bg-neutral-800 hs-tab-active:bg-gray-100 dark:hs-tab-active:bg-neutral-800 active:scale-[1.05]"
       >
-        <svg
-          class="size-10 mb-3 hs-tab-active:text-blue-600 text-gray-800 dark:hs-tab-active:text-blue-500 dark:text-white transition-all duration-300"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H12v7H8.5A3.5 3.5 0 0 1 5 5.5z" />
-          <path d="M12 2h3.5a3.5 3.5 0 1 1 0 7H12V2z" />
-          <path d="M12 12.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 1 1-7 0z" />
-        </svg>
+        <div class="h-10 w-10 grid place-items-center mb-3">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="h-6 w-6 text-gray-800 dark:text-neutral-300 hs-tab-active:text-[#4F46E5] dark:hs-tab-active:text-[#FFE135]"
+          >
+            <rect x="3" y="3" width="7" height="9" rx="1" />
+            <rect x="14" y="3" width="7" height="5" rx="1" />
+            <rect x="14" y="10" width="7" height="11" rx="1" />
+            <rect x="3" y="14" width="7" height="7" rx="1" />
+          </svg>
+        </div>
         <span
-          class="hs-tab-active:text-blue-600 font-semibold text-gray-800 dark:hs-tab-active:text-blue-500 dark:text-neutral-200"
+          class="font-semibold text-gray-800 dark:text-neutral-200 hs-tab-active:text-[#4F46E5] dark:hs-tab-active:text-[#FFE135]"
         >
-          All-in-one workspace
-        </span>
-        <span
-          class="hidden md:block mt-2 text-gray-600 dark:text-neutral-300 text-sm"
-        >
-          Build, organize, and manage your ideas seamlessly.
+          Seller Dashboard
         </span>
       </button>
 
       <!-- Tab 2 -->
       <button
         type="button"
-        class="hs-tab-active:bg-gray-100 hs-tab-active:hover:border-transparent flex flex-col items-center text-center hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 p-4 md:p-6 rounded-xl transition-all duration-300 dark:hs-tab-active:bg-neutral-800 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
         id="tabs-with-card-item-2"
-        aria-selected="false"
         data-hs-tab="#tabs-with-card-2"
-        aria-controls="tabs-with-card-2"
         role="tab"
+        aria-selected="false"
+        class="flex flex-col items-center justify-center text-center w-56 h-40 p-5 sm:p-6 rounded-xl transition-all duration-300 bg-transparent hover:bg-gray-100 dark:hover:bg-neutral-800 hs-tab-active:bg-gray-100 dark:hs-tab-active:bg-neutral-800"
       >
-        <svg
-          class="size-10 mb-3 hs-tab-active:text-blue-600 text-gray-800 dark:hs-tab-active:text-blue-500 dark:text-white transition-all duration-300"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path d="m12 14 4-4" />
-          <path d="M3.34 19a10 10 0 1 1 17.32 0" />
-        </svg>
+        <div class="h-10 w-10 grid place-items-center mb-3">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="h-6 w-6 text-gray-800 dark:text-neutral-300 hs-tab-active:text-[#4F46E5] dark:hs-tab-active:text-[#FFE135]"
+          >
+            <circle cx="12" cy="8" r="3" />
+            <path d="M16 21v-2a4 4 0 0 0-8 0v2" />
+            <circle cx="6" cy="8" r="2" />
+            <path d="M2 21v-2a4 4 0 0 1 4-4" />
+            <circle cx="18" cy="8" r="2" />
+            <path d="M22 21v-2a4 4 0 0 0-4-4" />
+          </svg>
+        </div>
         <span
-          class="hs-tab-active:text-blue-600 font-semibold text-gray-800 dark:hs-tab-active:text-blue-500 dark:text-neutral-200"
+          class="font-semibold text-gray-800 dark:text-neutral-200 hs-tab-active:text-[#4F46E5] dark:hs-tab-active:text-[#FFE135]"
         >
-          Automation on a new level
-        </span>
-        <span
-          class="hidden md:block mt-2 text-gray-600 dark:text-neutral-300 text-sm"
-        >
-          Streamline workflows and scale operations automatically.
+          Social + Commerce
         </span>
       </button>
 
       <!-- Tab 3 -->
       <button
         type="button"
-        class="hs-tab-active:bg-gray-100 hs-tab-active:hover:border-transparent flex flex-col items-center text-center hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 p-4 md:p-6 rounded-xl transition-all duration-300 dark:hs-tab-active:bg-neutral-800 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
         id="tabs-with-card-item-3"
-        aria-selected="false"
         data-hs-tab="#tabs-with-card-3"
-        aria-controls="tabs-with-card-3"
         role="tab"
+        aria-selected="false"
+        class="flex flex-col items-center justify-center text-center w-56 h-40 p-5 sm:p-6 rounded-xl transition-all duration-300 bg-transparent hover:bg-gray-100 dark:hover:bg-neutral-800 hs-tab-active:bg-gray-100 dark:hs-tab-active:bg-neutral-800"
       >
-        <svg
-          class="size-10 mb-3 hs-tab-active:text-blue-600 text-gray-800 dark:hs-tab-active:text-blue-500 dark:text-white transition-all duration-300"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path
-            d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"
-          />
-        </svg>
+        <div class="h-10 w-10 grid place-items-center mb-3">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="h-6 w-6 text-gray-800 dark:text-neutral-300 hs-tab-active:text-[#4F46E5] dark:hs-tab-active:text-[#FFE135]"
+          >
+            <circle cx="12" cy="12" r="3" />
+            <path d="M2 12a10 10 0 0 1 20 0" />
+          </svg>
+        </div>
         <span
-          class="hs-tab-active:text-blue-600 font-semibold text-gray-800 dark:hs-tab-active:text-blue-500 dark:text-neutral-200"
+          class="font-semibold text-gray-800 dark:text-neutral-200 hs-tab-active:text-[#4F46E5] dark:hs-tab-active:text-[#FFE135]"
         >
-          Solutions for every team
-        </span>
-        <span
-          class="hidden md:block mt-2 text-gray-600 dark:text-neutral-300 text-sm"
-        >
-          Empower collaboration across departments and goals.
+          Growth & Collaboration
         </span>
       </button>
     </nav>
@@ -453,51 +563,291 @@
     <!-- Tab Content -->
     <div class="mt-12 md:mt-16 flex justify-center">
       <div class="w-full max-w-[1140px] mx-auto text-center">
-        <!-- Panel 1 -->
+        <!-- 1. Seller Dashboard -->
         <div
           id="tabs-with-card-1"
           role="tabpanel"
           aria-labelledby="tabs-with-card-item-1"
         >
-          <figure class="mx-auto w-full max-w-5xl">
-            <img
-              src="https://tailwindcss.com/plus-assets/img/component-images/bento-03-performance.png"
-              alt="Feature Preview"
-              class="rounded-2xl shadow-lg w-full"
-            />
-          </figure>
+          <div
+            class="relative grid grid-cols-3 gap-4 p-8 rounded-2xl bg-gradient-to-br from-[#4F46E5]/10 to-[#4F46E5]/20 dark:from-[#FFE135]/10 dark:to-[#FFE135]/20"
+          >
+            <!-- Sales card -->
+            <div
+              class="p-4 bg-white/80 dark:bg-neutral-900/80 rounded-xl shadow-md"
+            >
+              <p class="text-xs text-gray-500 dark:text-neutral-400">
+                Earnings
+              </p>
+              <h3 class="text-2xl font-bold text-[#4F46E5] dark:text-[#FFE135]">
+                $12,840
+              </h3>
+              <p class="text-xs text-green-600 mt-1">▲ +12% this week</p>
+            </div>
+            <!-- Orders -->
+            <div
+              class="p-4 bg-white/80 dark:bg-neutral-900/80 rounded-xl shadow-md"
+            >
+              <p class="text-xs text-gray-500 dark:text-neutral-400">Orders</p>
+              <h3 class="text-2xl font-bold text-[#4F46E5] dark:text-[#FFE135]">
+                327
+              </h3>
+              <div
+                class="h-2 mt-3 bg-[#4F46E5]/20 dark:bg-[#FFE135]/20 rounded-full"
+              >
+                <div
+                  class="h-2 w-3/4 bg-[#4F46E5] dark:bg-[#FFE135] rounded-full animate-pulse"
+                ></div>
+              </div>
+            </div>
+            <!-- Visitors -->
+            <div
+              class="p-4 bg-white/80 dark:bg-neutral-900/80 rounded-xl shadow-md"
+            >
+              <p class="text-xs text-gray-500 dark:text-neutral-400">
+                Visitors
+              </p>
+              <h3 class="text-2xl font-bold text-[#4F46E5] dark:text-[#FFE135]">
+                8.4 K
+              </h3>
+              <p class="text-xs text-blue-500 mt-1">Peak ↑ Sat</p>
+            </div>
+            <!-- Chart block -->
+            <div
+              class="col-span-3 mt-4 p-6 bg-white/80 dark:bg-neutral-900/80 rounded-xl"
+            >
+              <div class="flex items-end gap-2 h-32">
+                <div
+                  class="flex-1 bg-[#4F46E5]/60 dark:bg-[#FFE135]/60 rounded-md animate-bar1"
+                ></div>
+                <div
+                  class="flex-1 bg-[#4F46E5]/50 dark:bg-[#FFE135]/50 rounded-md animate-bar2"
+                ></div>
+                <div
+                  class="flex-1 bg-[#4F46E5]/40 dark:bg-[#FFE135]/40 rounded-md animate-bar3"
+                ></div>
+                <div
+                  class="flex-1 bg-[#4F46E5]/50 dark:bg-[#FFE135]/50 rounded-md animate-bar4"
+                ></div>
+                <div
+                  class="flex-1 bg-[#4F46E5]/60 dark:bg-[#FFE135]/60 rounded-md animate-bar5"
+                ></div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <!-- Panel 2 -->
+        <!-- 2. Social + Commerce -->
         <div
           id="tabs-with-card-2"
           class="hidden"
           role="tabpanel"
           aria-labelledby="tabs-with-card-item-2"
         >
-          <figure class="mx-auto w-full max-w-5xl">
-            <img
-              src="https://tailwindcss.com/plus-assets/img/component-images/bento-03-performance.png"
-              alt="Feature Preview"
-              class="rounded-2xl shadow-lg w-full"
-            />
-          </figure>
+          <div
+            class="relative grid grid-cols-2 gap-4 p-8 rounded-2xl bg-gradient-to-br from-indigo-600/10 to-pink-500/10 dark:from-[#FFD84C]/10 dark:to-[#FFB300]/10"
+          >
+            <!-- Mock post -->
+            <div
+              class="p-4 bg-white/80 dark:bg-neutral-900/80 rounded-xl shadow-md text-left"
+            >
+              <div class="flex items-center gap-3 mb-3">
+                <div
+                  class="w-10 h-10 bg-[#4F46E5]/60 dark:bg-[#FFE135]/60 rounded-full"
+                ></div>
+                <p class="font-semibold text-gray-700 dark:text-white">
+                  @artbynova
+                </p>
+              </div>
+              <div
+                class="h-32 bg-[#4F46E5]/10 dark:bg-[#FFE135]/10 rounded-lg mb-3 flex items-center justify-center text-[#4F46E5] dark:text-[#FFE135] font-semibold"
+              >
+                New Prints Drop 🎨
+              </div>
+              <div
+                class="flex justify-between text-sm text-gray-600 dark:text-neutral-400"
+              >
+                <span>❤️ 248</span><span>💬 32</span><span>🛒 Shop</span>
+              </div>
+            </div>
+            <!-- Product highlight -->
+            <div
+              class="p-4 bg-white/80 dark:bg-neutral-900/80 rounded-xl shadow-md text-left"
+            >
+              <h3 class="font-semibold text-[#4F46E5] dark:text-[#FFE135] mb-2">
+                Trending Product
+              </h3>
+              <div
+                class="h-32 bg-gradient-to-tr from-[#4F46E5]/30 to-[#4F46E5]/10 dark:from-[#FFE135]/40 dark:to-[#FFE135]/10 rounded-lg flex items-center justify-center text-2xl font-bold"
+              >
+                Hoodie #239
+              </div>
+              <button
+                class="mt-3 w-full py-2 rounded-lg bg-[#4F46E5] dark:bg-[#FFE135] text-white dark:text-black font-semibold transition hover:scale-[1.03]"
+              >
+                Buy Now
+              </button>
+            </div>
+          </div>
         </div>
 
-        <!-- Panel 3 -->
+        <!-- 3. Growth & Collaboration -->
         <div
           id="tabs-with-card-3"
-          class="hidden"
+          class="hidden relative h-[28rem] flex flex-col items-center justify-center overflow-hidden"
           role="tabpanel"
           aria-labelledby="tabs-with-card-item-3"
         >
-          <figure class="mx-auto w-full max-w-5xl">
-            <img
-              src="https://tailwindcss.com/plus-assets/img/component-images/bento-03-performance.png"
-              alt="Feature Preview"
-              class="rounded-2xl shadow-lg w-full"
-            />
-          </figure>
+          <!-- Background gradient glow -->
+          <div
+            class="absolute inset-0 bg-gradient-to-b from-[#4F46E5]/10 via-transparent to-transparent dark:from-[#FFE135]/10"
+          ></div>
+
+          <!-- Subtle diagonal grid background -->
+          <div
+            class="absolute inset-0 opacity-[0.04] dark:opacity-[0.08] bg-[radial-gradient(circle_at_center,_#4F46E5_1px,_transparent_1px)] bg-[length:30px_30px] dark:bg-[radial-gradient(circle_at_center,_#FFE135_1px,_transparent_1px)]"
+          ></div>
+
+          <!-- Chart Container -->
+          <div
+            class="relative w-[85%] h-64 flex items-end justify-between mt-10"
+          >
+            <!-- Horizontal grid lines -->
+            <div class="absolute inset-0 flex flex-col justify-between">
+              <div
+                class="border-b border-gray-200/20 dark:border-white/10"
+              ></div>
+              <div
+                class="border-b border-gray-200/20 dark:border-white/10"
+              ></div>
+              <div
+                class="border-b border-gray-200/20 dark:border-white/10"
+              ></div>
+              <div
+                class="border-b border-gray-200/20 dark:border-white/10"
+              ></div>
+            </div>
+
+            <!-- Axis labels -->
+            <div
+              class="absolute left-0 top-0 h-full flex flex-col justify-between text-xs text-gray-400 dark:text-neutral-500"
+            >
+              <span>$20K</span>
+              <span>$15K</span>
+              <span>$10K</span>
+              <span>$5K</span>
+              <span>$0</span>
+            </div>
+
+            <!-- Vertical month labels -->
+            <div
+              class="absolute bottom-0 w-full flex justify-between text-xs text-gray-400 dark:text-neutral-500"
+            >
+              <span>Jan</span>
+              <span>Feb</span>
+              <span>Mar</span>
+              <span>Apr</span>
+              <span>May</span>
+            </div>
+
+            <!-- Bars -->
+            <div
+              class="relative flex items-end justify-between w-full gap-4 px-6"
+            >
+              <div
+                class="w-[12%] bg-[#4F46E5]/70 dark:bg-[#FFE135]/70 rounded-t-md animate-bar1 shadow-md"
+              ></div>
+              <div
+                class="w-[12%] bg-[#4F46E5]/80 dark:bg-[#FFE135]/80 rounded-t-md animate-bar2 shadow-md"
+              ></div>
+              <div
+                class="w-[12%] bg-[#4F46E5]/90 dark:bg-[#FFE135]/90 rounded-t-md animate-bar3 shadow-md"
+              ></div>
+              <div
+                class="w-[12%] bg-[#4F46E5]/80 dark:bg-[#FFE135]/80 rounded-t-md animate-bar4 shadow-md"
+              ></div>
+              <div
+                class="w-[12%] bg-[#4F46E5]/70 dark:bg-[#FFE135]/70 rounded-t-md animate-bar5 shadow-md"
+              ></div>
+            </div>
+
+            <!-- Animated Line Chart -->
+            <svg
+              viewBox="0 0 400 150"
+              preserveAspectRatio="none"
+              class="absolute bottom-0 w-full h-full pointer-events-none"
+            >
+              <!-- Faint shadow path -->
+              <path
+                d="M0,120 C50,110 80,100 120,90 C160,70 200,85 240,60 C280,40 320,30 360,10"
+                stroke="#4F46E5"
+                stroke-width="5"
+                stroke-opacity="0.15"
+                fill="none"
+                class="dark:stroke-[#FFE135] dark:opacity-20"
+              />
+              <!-- Main Line -->
+              <path
+                d="M0,120 C50,110 80,100 120,90 C160,70 200,85 240,60 C280,40 320,30 360,10"
+                stroke="#4F46E5"
+                stroke-width="3"
+                fill="none"
+                class="dark:stroke-[#FFE135] animate-draw-line enhanced-glow"
+              />
+              <!-- Moving Data Point -->
+              <circle
+                r="6"
+                fill="#4F46E5"
+                class="dark:fill-[#FFE135] animate-chart-point"
+              ></circle>
+            </svg>
+          </div>
+
+          <!-- Floating stats chips -->
+          <div class="absolute top-8 right-10 flex flex-col gap-3 text-right">
+            <div
+              class="bg-white/40 dark:bg-neutral-900/40 backdrop-blur-md rounded-lg px-4 py-2 shadow-md"
+            >
+              <p class="text-sm text-gray-600 dark:text-neutral-300">
+                Monthly Revenue
+              </p>
+              <h3
+                class="text-2xl font-bold text-[#4F46E5] dark:text-[#FFE135] animate-pulse-smooth"
+              >
+                $12.8K
+              </h3>
+            </div>
+            <div
+              class="bg-white/40 dark:bg-neutral-900/40 backdrop-blur-md rounded-lg px-4 py-2 shadow-md"
+            >
+              <p class="text-sm text-gray-600 dark:text-neutral-300">
+                Customer Growth
+              </p>
+              <h3
+                class="text-2xl font-semibold text-[#4F46E5] dark:text-[#FFE135] animate-pulse-smooth"
+              >
+                +24%
+              </h3>
+            </div>
+          </div>
+
+          <!-- Floating Money Bubbles -->
+          <div
+            class="absolute w-3 h-3 rounded-full bg-[#4F46E5]/60 dark:bg-[#FFE135]/70 blur-sm animate-bubble1"
+          ></div>
+          <div
+            class="absolute w-4 h-4 rounded-full bg-[#4F46E5]/40 dark:bg-[#FFE135]/50 blur-md animate-bubble2"
+          ></div>
+          <div
+            class="absolute w-2 h-2 rounded-full bg-[#4F46E5]/70 dark:bg-[#FFE135]/80 blur-[1px] animate-bubble3"
+          ></div>
+
+          <!-- Footer Label -->
+          <p
+            class="mt-10 text-gray-700 dark:text-neutral-300 font-semibold text-lg z-10"
+          >
+            Continuous Growth Over Time
+          </p>
         </div>
       </div>
     </div>
@@ -507,7 +857,7 @@
 <!-- Scrappy — How It Works -->
 <section
   id="how-it-works"
-  class="relative py-16 sm:py-20 bg-white dark:bg-neutral-900"
+  class="relative py-16 sm:py-20 bg-white dark:bg-neutral-950 transition-colors duration-300"
 >
   <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
     <!-- Header -->
@@ -517,7 +867,7 @@
       >
         How Scrappy Works
       </h2>
-      <p class="mt-4 text-lg text-gray-600 dark:text-neutral-300">
+      <p class="mt-4 text-lg text-gray-600 dark:text-neutral-400">
         A simple flow from signup to sale. Follow these steps to get your first
         order.
       </p>
@@ -527,9 +877,9 @@
     <ol
       class="relative mt-12 grid grid-cols-1 gap-6 sm:gap-8 lg:gap-10 lg:grid-cols-3"
     >
-      <!-- Step Card -->
+      <!-- Step 1 -->
       <li
-        class="fade-up group relative rounded-2xl border border-gray-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6 sm:p-8 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-lg hover:border-gray-300 dark:hover:border-neutral-700 hover:bg-gray-50/70 dark:hover:bg-neutral-800/70"
+        class="fade-up group relative rounded-2xl border border-gray-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6 sm:p-8 shadow-sm dark:shadow-black/20 transition-all duration-500 hover:-translate-y-2 hover:shadow-lg dark:hover:shadow-black/30 hover:border-[#4F46E5] dark:hover:border-[#FFE135] hover:bg-[#4F46E5]/5 dark:hover:bg-[#FFE135]/10"
       >
         <div class="flex items-center gap-3">
           <span
@@ -541,7 +891,7 @@
             Create your account
           </h3>
         </div>
-        <p class="mt-4 text-sm text-gray-600 dark:text-neutral-300">
+        <p class="mt-4 text-sm text-gray-600 dark:text-neutral-400">
           Sign up with your email or Google. Choose
           <span class="font-medium text-gray-900 dark:text-white">Buyer</span>,
           <span class="font-medium text-gray-900 dark:text-white">Seller</span>,
@@ -550,14 +900,16 @@
         <div class="mt-6 text-sm">
           <a
             href="/signup"
-            class="font-semibold text-gray-900 dark:text-white underline underline-offset-4 hover:text-gray-700 dark:hover:text-neutral-200 transition"
-            >Sign up</a
+            class="font-semibold text-gray-900 dark:text-white underline underline-offset-4 hover:text-[#4F46E5] dark:hover:text-[#FFE135] transition"
           >
+            Sign up
+          </a>
         </div>
       </li>
 
+      <!-- Step 2 -->
       <li
-        class="fade-up group relative rounded-2xl border border-gray-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6 sm:p-8 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-lg hover:border-gray-300 dark:hover:border-neutral-700 hover:bg-gray-50/70 dark:hover:bg-neutral-800/70"
+        class="fade-up group relative rounded-2xl border border-gray-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6 sm:p-8 shadow-sm dark:shadow-black/20 transition-all duration-500 hover:-translate-y-2 hover:shadow-lg dark:hover:shadow-black/30 hover:border-[#4F46E5] dark:hover:border-[#FFE135] hover:bg-[#4F46E5]/5 dark:hover:bg-[#FFE135]/10"
       >
         <div class="flex items-center gap-3">
           <span
@@ -569,21 +921,23 @@
             Set up your profile
           </h3>
         </div>
-        <p class="mt-4 text-sm text-gray-600 dark:text-neutral-300">
+        <p class="mt-4 text-sm text-gray-600 dark:text-neutral-400">
           Add a photo, short bio, and your preferred location. Sellers can
           connect Stripe for payouts and set shipping regions.
         </p>
         <div class="mt-6 text-sm">
           <a
             href="/settings/profile"
-            class="font-semibold text-gray-900 dark:text-white underline underline-offset-4 hover:text-gray-700 dark:hover:text-neutral-200 transition"
-            >Profile settings</a
+            class="font-semibold text-gray-900 dark:text-white underline underline-offset-4 hover:text-[#4F46E5] dark:hover:text-[#FFE135] transition"
           >
+            Profile settings
+          </a>
         </div>
       </li>
 
+      <!-- Step 3 -->
       <li
-        class="fade-up group relative rounded-2xl border border-gray-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6 sm:p-8 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-lg hover:border-gray-300 dark:hover:border-neutral-700 hover:bg-gray-50/70 dark:hover:bg-neutral-800/70"
+        class="fade-up group relative rounded-2xl border border-gray-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6 sm:p-8 shadow-sm dark:shadow-black/20 transition-all duration-500 hover:-translate-y-2 hover:shadow-lg dark:hover:shadow-black/30 hover:border-[#4F46E5] dark:hover:border-[#FFE135] hover:bg-[#4F46E5]/5 dark:hover:bg-[#FFE135]/10"
       >
         <div class="flex items-center gap-3">
           <span
@@ -595,21 +949,23 @@
             List your first product
           </h3>
         </div>
-        <p class="mt-4 text-sm text-gray-600 dark:text-neutral-300">
+        <p class="mt-4 text-sm text-gray-600 dark:text-neutral-400">
           Upload product photos, set your price, and add tags. A good title and
           description help buyers find you faster.
         </p>
         <div class="mt-6 text-sm">
           <a
             href="/sell/new"
-            class="font-semibold text-gray-900 dark:text-white underline underline-offset-4 hover:text-gray-700 dark:hover:text-neutral-200 transition"
-            >Create listing</a
+            class="font-semibold text-gray-900 dark:text-white underline underline-offset-4 hover:text-[#4F46E5] dark:hover:text-[#FFE135] transition"
           >
+            Create listing
+          </a>
         </div>
       </li>
 
+      <!-- Step 4 -->
       <li
-        class="fade-up group relative rounded-2xl border border-gray-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6 sm:p-8 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-lg hover:border-gray-300 dark:hover:border-neutral-700 hover:bg-gray-50/70 dark:hover:bg-neutral-800/70"
+        class="fade-up group relative rounded-2xl border border-gray-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6 sm:p-8 shadow-sm dark:shadow-black/20 transition-all duration-500 hover:-translate-y-2 hover:shadow-lg dark:hover:shadow-black/30 hover:border-[#4F46E5] dark:hover:border-[#FFE135] hover:bg-[#4F46E5]/5 dark:hover:bg-[#FFE135]/10"
       >
         <div class="flex items-center gap-3">
           <span
@@ -621,21 +977,23 @@
             Get discovered
           </h3>
         </div>
-        <p class="mt-4 text-sm text-gray-600 dark:text-neutral-300">
+        <p class="mt-4 text-sm text-gray-600 dark:text-neutral-400">
           Your products appear in Scrappy’s marketplace and curated feeds.
           Interact with buyers and boost your visibility.
         </p>
         <div class="mt-6 text-sm">
           <a
             href="/marketplace"
-            class="font-semibold text-gray-900 dark:text-white underline underline-offset-4 hover:text-gray-700 dark:hover:text-neutral-200 transition"
-            >Explore marketplace</a
+            class="font-semibold text-gray-900 dark:text-white underline underline-offset-4 hover:text-[#4F46E5] dark:hover:text-[#FFE135] transition"
           >
+            Explore marketplace
+          </a>
         </div>
       </li>
 
+      <!-- Step 5 -->
       <li
-        class="fade-up group relative rounded-2xl border border-gray-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6 sm:p-8 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-lg hover:border-gray-300 dark:hover:border-neutral-700 hover:bg-gray-50/70 dark:hover:bg-neutral-800/70"
+        class="fade-up group relative rounded-2xl border border-gray-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6 sm:p-8 shadow-sm dark:shadow-black/20 transition-all duration-500 hover:-translate-y-2 hover:shadow-lg dark:hover:shadow-black/30 hover:border-[#4F46E5] dark:hover:border-[#FFE135] hover:bg-[#4F46E5]/5 dark:hover:bg-[#FFE135]/10"
       >
         <div class="flex items-center gap-3">
           <span
@@ -647,21 +1005,23 @@
             Secure checkout
           </h3>
         </div>
-        <p class="mt-4 text-sm text-gray-600 dark:text-neutral-300">
+        <p class="mt-4 text-sm text-gray-600 dark:text-neutral-400">
           Buyers complete their purchase through our secure Stripe checkout. You
           receive payments automatically — minus platform fees.
         </p>
         <div class="mt-6 text-sm">
           <a
             href="/cart"
-            class="font-semibold text-gray-900 dark:text-white underline underline-offset-4 hover:text-gray-700 dark:hover:text-neutral-200 transition"
-            >Go to cart</a
+            class="font-semibold text-gray-900 dark:text-white underline underline-offset-4 hover:text-[#4F46E5] dark:hover:text-[#FFE135] transition"
           >
+            Go to cart
+          </a>
         </div>
       </li>
 
+      <!-- Step 6 -->
       <li
-        class="fade-up group relative rounded-2xl border border-gray-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6 sm:p-8 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-lg hover:border-gray-300 dark:hover:border-neutral-700 hover:bg-gray-50/70 dark:hover:bg-neutral-800/70"
+        class="fade-up group relative rounded-2xl border border-gray-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6 sm:p-8 shadow-sm dark:shadow-black/20 transition-all duration-500 hover:-translate-y-2 hover:shadow-lg dark:hover:shadow-black/30 hover:border-[#4F46E5] dark:hover:border-[#FFE135] hover:bg-[#4F46E5]/5 dark:hover:bg-[#FFE135]/10"
       >
         <div class="flex items-center gap-3">
           <span
@@ -673,16 +1033,17 @@
             Ship and confirm
           </h3>
         </div>
-        <p class="mt-4 text-sm text-gray-600 dark:text-neutral-300">
+        <p class="mt-4 text-sm text-gray-600 dark:text-neutral-400">
           Print labels, ship your item, and mark it as sent. Buyers receive
           real-time tracking updates through Scrappy.
         </p>
         <div class="mt-6 text-sm">
           <a
             href="/orders/seller"
-            class="font-semibold text-gray-900 dark:text-white underline underline-offset-4 hover:text-gray-700 dark:hover:text-neutral-200 transition"
-            >Seller orders</a
+            class="font-semibold text-gray-900 dark:text-white underline underline-offset-4 hover:text-[#4F46E5] dark:hover:text-[#FFE135] transition"
           >
+            Seller orders
+          </a>
         </div>
       </li>
     </ol>
@@ -693,7 +1054,7 @@
     >
       <a
         routerLink="/signup"
-        class="inline-flex items-center justify-center rounded-full px-8 py-3 text-sm font-semibold text-white bg-gray-900 hover:bg-black dark:bg-white dark:text-neutral-900 dark:hover:bg-neutral-200 transition"
+        class="inline-flex items-center justify-center rounded-full px-8 py-3 text-sm font-semibold text-white bg-gray-900 hover:bg-[#4F46E5] dark:bg-white dark:text-neutral-900 dark:hover:bg-[#FFE135] transition"
       >
         Start Selling Now
       </a>
@@ -701,14 +1062,15 @@
   </div>
 </section>
 
-
-<section class="fade-up mt-8 mb-8 bg-gray-50">
+<section
+  class="fade-up mt-8 mb-8 bg-gray-50 dark:bg-neutral-950 transition-colors duration-300"
+>
   <!-- FAQ -->
   <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
     <!-- Title -->
     <div class="max-w-2xl mx-auto text-center mb-10 lg:mb-14">
       <h2
-        class="text-2xl font-bold md:text-4xl md:leading-tight dark:text-white"
+        class="text-2xl font-bold md:text-4xl md:leading-tight text-gray-900 dark:text-white"
       >
         Your questions, answered
       </h2>
@@ -720,23 +1082,21 @@
 
     <div class="max-w-2xl mx-auto">
       <!-- Accordion -->
-      <div class="hs-accordion-group">
+      <div class="hs-accordion-group space-y-4">
+        <!-- Single FAQ Item -->
         <div
-          class="hs-accordion hs-accordion-active:bg-gray-100 rounded-xl p-6 dark:hs-accordion-active:bg-white/10 active"
-          id="hs-basic-with-title-and-arrow-stretched-heading-one"
+          class="hs-accordion hs-accordion-active:bg-[#4F46E5]/10 dark:hs-accordion-active:bg-[#FFE135]/10 rounded-xl p-6 border border-gray-200 dark:border-neutral-800 shadow-sm dark:shadow-black/20 transition-all duration-300 hover:shadow-lg hover:border-[#4F46E5] dark:hover:border-[#FFE135] hover:-translate-y-1"
+          id="hs-faq-heading-1"
         >
           <button
-            class="hs-accordion-toggle group pb-3 inline-flex items-center justify-between gap-x-3 w-full md:text-lg font-semibold text-start text-gray-800 rounded-lg transition hover:text-gray-500 focus:outline-hidden focus:text-gray-500 dark:text-neutral-200 dark:hover:text-neutral-400 dark:focus:text-neutral-400"
+            class="hs-accordion-toggle group pb-3 inline-flex items-center justify-between gap-x-3 w-full md:text-lg font-semibold text-start text-gray-800 hover:text-[#4F46E5] dark:text-neutral-200 dark:hover:text-[#FFE135] transition-colors duration-300"
             aria-expanded="true"
-            aria-controls="hs-basic-with-title-and-arrow-stretched-collapse-one"
+            aria-controls="hs-faq-collapse-1"
           >
             Can I cancel at anytime?
             <svg
-              class="hs-accordion-active:hidden block shrink-0 size-5 text-gray-600 group-hover:text-gray-500 dark:text-neutral-400"
+              class="hs-accordion-active:hidden block shrink-0 size-5 text-gray-600 dark:text-neutral-400 group-hover:text-[#4F46E5] dark:group-hover:text-[#FFE135]"
               xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
               stroke-width="2"
@@ -746,11 +1106,8 @@
               <path d="m6 9 6 6 6-6" />
             </svg>
             <svg
-              class="hs-accordion-active:block hidden shrink-0 size-5 text-gray-600 group-hover:text-gray-500 dark:text-neutral-400"
+              class="hs-accordion-active:block hidden shrink-0 size-5 text-gray-600 dark:text-neutral-400 group-hover:text-[#4F46E5] dark:group-hover:text-[#FFE135]"
               xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
               stroke-width="2"
@@ -761,35 +1118,32 @@
             </svg>
           </button>
           <div
-            id="hs-basic-with-title-and-arrow-stretched-collapse-one"
+            id="hs-faq-collapse-1"
             class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300"
             role="region"
-            aria-labelledby="hs-basic-with-title-and-arrow-stretched-heading-one"
+            aria-labelledby="hs-faq-heading-1"
           >
-            <p class="text-gray-800 dark:text-neutral-200">
-              Yes, you can cancel anytime no questions are asked while you
-              cancel but we would highly appreciate if you will give us some
-              feedback.
+            <p class="text-gray-700 dark:text-neutral-300">
+              Yes, you can cancel anytime — no questions asked. We’d appreciate
+              any feedback to help us improve.
             </p>
           </div>
         </div>
 
+        <!-- Repeat this block for each FAQ below -->
         <div
-          class="hs-accordion hs-accordion-active:bg-gray-100 rounded-xl p-6 dark:hs-accordion-active:bg-white/10"
-          id="hs-basic-with-title-and-arrow-stretched-heading-two"
+          class="hs-accordion hs-accordion-active:bg-[#4F46E5]/10 dark:hs-accordion-active:bg-[#FFE135]/10 rounded-xl p-6 border border-gray-200 dark:border-neutral-800 shadow-sm dark:shadow-black/20 transition-all duration-300 hover:shadow-lg hover:border-[#4F46E5] dark:hover:border-[#FFE135] hover:-translate-y-1"
+          id="hs-faq-heading-2"
         >
           <button
-            class="hs-accordion-toggle group pb-3 inline-flex items-center justify-between gap-x-3 w-full md:text-lg font-semibold text-start text-gray-800 rounded-lg transition hover:text-gray-500 focus:outline-hidden focus:text-gray-500 dark:text-neutral-200 dark:hover:text-neutral-400 dark:focus:text-neutral-400"
+            class="hs-accordion-toggle group pb-3 inline-flex items-center justify-between gap-x-3 w-full md:text-lg font-semibold text-start text-gray-800 hover:text-[#4F46E5] dark:text-neutral-200 dark:hover:text-[#FFE135] transition-colors duration-300"
             aria-expanded="false"
-            aria-controls="hs-basic-with-title-and-arrow-stretched-collapse-two"
+            aria-controls="hs-faq-collapse-2"
           >
             My team has credits. How do we use them?
             <svg
-              class="hs-accordion-active:hidden block shrink-0 size-5 text-gray-600 group-hover:text-gray-500 dark:text-neutral-400"
+              class="hs-accordion-active:hidden block shrink-0 size-5 text-gray-600 dark:text-neutral-400 group-hover:text-[#4F46E5] dark:group-hover:text-[#FFE135]"
               xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
               stroke-width="2"
@@ -799,11 +1153,8 @@
               <path d="m6 9 6 6 6-6" />
             </svg>
             <svg
-              class="hs-accordion-active:block hidden shrink-0 size-5 text-gray-600 group-hover:text-gray-500 dark:text-neutral-400"
+              class="hs-accordion-active:block hidden shrink-0 size-5 text-gray-600 dark:text-neutral-400 group-hover:text-[#4F46E5] dark:group-hover:text-[#FFE135]"
               xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
               stroke-width="2"
@@ -814,34 +1165,31 @@
             </svg>
           </button>
           <div
-            id="hs-basic-with-title-and-arrow-stretched-collapse-two"
+            id="hs-faq-collapse-2"
             class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300"
             role="region"
-            aria-labelledby="hs-basic-with-title-and-arrow-stretched-heading-two"
+            aria-labelledby="hs-faq-heading-2"
           >
-            <p class="text-gray-800 dark:text-neutral-200">
-              Once your team signs up for a subscription plan. This is where we
-              sit down, grab a cup of coffee and dial in the details.
+            <p class="text-gray-700 dark:text-neutral-300">
+              Once your team subscribes to a plan, credits are automatically
+              applied to your workspace for all shared actions.
             </p>
           </div>
         </div>
 
         <div
-          class="hs-accordion hs-accordion-active:bg-gray-100 rounded-xl p-6 dark:hs-accordion-active:bg-white/10"
-          id="hs-basic-with-title-and-arrow-stretched-heading-three"
+          class="hs-accordion hs-accordion-active:bg-[#4F46E5]/10 dark:hs-accordion-active:bg-[#FFE135]/10 rounded-xl p-6 border border-gray-200 dark:border-neutral-800 shadow-sm dark:shadow-black/20 transition-all duration-300 hover:shadow-lg hover:border-[#4F46E5] dark:hover:border-[#FFE135] hover:-translate-y-1"
+          id="hs-faq-heading-3"
         >
           <button
-            class="hs-accordion-toggle group pb-3 inline-flex items-center justify-between gap-x-3 w-full md:text-lg font-semibold text-start text-gray-800 rounded-lg transition hover:text-gray-500 focus:outline-hidden focus:text-gray-500 dark:text-neutral-200 dark:hover:text-neutral-400 dark:focus:text-neutral-400"
+            class="hs-accordion-toggle group pb-3 inline-flex items-center justify-between gap-x-3 w-full md:text-lg font-semibold text-start text-gray-800 hover:text-[#4F46E5] dark:text-neutral-200 dark:hover:text-[#FFE135] transition-colors duration-300"
             aria-expanded="false"
-            aria-controls="hs-basic-with-title-and-arrow-stretched-collapse-three"
+            aria-controls="hs-faq-collapse-3"
           >
-            How does Preline's pricing work?
+            How does Scrappy’s pricing work?
             <svg
-              class="hs-accordion-active:hidden block shrink-0 size-5 text-gray-600 group-hover:text-gray-500 dark:text-neutral-400"
+              class="hs-accordion-active:hidden block shrink-0 size-5 text-gray-600 dark:text-neutral-400 group-hover:text-[#4F46E5] dark:group-hover:text-[#FFE135]"
               xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
               stroke-width="2"
@@ -851,11 +1199,8 @@
               <path d="m6 9 6 6 6-6" />
             </svg>
             <svg
-              class="hs-accordion-active:block hidden shrink-0 size-5 text-gray-600 group-hover:text-gray-500 dark:text-neutral-400"
+              class="hs-accordion-active:block hidden shrink-0 size-5 text-gray-600 dark:text-neutral-400 group-hover:text-[#4F46E5] dark:group-hover:text-[#FFE135]"
               xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
               stroke-width="2"
@@ -866,34 +1211,31 @@
             </svg>
           </button>
           <div
-            id="hs-basic-with-title-and-arrow-stretched-collapse-three"
+            id="hs-faq-collapse-3"
             class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300"
             role="region"
-            aria-labelledby="hs-basic-with-title-and-arrow-stretched-heading-three"
+            aria-labelledby="hs-faq-heading-3"
           >
-            <p class="text-gray-800 dark:text-neutral-200">
-              Our subscriptions are tiered. Understanding the task at hand and
-              ironing out the wrinkles is key.
+            <p class="text-gray-700 dark:text-neutral-300">
+              Scrappy offers flexible tiers — pay only for what you use, with
+              optional boosts for sellers and stores.
             </p>
           </div>
         </div>
 
         <div
-          class="hs-accordion hs-accordion-active:bg-gray-100 rounded-xl p-6 dark:hs-accordion-active:bg-white/10"
-          id="hs-basic-with-title-and-arrow-stretched-heading-four"
+          class="hs-accordion hs-accordion-active:bg-[#4F46E5]/10 dark:hs-accordion-active:bg-[#FFE135]/10 rounded-xl p-6 border border-gray-200 dark:border-neutral-800 shadow-sm dark:shadow-black/20 transition-all duration-300 hover:shadow-lg hover:border-[#4F46E5] dark:hover:border-[#FFE135] hover:-translate-y-1"
+          id="hs-faq-heading-4"
         >
           <button
-            class="hs-accordion-toggle group pb-3 inline-flex items-center justify-between gap-x-3 w-full md:text-lg font-semibold text-start text-gray-800 rounded-lg transition hover:text-gray-500 focus:outline-hidden focus:text-gray-500 dark:text-neutral-200 dark:hover:text-neutral-400 dark:focus:text-neutral-400"
+            class="hs-accordion-toggle group pb-3 inline-flex items-center justify-between gap-x-3 w-full md:text-lg font-semibold text-start text-gray-800 hover:text-[#4F46E5] dark:text-neutral-200 dark:hover:text-[#FFE135] transition-colors duration-300"
             aria-expanded="false"
-            aria-controls="hs-basic-with-title-and-arrow-stretched-collapse-four"
+            aria-controls="hs-faq-collapse-4"
           >
-            How secure is Preline?
+            How secure is Scrappy?
             <svg
-              class="hs-accordion-active:hidden block shrink-0 size-5 text-gray-600 group-hover:text-gray-500 dark:text-neutral-400"
+              class="hs-accordion-active:hidden block shrink-0 size-5 text-gray-600 dark:text-neutral-400 group-hover:text-[#4F46E5] dark:group-hover:text-[#FFE135]"
               xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
               stroke-width="2"
@@ -903,11 +1245,8 @@
               <path d="m6 9 6 6 6-6" />
             </svg>
             <svg
-              class="hs-accordion-active:block hidden shrink-0 size-5 text-gray-600 group-hover:text-gray-500 dark:text-neutral-400"
+              class="hs-accordion-active:block hidden shrink-0 size-5 text-gray-600 dark:text-neutral-400 group-hover:text-[#4F46E5] dark:group-hover:text-[#FFE135]"
               xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
               stroke-width="2"
@@ -918,35 +1257,31 @@
             </svg>
           </button>
           <div
-            id="hs-basic-with-title-and-arrow-stretched-collapse-four"
+            id="hs-faq-collapse-4"
             class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300"
             role="region"
-            aria-labelledby="hs-basic-with-title-and-arrow-stretched-heading-four"
+            aria-labelledby="hs-faq-heading-4"
           >
-            <p class="text-gray-800 dark:text-neutral-200">
-              Protecting the data you trust to Preline is our first priority.
-              This part is really crucial in keeping the project in line to
-              completion.
+            <p class="text-gray-700 dark:text-neutral-300">
+              We use advanced encryption, fraud detection, and regular audits
+              through Stripe and AWS for top-tier data security.
             </p>
           </div>
         </div>
 
         <div
-          class="hs-accordion hs-accordion-active:bg-gray-100 rounded-xl p-6 dark:hs-accordion-active:bg-white/10"
-          id="hs-basic-with-title-and-arrow-stretched-heading-five"
+          class="hs-accordion hs-accordion-active:bg-[#4F46E5]/10 dark:hs-accordion-active:bg-[#FFE135]/10 rounded-xl p-6 border border-gray-200 dark:border-neutral-800 shadow-sm dark:shadow-black/20 transition-all duration-300 hover:shadow-lg hover:border-[#4F46E5] dark:hover:border-[#FFE135] hover:-translate-y-1"
+          id="hs-faq-heading-5"
         >
           <button
-            class="hs-accordion-toggle group pb-3 inline-flex items-center justify-between gap-x-3 w-full md:text-lg font-semibold text-start text-gray-800 rounded-lg transition hover:text-gray-500 focus:outline-hidden focus:text-gray-500 dark:text-neutral-200 dark:hover:text-neutral-400 dark:focus:text-neutral-400"
+            class="hs-accordion-toggle group pb-3 inline-flex items-center justify-between gap-x-3 w-full md:text-lg font-semibold text-start text-gray-800 hover:text-[#4F46E5] dark:text-neutral-200 dark:hover:text-[#FFE135] transition-colors duration-300"
             aria-expanded="false"
-            aria-controls="hs-basic-with-title-and-arrow-stretched-collapse-five"
+            aria-controls="hs-faq-collapse-5"
           >
-            How do I get access to a theme I purchased?
+            How do I get access to my purchased items?
             <svg
-              class="hs-accordion-active:hidden block shrink-0 size-5 text-gray-600 group-hover:text-gray-500 dark:text-neutral-400"
+              class="hs-accordion-active:hidden block shrink-0 size-5 text-gray-600 dark:text-neutral-400 group-hover:text-[#4F46E5] dark:group-hover:text-[#FFE135]"
               xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
               stroke-width="2"
@@ -956,11 +1291,8 @@
               <path d="m6 9 6 6 6-6" />
             </svg>
             <svg
-              class="hs-accordion-active:block hidden shrink-0 size-5 text-gray-600 group-hover:text-gray-500 dark:text-neutral-400"
+              class="hs-accordion-active:block hidden shrink-0 size-5 text-gray-600 dark:text-neutral-400 group-hover:text-[#4F46E5] dark:group-hover:text-[#FFE135]"
               xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
               stroke-width="2"
@@ -971,72 +1303,14 @@
             </svg>
           </button>
           <div
-            id="hs-basic-with-title-and-arrow-stretched-collapse-five"
+            id="hs-faq-collapse-5"
             class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300"
             role="region"
-            aria-labelledby="hs-basic-with-title-and-arrow-stretched-heading-five"
+            aria-labelledby="hs-faq-heading-5"
           >
-            <p class="text-gray-800 dark:text-neutral-200">
-              If you lose the link for a theme you purchased, don't panic! We've
-              got you covered. You can login to your account, tap your avatar in
-              the upper right corner, and tap Purchases. If you didn't create a
-              login or can't remember the information, you can use our handy
-              Redownload page, just remember to use the same email you
-              originally made your purchases with.
-            </p>
-          </div>
-        </div>
-
-        <div
-          class="hs-accordion hs-accordion-active:bg-gray-100 rounded-xl p-6 dark:hs-accordion-active:bg-white/10"
-          id="hs-basic-with-title-and-arrow-stretched-heading-six"
-        >
-          <button
-            class="hs-accordion-toggle group pb-3 inline-flex items-center justify-between gap-x-3 w-full md:text-lg font-semibold text-start text-gray-800 rounded-lg transition hover:text-gray-500 focus:outline-hidden focus:text-gray-500 dark:text-neutral-200 dark:hover:text-neutral-400 dark:focus:text-neutral-400"
-            aria-expanded="false"
-            aria-controls="hs-basic-with-title-and-arrow-stretched-collapse-six"
-          >
-            Upgrade License Type
-            <svg
-              class="hs-accordion-active:hidden block shrink-0 size-5 text-gray-600 group-hover:text-gray-500 dark:text-neutral-400"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="m6 9 6 6 6-6" />
-            </svg>
-            <svg
-              class="hs-accordion-active:block hidden shrink-0 size-5 text-gray-600 group-hover:text-gray-500 dark:text-neutral-400"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="m18 15-6-6-6 6" />
-            </svg>
-          </button>
-          <div
-            id="hs-basic-with-title-and-arrow-stretched-collapse-six"
-            class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300"
-            role="region"
-            aria-labelledby="hs-basic-with-title-and-arrow-stretched-heading-six"
-          >
-            <p class="text-gray-800 dark:text-neutral-200">
-              There may be times when you need to upgrade your license from the
-              original type you purchased and we have a solution that ensures
-              you can apply your original purchase cost to the new license
-              purchase.
+            <p class="text-gray-700 dark:text-neutral-300">
+              Log into your account, navigate to your purchases, and download
+              them anytime — your files are always available.
             </p>
           </div>
         </div>

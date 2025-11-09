@@ -15,27 +15,23 @@ export class Header {
   mobileOpen = false;
   isLoggedIn: any;
   userRole: any;
+  isDarkMode = false;
 
   constructor(private router: Router, public auth: Auth) {
     this.isLoggedIn = this.auth.isLoggedIn;
     this.userRole = this.auth.userRole;
 
-    // debug listener for auth changes willl remove after this is done
     effect(() => {
       console.log('Auth changed:', this.isLoggedIn(), this.userRole());
     });
 
-    // Reinitialize Preline dropdowns after every route change
-    //preline stuff that i have no idea about (chatgpt)
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => {
         setTimeout(() => {
-          // Reset mobile state
           this.mobileOpen = false;
           document.body.classList.remove('overflow-hidden');
 
-          // Reinitialize Preline components
           if ((window as any).HSStaticMethods) {
             (window as any).HSStaticMethods.autoInit();
           }
@@ -43,28 +39,33 @@ export class Header {
       });
   }
 
-  signUpButton() {
-    this.router.navigate(['/signup']);
+  ngOnInit() {
+    const saved = localStorage.getItem('theme');
+    const html = document.documentElement;
+    if (saved === 'dark') {
+      html.classList.add('dark');
+      this.isDarkMode = true;
+    }
   }
 
-  loginButton() {
-    this.router.navigate(['/login']);
+  toggleTheme() {
+    const html = document.documentElement;
+    html.classList.toggle('dark');
+    this.isDarkMode = html.classList.contains('dark');
+    localStorage.setItem('theme', this.isDarkMode ? 'dark' : 'light');
   }
 
-  logoutButton() {
-    this.auth.logout();
-  }
+  signUpButton() { this.router.navigate(['/signup']); }
+  loginButton() { this.router.navigate(['/login']); }
+  logoutButton() { this.auth.logout(); }
 
   @HostListener('window:scroll')
-  onScroll() {
-    this.scrolled = window.scrollY > 20;
-  }
+  onScroll() { this.scrolled = window.scrollY > 20; }
 
   toggleMobile() {
     this.mobileOpen = !this.mobileOpen;
     document.body.classList.toggle('overflow-hidden', this.mobileOpen);
   }
-
   closeMobile() {
     this.mobileOpen = false;
     document.body.classList.remove('overflow-hidden');

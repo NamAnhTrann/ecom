@@ -35,5 +35,5 @@ export const routes: Routes = [
   },
   { path: 'forget-password', component: ForgetPassword },
   { path: 'auth/callback', component: AuthCallbackComponent },
-
+  
 ];

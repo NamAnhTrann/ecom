@@ -12,3 +12,55 @@
 .fade-up.animate {
   animation: fadeUp 0.8s ease-out forwards;
 }
+/* Bar animation */
+@keyframes barAnim1 { 0%,100%{height:35%} 50%{height:65%} }
+@keyframes barAnim2 { 0%,100%{height:55%} 50%{height:85%} }
+@keyframes barAnim3 { 0%,100%{height:70%} 50%{height:95%} }
+@keyframes barAnim4 { 0%,100%{height:45%} 50%{height:80%} }
+@keyframes barAnim5 { 0%,100%{height:60%} 50%{height:90%} }
+.animate-bar1 { animation: barAnim1 2s ease-in-out infinite }
+.animate-bar2 { animation: barAnim2 2.2s ease-in-out infinite }
+.animate-bar3 { animation: barAnim3 2.4s ease-in-out infinite }
+.animate-bar4 { animation: barAnim4 2.6s ease-in-out infinite }
+.animate-bar5 { animation: barAnim5 2.8s ease-in-out infinite }
+
+/* Line animations */
+@keyframes draw-line {
+  0% { stroke-dasharray: 0 500; stroke-dashoffset: 0; }
+  50% { stroke-dasharray: 500 0; }
+  100% { stroke-dasharray: 0 500; }
+}
+.animate-draw-line {
+  stroke-dasharray: 500;
+  stroke-dashoffset: 500;
+  animation: draw-line 4s ease-in-out infinite;
+}
+
+@keyframes move-point {
+  0% { offset-distance: 0%; opacity: 0; transform: scale(0.5); }
+  10% { opacity: 1; }
+  50% { transform: scale(1.2); }
+  100% { offset-distance: 100%; opacity: 0.8; transform: scale(1); }
+}
+.animate-chart-point {
+  offset-path: path("M0,120 C50,110 80,100 120,90 C160,70 200,85 240,60 C280,40 320,30 360,10");
+  offset-rotate: auto;
+  animation: move-point 4s ease-in-out infinite;
+}
+
+.enhanced-glow { filter: drop-shadow(0 0 6px rgba(79,70,229,0.5)); }
+.dark .enhanced-glow { filter: drop-shadow(0 0 8px rgba(255,225,53,0.8)); }
+
+@keyframes pulse-smooth {
+  0%,100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+.animate-pulse-smooth { animation: pulse-smooth 2.5s ease-in-out infinite; }
+
+/* Floating bubbles */
+@keyframes bubble1 { 0%{transform:translate(0,0);opacity:.4} 50%{transform:translate(-50px,-80px);opacity:.8} 100%{transform:translate(0,0);opacity:.4} }
+@keyframes bubble2 { 0%{transform:translate(30px,10px);opacity:.5} 50%{transform:translate(80px,-100px);opacity:.9} 100%{transform:translate(30px,10px);opacity:.5} }
+@keyframes bubble3 { 0%{transform:translate(-20px,20px);opacity:.4} 50%{transform:translate(60px,-60px);opacity:.7} 100%{transform:translate(-20px,20px);opacity:.4} }
+.animate-bubble1 { animation: bubble1 6s ease-in-out infinite alternate; top: 60%; left: 30%; }
+.animate-bubble2 { animation: bubble2 7s ease-in-out infinite alternate; top: 70%; left: 55%; }
+.animate-bubble3 { animation: bubble3 8s ease-in-out infinite alternate; top: 65%; left: 45%; }
