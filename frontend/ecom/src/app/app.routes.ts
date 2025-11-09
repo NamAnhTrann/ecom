@@ -12,15 +12,19 @@ import { Marketplace } from './marketplace/marketplace';
 import { ViewDetail } from './view-detail/view-detail';
 import { CartPage } from './cart-page/cart-page';
 import { OrderSummaryPage } from './order-summary-page/order-summary-page';
+import { ChatPage } from './chat-page/chat-page';
+import { AboutUsPage } from './about-us-page/about-us-page';
 
 export const routes: Routes = [
   { path: '', component: Homepage },
   { path: 'contact-us', component: ContactUs },
   { path: 'forum-page', component: ForumPage },
+  { path: 'about-us-page', component: AboutUsPage },
   { path: 'marketplace-page', component: Marketplace },
   { path: 'view-detail-page/:id', component: ViewDetail },
   { path: 'cart-page', component: CartPage },
   { path: "order-summary-page", component: OrderSummaryPage},
+  { path: 'chat-page', component: ChatPage},
   { path: 'login', component: Login },
   { path: 'signup', component: Signup },
   {

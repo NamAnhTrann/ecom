@@ -1,13 +1,10 @@
 <!-- ========== HEADER ========== -->
 <header
   id="main-header"
-  class="fixed top-0 left-0 z-50 w-full h-16 lg:h-20 transition-all duration-300 bg-white dark:bg-neutral-900"
+  class="fixed top-0 left-0 z-50 w-full h-16 lg:h-20 transition-all duration-300 "
   [class.backdrop-blur-md]="scrolled"
   [class.bg-white/70]="scrolled"
   [class.dark:bg-neutral-900/70]="scrolled"
-  [class.border-b]="scrolled"
-  [class.border-gray-200]="scrolled"
-  [class.dark:border-neutral-800]="scrolled"
 >
   <nav
     class="relative max-w-7xl w-full h-full flex items-center px-4 md:px-6 lg:px-8 mx-auto"
@@ -53,7 +50,7 @@
           Home
         </a>
         <a
-          routerLink="aboutUs-page"
+          routerLink="/about-us-page"
           routerLinkActive="active"
           class="nav-link inline-block text-black"
           (click)="closeMobile()"
@@ -71,7 +68,7 @@
       } @else {
         <!-- Logged-in nav links -->
         <a
-          routerLink="chat"
+          routerLink="/chat-page"
           routerLinkActive="active"
           class="nav-link inline-block text-black"
           (click)="closeMobile()"
@@ -89,7 +86,7 @@
         </a>
         
         <a
-          routerLink="forum-page"
+          routerLink="/forum-page"
           routerLinkActive="active"
           class="nav-link inline-block text-black"
           (click)="closeMobile()"
@@ -281,8 +278,7 @@
           >Contact Us</a
         >
         <a
-          routerLink="aboutUs-page"
-          routerLinkActive="active"
+    routerLink="/about-us-page"          routerLinkActive="active"
           class="text-black dark:text-white w-full"
           (click)="closeMobile()"
           >About Scrappy</a
@@ -290,7 +286,7 @@
       } @else {
         <!-- Logged-in mobile links -->
         <a
-          routerLink="chat"
+          routerLink="/chat-page"
           routerLinkActive="active"
           class="text-black dark:text-white w-full"
           (click)="closeMobile()"

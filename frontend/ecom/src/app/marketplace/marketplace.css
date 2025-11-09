@@ -4,3 +4,17 @@ svg {
 svg:hover {
   transform: scale(1.1);
 }
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-up.animate {
+  animation: fadeUp 0.8s ease-out forwards;
+}

@@ -109,6 +109,12 @@ module.exports = {
         quantity: item.quantity,
       }));
 
+      //for prod and dev environment
+      const BASE_URL =
+        process.env.NODE_ENV === "production"
+          ? "https://ecom-six-eosin.vercel.app/#"
+          : "http://localhost:4200/#";
+
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ["card"],
         mode: "payment",
@@ -118,9 +124,8 @@ module.exports = {
           order_id: order._id.toString(),
         },
 
-        //remember to update when prod
-        success_url: "https://ecom-six-eosin.vercel.app/order-summary-page",
-        cancel_url: "https://ecom-six-eosin.vercel.app/marketplace-page",
+        success_url: `${BASE_URL}/order-summary-page`,
+        cancel_url: `${BASE_URL}/marketplace-page`,
       });
       return res.json({ url: session.url });
     } catch (err) {
