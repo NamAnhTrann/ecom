@@ -64,3 +64,11 @@
 .animate-bubble1 { animation: bubble1 6s ease-in-out infinite alternate; top: 60%; left: 30%; }
 .animate-bubble2 { animation: bubble2 7s ease-in-out infinite alternate; top: 70%; left: 55%; }
 .animate-bubble3 { animation: bubble3 8s ease-in-out infinite alternate; top: 65%; left: 45%; }
+
+@keyframes slideFade {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.animate-slideFade {
+  animation: slideFade 0.45s ease-in-out;
+}

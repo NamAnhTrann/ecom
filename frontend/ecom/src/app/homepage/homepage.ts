@@ -21,7 +21,7 @@ import 'swiper/css/bundle';
 export class Homepage implements OnInit, AfterViewInit, OnDestroy {
   activeTab = 1;
   private intervalId: any;
-  private autoSlide = true;
+  private autoSlide = false;
   private slideInterval = 6000;
   private observer?: IntersectionObserver;
 

@@ -31,9 +31,8 @@
                 >
                 <input
                   type="text"
-                  name="hs-firstname-contacts-1"
                   id="hs-firstname-contacts-1"
-                  class="py-2.5 sm:py-3 px-4 block w-full border border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                  class="py-2.5 sm:py-3 px-4 block w-full border border-gray-200 rounded-lg sm:text-sm focus:border-[#4F46E5] focus:ring-[#4F46E5] dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-[#FFE135]"
                   placeholder="First Name"
                   [(ngModel)]="contact_data.contact_first_name"
                 />
@@ -45,9 +44,8 @@
                 >
                 <input
                   type="text"
-                  name="hs-lastname-contacts-1"
                   id="hs-lastname-contacts-1"
-                  class="py-2.5 sm:py-3 px-4 block w-full border border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                  class="py-2.5 sm:py-3 px-4 block w-full border border-gray-200 rounded-lg sm:text-sm focus:border-[#4F46E5] focus:ring-[#4F46E5] dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-[#FFE135]"
                   placeholder="Last Name"
                   [(ngModel)]="contact_data.contact_last_name"
                 />
@@ -59,10 +57,9 @@
               <label for="hs-email-contacts-1" class="sr-only">Email</label>
               <input
                 type="email"
-                name="hs-email-contacts-1"
                 id="hs-email-contacts-1"
                 autocomplete="email"
-                class="py-2.5 sm:py-3 px-4 block w-full border border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                class="py-2.5 sm:py-3 px-4 block w-full border border-gray-200 rounded-lg sm:text-sm focus:border-[#4F46E5] focus:ring-[#4F46E5] dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-[#FFE135]"
                 placeholder="Email"
                 [(ngModel)]="contact_data.contact_email"
               />
@@ -74,9 +71,8 @@
               >
               <input
                 type="text"
-                name="hs-phone-number-1"
                 id="hs-phone-number-1"
-                class="py-2.5 sm:py-3 px-4 block w-full border border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                class="py-2.5 sm:py-3 px-4 block w-full border border-gray-200 rounded-lg sm:text-sm focus:border-[#4F46E5] focus:ring-[#4F46E5] dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-[#FFE135]"
                 placeholder="Phone Number"
                 [(ngModel)]="contact_data.contact_phone_number"
               />
@@ -86,8 +82,7 @@
               <label for="hs-enquiry-type" class="sr-only">Enquiry Type</label>
               <select
                 id="hs-enquiry-type"
-                name="hs-enquiry-type"
-                class="dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 py-2.5 sm:py-3 px-4 block w-full  border border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
+                class="py-2.5 sm:py-3 px-4 block w-full border border-gray-200 rounded-lg sm:text-sm focus:border-[#4F46E5] focus:ring-[#4F46E5] dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-[#FFE135]"
                 [(ngModel)]="contact_data.contact_enquiry_type"
               >
                 <option value="" disabled selected>Select Enquiry Type</option>
@@ -103,9 +98,8 @@
               <label for="hs-about-contacts-1" class="sr-only">Details</label>
               <textarea
                 id="hs-about-contacts-1"
-                name="hs-about-contacts-1"
                 rows="4"
-                class="py-2.5 sm:py-3 px-4 block w-full  border border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                class="py-2.5 sm:py-3 px-4 block w-full border border-gray-200 rounded-lg sm:text-sm focus:border-[#4F46E5] focus:ring-[#4F46E5] dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-[#FFE135]"
                 placeholder="Details"
                 [(ngModel)]="contact_data.contact_message"
               ></textarea>
@@ -116,7 +110,7 @@
           <div class="mt-4 grid">
             <button
               type="submit"
-              class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
+              class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-[#4F46E5] text-white hover:bg-[#4338CA] focus:outline-hidden focus:bg-[#4338CA] dark:bg-[#FFE135] dark:text-black dark:hover:bg-[#FFD700] dark:focus:bg-[#FFD700]"
             >
               Send inquiry
             </button>
@@ -158,31 +152,14 @@
               We're here to help with any questions or code.
             </p>
             <a
-              class="mt-2 inline-flex items-center gap-x-2 text-sm font-medium text-gray-600 hover:text-gray-800 focus:outline-hidden focus:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200"
+              class="mt-2 inline-flex items-center gap-x-2 text-sm font-medium text-gray-600 hover:text-[#4F46E5] focus:text-[#4F46E5] dark:text-neutral-400 dark:hover:text-[#FFE135] dark:focus:text-[#FFE135]"
               href="#"
             >
               Contact support
-              <svg
-                class="shrink-0 size-2.5 transition ease-in-out group-hover:translate-x-1 group-focus:translate-x-1"
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M0.975821 6.92249C0.43689 6.92249 -3.50468e-07 7.34222 -3.27835e-07 7.85999C-3.05203e-07 8.37775 0.43689 8.79749 0.975821 8.79749L12.7694 8.79748L7.60447 13.7596C7.22339 14.1257 7.22339 14.7193 7.60447 15.0854C7.98555 15.4515 8.60341 15.4515 8.98449 15.0854L15.6427 8.68862C16.1191 8.23098 16.1191 7.48899 15.6427 7.03134L8.98449 0.634573C8.60341 0.268455 7.98555 0.268456 7.60447 0.634573C7.22339 1.00069 7.22339 1.59428 7.60447 1.9604L12.7694 6.92248L0.975821 6.92249Z"
-                  fill="currentColor"
-                />
-              </svg>
             </a>
           </div>
         </div>
-        <!-- End Icon Block -->
 
-        <!-- Icon Block -->
         <div class="flex gap-x-7 py-6">
           <svg
             class="shrink-0 size-6 mt-1.5 text-gray-800 dark:text-neutral-200"
@@ -209,31 +186,14 @@
               Search our FAQ for answers to anything you might ask.
             </p>
             <a
-              class="mt-2 inline-flex items-center gap-x-2 text-sm font-medium text-gray-600 hover:text-gray-800 focus:outline-hidden focus:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200"
+              class="mt-2 inline-flex items-center gap-x-2 text-sm font-medium text-gray-600 hover:text-[#4F46E5] focus:text-[#4F46E5] dark:text-neutral-400 dark:hover:text-[#FFE135] dark:focus:text-[#FFE135]"
               href="#"
             >
               Visit FAQ
-              <svg
-                class="shrink-0 size-2.5 transition ease-in-out group-hover:translate-x-1 group-focus:translate-x-1"
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M0.975821 6.92249C0.43689 6.92249 -3.50468e-07 7.34222 -3.27835e-07 7.85999C-3.05203e-07 8.37775 0.43689 8.79749 0.975821 8.79749L12.7694 8.79748L7.60447 13.7596C7.22339 14.1257 7.22339 14.7193 7.60447 15.0854C7.98555 15.4515 8.60341 15.4515 8.98449 15.0854L15.6427 8.68862C16.1191 8.23098 16.1191 7.48899 15.6427 7.03134L8.98449 0.634573C8.60341 0.268455 7.98555 0.268456 7.60447 0.634573C7.22339 1.00069 7.22339 1.59428 7.60447 1.9604L12.7694 6.92248L0.975821 6.92249Z"
-                  fill="currentColor"
-                />
-              </svg>
             </a>
           </div>
         </div>
-        <!-- End Icon Block -->
 
-        <!-- Icon Block -->
         <div class="flex gap-x-7 py-6">
           <svg
             class="shrink-0 size-6 mt-1.5 text-gray-800 dark:text-neutral-200"
@@ -259,31 +219,14 @@
               Check out our development quickstart guide.
             </p>
             <a
-              class="mt-2 inline-flex items-center gap-x-2 text-sm font-medium text-gray-600 hover:text-gray-800 focus:outline-hidden focus:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200"
+              class="mt-2 inline-flex items-center gap-x-2 text-sm font-medium text-gray-600 hover:text-[#4F46E5] focus:text-[#4F46E5] dark:text-neutral-400 dark:hover:text-[#FFE135] dark:focus:text-[#FFE135]"
               href="#"
             >
               Contact sales
-              <svg
-                class="shrink-0 size-2.5 transition ease-in-out group-hover:translate-x-1 group-focus:translate-x-1"
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M0.975821 6.92249C0.43689 6.92249 -3.50468e-07 7.34222 -3.27835e-07 7.85999C-3.05203e-07 8.37775 0.43689 8.79749 0.975821 8.79749L12.7694 8.79748L7.60447 13.7596C7.22339 14.1257 7.22339 14.7193 7.60447 15.0854C7.98555 15.4515 8.60341 15.4515 8.98449 15.0854L15.6427 8.68862C16.1191 8.23098 16.1191 7.48899 15.6427 7.03134L8.98449 0.634573C8.60341 0.268455 7.98555 0.268456 7.60447 0.634573C7.22339 1.00069 7.22339 1.59428 7.60447 1.9604L12.7694 6.92248L0.975821 6.92249Z"
-                  fill="currentColor"
-                />
-              </svg>
             </a>
           </div>
         </div>
-        <!-- End Icon Block -->
 
-        <!-- Icon Block -->
         <div class="flex gap-x-7 py-6">
           <svg
             class="shrink-0 size-6 mt-1.5 text-gray-800 dark:text-neutral-200"
@@ -310,14 +253,13 @@
               If you wish to write us an email instead please use
             </p>
             <a
-              class="mt-2 inline-flex items-center gap-x-2 text-sm font-medium text-gray-600 hover:text-gray-800 focus:outline-hidden focus:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200"
+              class="mt-2 inline-flex items-center gap-x-2 text-sm font-medium text-gray-600 hover:text-[#4F46E5] focus:text-[#4F46E5] dark:text-neutral-400 dark:hover:text-[#FFE135] dark:focus:text-[#FFE135]"
               href="#"
             >
               example@site.com
             </a>
           </div>
         </div>
-        <!-- End Icon Block -->
       </div>
     </div>
   </div>
