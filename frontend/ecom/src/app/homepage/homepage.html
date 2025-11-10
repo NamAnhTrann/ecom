@@ -564,291 +564,329 @@
     <div class="mt-12 md:mt-16 flex justify-center">
       <div class="w-full max-w-[1140px] mx-auto text-center">
         <!-- 1. Seller Dashboard -->
+      <div
+  id="tabs-with-card-1"
+  role="tabpanel"
+  aria-labelledby="tabs-with-card-item-1"
+>
+  <div
+    class="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4
+           p-4 sm:p-6 lg:p-8 rounded-2xl
+           bg-gradient-to-br from-[#4F46E5]/10 to-[#4F46E5]/20
+           dark:from-[#FFE135]/10 dark:to-[#FFE135]/20
+           transition-all duration-300"
+  >
+    <!-- Earnings -->
+    <div
+      class="p-4 sm:p-5 bg-white/80 dark:bg-neutral-900/80
+             rounded-xl shadow-md flex flex-col justify-between
+             hover:shadow-lg transition-all"
+    >
+      <p class="text-xs sm:text-sm text-gray-500 dark:text-neutral-400">
+        Earnings
+      </p>
+      <h3 class="text-xl sm:text-2xl font-bold text-[#4F46E5] dark:text-[#FFE135]">
+        $12,840
+      </h3>
+      <p class="text-xs text-green-600 mt-1">▲ +12% this week</p>
+    </div>
+
+    <!-- Orders -->
+    <div
+      class="p-4 sm:p-5 bg-white/80 dark:bg-neutral-900/80
+             rounded-xl shadow-md hover:shadow-lg transition-all"
+    >
+      <p class="text-xs sm:text-sm text-gray-500 dark:text-neutral-400">Orders</p>
+      <h3 class="text-xl sm:text-2xl font-bold text-[#4F46E5] dark:text-[#FFE135]">
+        327
+      </h3>
+      <div
+        class="h-2 mt-3 bg-[#4F46E5]/20 dark:bg-[#FFE135]/20 rounded-full overflow-hidden"
+      >
         <div
-          id="tabs-with-card-1"
-          role="tabpanel"
-          aria-labelledby="tabs-with-card-item-1"
-        >
-          <div
-            class="relative grid grid-cols-3 gap-4 p-8 rounded-2xl bg-gradient-to-br from-[#4F46E5]/10 to-[#4F46E5]/20 dark:from-[#FFE135]/10 dark:to-[#FFE135]/20"
-          >
-            <!-- Sales card -->
-            <div
-              class="p-4 bg-white/80 dark:bg-neutral-900/80 rounded-xl shadow-md"
-            >
-              <p class="text-xs text-gray-500 dark:text-neutral-400">
-                Earnings
-              </p>
-              <h3 class="text-2xl font-bold text-[#4F46E5] dark:text-[#FFE135]">
-                $12,840
-              </h3>
-              <p class="text-xs text-green-600 mt-1">▲ +12% this week</p>
-            </div>
-            <!-- Orders -->
-            <div
-              class="p-4 bg-white/80 dark:bg-neutral-900/80 rounded-xl shadow-md"
-            >
-              <p class="text-xs text-gray-500 dark:text-neutral-400">Orders</p>
-              <h3 class="text-2xl font-bold text-[#4F46E5] dark:text-[#FFE135]">
-                327
-              </h3>
-              <div
-                class="h-2 mt-3 bg-[#4F46E5]/20 dark:bg-[#FFE135]/20 rounded-full"
-              >
-                <div
-                  class="h-2 w-3/4 bg-[#4F46E5] dark:bg-[#FFE135] rounded-full animate-pulse"
-                ></div>
-              </div>
-            </div>
-            <!-- Visitors -->
-            <div
-              class="p-4 bg-white/80 dark:bg-neutral-900/80 rounded-xl shadow-md"
-            >
-              <p class="text-xs text-gray-500 dark:text-neutral-400">
-                Visitors
-              </p>
-              <h3 class="text-2xl font-bold text-[#4F46E5] dark:text-[#FFE135]">
-                8.4 K
-              </h3>
-              <p class="text-xs text-blue-500 mt-1">Peak ↑ Sat</p>
-            </div>
-            <!-- Chart block -->
-            <div
-              class="col-span-3 mt-4 p-6 bg-white/80 dark:bg-neutral-900/80 rounded-xl"
-            >
-              <div class="flex items-end gap-2 h-32">
-                <div
-                  class="flex-1 bg-[#4F46E5]/60 dark:bg-[#FFE135]/60 rounded-md animate-bar1"
-                ></div>
-                <div
-                  class="flex-1 bg-[#4F46E5]/50 dark:bg-[#FFE135]/50 rounded-md animate-bar2"
-                ></div>
-                <div
-                  class="flex-1 bg-[#4F46E5]/40 dark:bg-[#FFE135]/40 rounded-md animate-bar3"
-                ></div>
-                <div
-                  class="flex-1 bg-[#4F46E5]/50 dark:bg-[#FFE135]/50 rounded-md animate-bar4"
-                ></div>
-                <div
-                  class="flex-1 bg-[#4F46E5]/60 dark:bg-[#FFE135]/60 rounded-md animate-bar5"
-                ></div>
-              </div>
-            </div>
-          </div>
-        </div>
+          class="h-2 w-3/4 bg-[#4F46E5] dark:bg-[#FFE135] rounded-full animate-pulse"
+        ></div>
+      </div>
+    </div>
+
+    <!-- Visitors -->
+    <div
+      class="p-4 sm:p-5 bg-white/80 dark:bg-neutral-900/80
+             rounded-xl shadow-md hover:shadow-lg transition-all"
+    >
+      <p class="text-xs sm:text-sm text-gray-500 dark:text-neutral-400">
+        Visitors
+      </p>
+      <h3 class="text-xl sm:text-2xl font-bold text-[#4F46E5] dark:text-[#FFE135]">
+        8.4 K
+      </h3>
+      <p class="text-xs text-blue-500 mt-1">Peak ↑ Sat</p>
+    </div>
+
+    <!-- Chart -->
+    <div
+      class="col-span-1 sm:col-span-2 lg:col-span-3
+             mt-2 sm:mt-4 p-4 sm:p-6 bg-white/80 dark:bg-neutral-900/80
+             rounded-xl shadow-md hover:shadow-lg transition-all"
+    >
+      <div class="flex items-end gap-2 h-28 sm:h-32">
+        <div
+          class="flex-1 bg-[#4F46E5]/60 dark:bg-[#FFE135]/60 rounded-md animate-bar1"
+        ></div>
+        <div
+          class="flex-1 bg-[#4F46E5]/50 dark:bg-[#FFE135]/50 rounded-md animate-bar2"
+        ></div>
+        <div
+          class="flex-1 bg-[#4F46E5]/40 dark:bg-[#FFE135]/40 rounded-md animate-bar3"
+        ></div>
+        <div
+          class="flex-1 bg-[#4F46E5]/50 dark:bg-[#FFE135]/50 rounded-md animate-bar4"
+        ></div>
+        <div
+          class="flex-1 bg-[#4F46E5]/60 dark:bg-[#FFE135]/60 rounded-md animate-bar5"
+        ></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
         <!-- 2. Social + Commerce -->
+       <div
+  id="tabs-with-card-2"
+  class="hidden"
+  role="tabpanel"
+  aria-labelledby="tabs-with-card-item-2"
+>
+  <div
+    class="relative grid grid-cols-1 sm:grid-cols-2 gap-4
+           p-4 sm:p-6 lg:p-8 rounded-2xl
+           bg-gradient-to-br from-indigo-600/10 to-pink-500/10
+           dark:from-[#FFD84C]/10 dark:to-[#FFB300]/10
+           transition-all duration-300"
+  >
+    <!-- Mock post -->
+    <div
+      class="p-4 sm:p-5 bg-white/80 dark:bg-neutral-900/80 rounded-xl shadow-md
+             text-left hover:shadow-lg transition-all duration-300"
+    >
+      <div class="flex items-center gap-3 mb-3">
         <div
-          id="tabs-with-card-2"
-          class="hidden"
-          role="tabpanel"
-          aria-labelledby="tabs-with-card-item-2"
-        >
-          <div
-            class="relative grid grid-cols-2 gap-4 p-8 rounded-2xl bg-gradient-to-br from-indigo-600/10 to-pink-500/10 dark:from-[#FFD84C]/10 dark:to-[#FFB300]/10"
-          >
-            <!-- Mock post -->
-            <div
-              class="p-4 bg-white/80 dark:bg-neutral-900/80 rounded-xl shadow-md text-left"
-            >
-              <div class="flex items-center gap-3 mb-3">
-                <div
-                  class="w-10 h-10 bg-[#4F46E5]/60 dark:bg-[#FFE135]/60 rounded-full"
-                ></div>
-                <p class="font-semibold text-gray-700 dark:text-white">
-                  @artbynova
-                </p>
-              </div>
-              <div
-                class="h-32 bg-[#4F46E5]/10 dark:bg-[#FFE135]/10 rounded-lg mb-3 flex items-center justify-center text-[#4F46E5] dark:text-[#FFE135] font-semibold"
-              >
-                New Prints Drop 🎨
-              </div>
-              <div
-                class="flex justify-between text-sm text-gray-600 dark:text-neutral-400"
-              >
-                <span>❤️ 248</span><span>💬 32</span><span>🛒 Shop</span>
-              </div>
-            </div>
-            <!-- Product highlight -->
-            <div
-              class="p-4 bg-white/80 dark:bg-neutral-900/80 rounded-xl shadow-md text-left"
-            >
-              <h3 class="font-semibold text-[#4F46E5] dark:text-[#FFE135] mb-2">
-                Trending Product
-              </h3>
-              <div
-                class="h-32 bg-gradient-to-tr from-[#4F46E5]/30 to-[#4F46E5]/10 dark:from-[#FFE135]/40 dark:to-[#FFE135]/10 rounded-lg flex items-center justify-center text-2xl font-bold"
-              >
-                Hoodie #239
-              </div>
-              <button
-                class="mt-3 w-full py-2 rounded-lg bg-[#4F46E5] dark:bg-[#FFE135] text-white dark:text-black font-semibold transition hover:scale-[1.03]"
-              >
-                Buy Now
-              </button>
-            </div>
-          </div>
-        </div>
+          class="w-10 h-10 bg-[#4F46E5]/60 dark:bg-[#FFE135]/60 rounded-full shrink-0"
+        ></div>
+        <p class="font-semibold text-gray-700 dark:text-white text-sm sm:text-base">
+          @artbynova
+        </p>
+      </div>
+
+      <div
+        class="h-32 sm:h-36 bg-[#4F46E5]/10 dark:bg-[#FFE135]/10 rounded-lg mb-3
+               flex items-center justify-center text-[#4F46E5] dark:text-[#FFE135]
+               font-semibold text-base sm:text-lg"
+      >
+        New Prints Drop 🎨
+      </div>
+
+      <div
+        class="flex justify-between text-xs sm:text-sm text-gray-600 dark:text-neutral-400"
+      >
+        <span>❤️ 248</span><span>💬 32</span><span>🛒 Shop</span>
+      </div>
+    </div>
+
+    <!-- Product highlight -->
+    <div
+      class="p-4 sm:p-5 bg-white/80 dark:bg-neutral-900/80 rounded-xl shadow-md
+             text-left hover:shadow-lg transition-all duration-300"
+    >
+      <h3
+        class="font-semibold text-[#4F46E5] dark:text-[#FFE135] mb-2
+               text-base sm:text-lg"
+      >
+        Trending Product
+      </h3>
+
+      <div
+        class="h-32 sm:h-36 bg-gradient-to-tr from-[#4F46E5]/30 to-[#4F46E5]/10
+               dark:from-[#FFE135]/40 dark:to-[#FFE135]/10 rounded-lg
+               flex items-center justify-center text-[#4F46E5] dark:text-[#FFE135]
+               text-lg sm:text-2xl font-bold"
+      >
+        Hoodie #239
+      </div>
+
+      <button
+        class="mt-3 w-full py-2 sm:py-3 rounded-lg
+               bg-[#4F46E5] dark:bg-[#FFE135]
+               text-white dark:text-black font-semibold
+               shadow-md hover:shadow-lg hover:scale-[1.03]
+               transition-all duration-300"
+      >
+        Buy Now
+      </button>
+    </div>
+  </div>
+</div>
+
 
         <!-- 3. Growth & Collaboration -->
-        <div
-          id="tabs-with-card-3"
-          class="hidden relative h-[28rem] flex flex-col items-center justify-center overflow-hidden"
-          role="tabpanel"
-          aria-labelledby="tabs-with-card-item-3"
-        >
-          <!-- Background gradient glow -->
-          <div
-            class="absolute inset-0 bg-gradient-to-b from-[#4F46E5]/10 via-transparent to-transparent dark:from-[#FFE135]/10"
-          ></div>
+       <div
+  id="tabs-with-card-3"
+  class="hidden relative min-h-[22rem] sm:min-h-[26rem] lg:h-[28rem] 
+         flex flex-col items-center justify-center overflow-hidden"
+  role="tabpanel"
+  aria-labelledby="tabs-with-card-item-3"
+>
+  <!-- Background gradient glow -->
+  <div
+    class="absolute inset-0 bg-gradient-to-b from-[#4F46E5]/10 via-transparent to-transparent 
+           dark:from-[#FFE135]/10 transition-all"
+  ></div>
 
-          <!-- Subtle diagonal grid background -->
-          <div
-            class="absolute inset-0 opacity-[0.04] dark:opacity-[0.08] bg-[radial-gradient(circle_at_center,_#4F46E5_1px,_transparent_1px)] bg-[length:30px_30px] dark:bg-[radial-gradient(circle_at_center,_#FFE135_1px,_transparent_1px)]"
-          ></div>
+  <!-- Subtle diagonal grid background -->
+  <div
+    class="absolute inset-0 opacity-[0.04] dark:opacity-[0.08]
+           bg-[radial-gradient(circle_at_center,_#4F46E5_1px,_transparent_1px)] 
+           bg-[length:24px_24px] sm:bg-[length:30px_30px]
+           dark:bg-[radial-gradient(circle_at_center,_#FFE135_1px,_transparent_1px)]"
+  ></div>
 
-          <!-- Chart Container -->
-          <div
-            class="relative w-[85%] h-64 flex items-end justify-between mt-10"
-          >
-            <!-- Horizontal grid lines -->
-            <div class="absolute inset-0 flex flex-col justify-between">
-              <div
-                class="border-b border-gray-200/20 dark:border-white/10"
-              ></div>
-              <div
-                class="border-b border-gray-200/20 dark:border-white/10"
-              ></div>
-              <div
-                class="border-b border-gray-200/20 dark:border-white/10"
-              ></div>
-              <div
-                class="border-b border-gray-200/20 dark:border-white/10"
-              ></div>
-            </div>
+  <!-- Chart Container -->
+  <div
+    class="relative w-[92%] sm:w-[85%] h-52 sm:h-64 flex items-end justify-between mt-10"
+  >
+    <!-- Horizontal grid lines -->
+    <div class="absolute inset-0 flex flex-col justify-between">
+      <div class="border-b border-gray-200/20 dark:border-white/10"></div>
+      <div class="border-b border-gray-200/20 dark:border-white/10"></div>
+      <div class="border-b border-gray-200/20 dark:border-white/10"></div>
+      <div class="border-b border-gray-200/20 dark:border-white/10"></div>
+    </div>
 
-            <!-- Axis labels -->
-            <div
-              class="absolute left-0 top-0 h-full flex flex-col justify-between text-xs text-gray-400 dark:text-neutral-500"
-            >
-              <span>$20K</span>
-              <span>$15K</span>
-              <span>$10K</span>
-              <span>$5K</span>
-              <span>$0</span>
-            </div>
+    <!-- Y-axis labels -->
+    <div
+      class="absolute left-0 top-0 h-full flex flex-col justify-between 
+             text-[0.65rem] sm:text-xs text-gray-400 dark:text-neutral-500"
+    >
+      <span>$20K</span>
+      <span>$15K</span>
+      <span>$10K</span>
+      <span>$5K</span>
+      <span>$0</span>
+    </div>
 
-            <!-- Vertical month labels -->
-            <div
-              class="absolute bottom-0 w-full flex justify-between text-xs text-gray-400 dark:text-neutral-500"
-            >
-              <span>Jan</span>
-              <span>Feb</span>
-              <span>Mar</span>
-              <span>Apr</span>
-              <span>May</span>
-            </div>
+    <!-- X-axis labels -->
+    <div
+      class="absolute bottom-0 w-full flex justify-between 
+             text-[0.65rem] sm:text-xs text-gray-400 dark:text-neutral-500 px-2 sm:px-0"
+    >
+      <span>Jan</span>
+      <span>Feb</span>
+      <span>Mar</span>
+      <span>Apr</span>
+      <span>May</span>
+    </div>
 
-            <!-- Bars -->
-            <div
-              class="relative flex items-end justify-between w-full gap-4 px-6"
-            >
-              <div
-                class="w-[12%] bg-[#4F46E5]/70 dark:bg-[#FFE135]/70 rounded-t-md animate-bar1 shadow-md"
-              ></div>
-              <div
-                class="w-[12%] bg-[#4F46E5]/80 dark:bg-[#FFE135]/80 rounded-t-md animate-bar2 shadow-md"
-              ></div>
-              <div
-                class="w-[12%] bg-[#4F46E5]/90 dark:bg-[#FFE135]/90 rounded-t-md animate-bar3 shadow-md"
-              ></div>
-              <div
-                class="w-[12%] bg-[#4F46E5]/80 dark:bg-[#FFE135]/80 rounded-t-md animate-bar4 shadow-md"
-              ></div>
-              <div
-                class="w-[12%] bg-[#4F46E5]/70 dark:bg-[#FFE135]/70 rounded-t-md animate-bar5 shadow-md"
-              ></div>
-            </div>
+    <!-- Bars -->
+    <div class="relative flex items-end justify-between w-full gap-2 sm:gap-4 px-4 sm:px-6">
+      <div
+        class="flex-1 max-w-[14%] sm:max-w-[12%] bg-[#4F46E5]/70 dark:bg-[#FFE135]/70 
+               rounded-t-md animate-bar1 shadow-md"
+      ></div>
+      <div
+        class="flex-1 max-w-[14%] sm:max-w-[12%] bg-[#4F46E5]/80 dark:bg-[#FFE135]/80 
+               rounded-t-md animate-bar2 shadow-md"
+      ></div>
+      <div
+        class="flex-1 max-w-[14%] sm:max-w-[12%] bg-[#4F46E5]/90 dark:bg-[#FFE135]/90 
+               rounded-t-md animate-bar3 shadow-md"
+      ></div>
+      <div
+        class="flex-1 max-w-[14%] sm:max-w-[12%] bg-[#4F46E5]/80 dark:bg-[#FFE135]/80 
+               rounded-t-md animate-bar4 shadow-md"
+      ></div>
+      <div
+        class="flex-1 max-w-[14%] sm:max-w-[12%] bg-[#4F46E5]/70 dark:bg-[#FFE135]/70 
+               rounded-t-md animate-bar5 shadow-md"
+      ></div>
+    </div>
 
-            <!-- Animated Line Chart -->
-            <svg
-              viewBox="0 0 400 150"
-              preserveAspectRatio="none"
-              class="absolute bottom-0 w-full h-full pointer-events-none"
-            >
-              <!-- Faint shadow path -->
-              <path
-                d="M0,120 C50,110 80,100 120,90 C160,70 200,85 240,60 C280,40 320,30 360,10"
-                stroke="#4F46E5"
-                stroke-width="5"
-                stroke-opacity="0.15"
-                fill="none"
-                class="dark:stroke-[#FFE135] dark:opacity-20"
-              />
-              <!-- Main Line -->
-              <path
-                d="M0,120 C50,110 80,100 120,90 C160,70 200,85 240,60 C280,40 320,30 360,10"
-                stroke="#4F46E5"
-                stroke-width="3"
-                fill="none"
-                class="dark:stroke-[#FFE135] animate-draw-line enhanced-glow"
-              />
-              <!-- Moving Data Point -->
-              <circle
-                r="6"
-                fill="#4F46E5"
-                class="dark:fill-[#FFE135] animate-chart-point"
-              ></circle>
-            </svg>
-          </div>
+    <!-- Animated Line Chart -->
+    <svg
+      viewBox="0 0 400 150"
+      preserveAspectRatio="none"
+      class="absolute bottom-0 w-full h-full pointer-events-none"
+    >
+      <!-- Faint shadow path -->
+      <path
+        d="M0,120 C50,110 80,100 120,90 C160,70 200,85 240,60 C280,40 320,30 360,10"
+        stroke="#4F46E5"
+        stroke-width="5"
+        stroke-opacity="0.15"
+        fill="none"
+        class="dark:stroke-[#FFE135] dark:opacity-20"
+      />
+      <!-- Main Line -->
+      <path
+        d="M0,120 C50,110 80,100 120,90 C160,70 200,85 240,60 C280,40 320,30 360,10"
+        stroke="#4F46E5"
+        stroke-width="3"
+        fill="none"
+        class="dark:stroke-[#FFE135] animate-draw-line enhanced-glow"
+      />
+      <!-- Moving Data Point -->
+      <circle
+        r="5"
+        fill="#4F46E5"
+        class="dark:fill-[#FFE135] animate-chart-point"
+      ></circle>
+    </svg>
+  </div>
 
-          <!-- Floating stats chips -->
-          <div class="absolute top-8 right-10 flex flex-col gap-3 text-right">
-            <div
-              class="bg-white/40 dark:bg-neutral-900/40 backdrop-blur-md rounded-lg px-4 py-2 shadow-md"
-            >
-              <p class="text-sm text-gray-600 dark:text-neutral-300">
-                Monthly Revenue
-              </p>
-              <h3
-                class="text-2xl font-bold text-[#4F46E5] dark:text-[#FFE135] animate-pulse-smooth"
-              >
-                $12.8K
-              </h3>
-            </div>
-            <div
-              class="bg-white/40 dark:bg-neutral-900/40 backdrop-blur-md rounded-lg px-4 py-2 shadow-md"
-            >
-              <p class="text-sm text-gray-600 dark:text-neutral-300">
-                Customer Growth
-              </p>
-              <h3
-                class="text-2xl font-semibold text-[#4F46E5] dark:text-[#FFE135] animate-pulse-smooth"
-              >
-                +24%
-              </h3>
-            </div>
-          </div>
+  <!-- Floating stats chips -->
+  <div
+    class="absolute top-4 sm:top-8 right-4 sm:right-10 flex flex-col gap-2 sm:gap-3 text-right"
+  >
+    <div
+      class="bg-white/50 dark:bg-neutral-900/50 backdrop-blur-md rounded-lg px-3 sm:px-4 py-2 shadow-md"
+    >
+      <p class="text-xs sm:text-sm text-gray-600 dark:text-neutral-300">
+        Monthly Revenue
+      </p>
+      <h3
+        class="text-lg sm:text-2xl font-bold text-[#4F46E5] dark:text-[#FFE135] animate-pulse-smooth"
+      >
+        $12.8K
+      </h3>
+    </div>
+    <div
+      class="bg-white/50 dark:bg-neutral-900/50 backdrop-blur-md rounded-lg px-3 sm:px-4 py-2 shadow-md"
+    >
+      <p class="text-xs sm:text-sm text-gray-600 dark:text-neutral-300">
+        Customer Growth
+      </p>
+      <h3
+        class="text-lg sm:text-2xl font-semibold text-[#4F46E5] dark:text-[#FFE135] animate-pulse-smooth"
+      >
+        +24%
+      </h3>
+    </div>
+  </div>
 
-          <!-- Floating Money Bubbles -->
-          <div
-            class="absolute w-3 h-3 rounded-full bg-[#4F46E5]/60 dark:bg-[#FFE135]/70 blur-sm animate-bubble1"
-          ></div>
-          <div
-            class="absolute w-4 h-4 rounded-full bg-[#4F46E5]/40 dark:bg-[#FFE135]/50 blur-md animate-bubble2"
-          ></div>
-          <div
-            class="absolute w-2 h-2 rounded-full bg-[#4F46E5]/70 dark:bg-[#FFE135]/80 blur-[1px] animate-bubble3"
-          ></div>
+  <!-- Floating Money Bubbles -->
+  <div class="absolute w-3 h-3 rounded-full bg-[#4F46E5]/60 dark:bg-[#FFE135]/70 blur-sm animate-bubble1"></div>
+  <div class="absolute w-4 h-4 rounded-full bg-[#4F46E5]/40 dark:bg-[#FFE135]/50 blur-md animate-bubble2"></div>
+  <div class="absolute w-2 h-2 rounded-full bg-[#4F46E5]/70 dark:bg-[#FFE135]/80 blur-[1px] animate-bubble3"></div>
 
-          <!-- Footer Label -->
-          <p
-            class="mt-10 text-gray-700 dark:text-neutral-300 font-semibold text-lg z-10"
-          >
-            Continuous Growth Over Time
-          </p>
-        </div>
+  <!-- Footer Label -->
+  <p
+    class="mt-8 sm:mt-10 text-gray-700 dark:text-neutral-300 font-semibold text-base sm:text-lg z-10 text-center px-4"
+  >
+    Continuous Growth Over Time
+  </p>
+</div>
+
+
       </div>
     </div>
   </div>
