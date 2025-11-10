@@ -23,7 +23,6 @@
 
         <form (ngSubmit)="addContact()">
           <div class="grid gap-4">
-            <!-- Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label for="hs-firstname-contacts-1" class="sr-only"
@@ -32,6 +31,7 @@
                 <input
                   type="text"
                   id="hs-firstname-contacts-1"
+                  name="firstName"
                   class="py-2.5 sm:py-3 px-4 block w-full border border-gray-200 rounded-lg sm:text-sm focus:border-[#4F46E5] focus:ring-[#4F46E5] dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-[#FFE135]"
                   placeholder="First Name"
                   [(ngModel)]="contact_data.contact_first_name"
@@ -45,19 +45,20 @@
                 <input
                   type="text"
                   id="hs-lastname-contacts-1"
+                  name="lastName"
                   class="py-2.5 sm:py-3 px-4 block w-full border border-gray-200 rounded-lg sm:text-sm focus:border-[#4F46E5] focus:ring-[#4F46E5] dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-[#FFE135]"
                   placeholder="Last Name"
                   [(ngModel)]="contact_data.contact_last_name"
                 />
               </div>
             </div>
-            <!-- End Grid -->
 
             <div>
               <label for="hs-email-contacts-1" class="sr-only">Email</label>
               <input
                 type="email"
                 id="hs-email-contacts-1"
+                name="email"
                 autocomplete="email"
                 class="py-2.5 sm:py-3 px-4 block w-full border border-gray-200 rounded-lg sm:text-sm focus:border-[#4F46E5] focus:ring-[#4F46E5] dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-[#FFE135]"
                 placeholder="Email"
@@ -72,6 +73,7 @@
               <input
                 type="text"
                 id="hs-phone-number-1"
+                name="phone"
                 class="py-2.5 sm:py-3 px-4 block w-full border border-gray-200 rounded-lg sm:text-sm focus:border-[#4F46E5] focus:ring-[#4F46E5] dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-[#FFE135]"
                 placeholder="Phone Number"
                 [(ngModel)]="contact_data.contact_phone_number"
@@ -82,6 +84,7 @@
               <label for="hs-enquiry-type" class="sr-only">Enquiry Type</label>
               <select
                 id="hs-enquiry-type"
+                name="enquiry"
                 class="py-2.5 sm:py-3 px-4 block w-full border border-gray-200 rounded-lg sm:text-sm focus:border-[#4F46E5] focus:ring-[#4F46E5] dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-[#FFE135]"
                 [(ngModel)]="contact_data.contact_enquiry_type"
               >
@@ -98,6 +101,7 @@
               <label for="hs-about-contacts-1" class="sr-only">Details</label>
               <textarea
                 id="hs-about-contacts-1"
+                name="message"
                 rows="4"
                 class="py-2.5 sm:py-3 px-4 block w-full border border-gray-200 rounded-lg sm:text-sm focus:border-[#4F46E5] focus:ring-[#4F46E5] dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-[#FFE135]"
                 placeholder="Details"
@@ -105,21 +109,14 @@
               ></textarea>
             </div>
           </div>
-          <!-- End Grid -->
 
           <div class="mt-4 grid">
             <button
               type="submit"
-              class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-[#4F46E5] text-white hover:bg-[#4338CA] focus:outline-hidden focus:bg-[#4338CA] dark:bg-[#FFE135] dark:text-black dark:hover:bg-[#FFD700] dark:focus:bg-[#FFD700]"
+              class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-[#4F46E5] text-white hover:bg-[#4338CA] dark:bg-[#FFE135] dark:text-black dark:hover:bg-[#FFD700]"
             >
               Send inquiry
             </button>
-          </div>
-
-          <div class="mt-3 text-center">
-            <p class="text-sm text-gray-500 dark:text-neutral-500">
-              We'll get back to you in 1-2 business days.
-            </p>
           </div>
         </form>
       </div>
