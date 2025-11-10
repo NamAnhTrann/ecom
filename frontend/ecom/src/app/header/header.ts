@@ -16,6 +16,8 @@ export class Header {
   isLoggedIn: any;
   userRole: any;
   isDarkMode = false;
+  dropdownOpen = false;
+
 
   constructor(private router: Router, public auth: Auth) {
     this.isLoggedIn = this.auth.isLoggedIn;
@@ -38,6 +40,9 @@ export class Header {
         }, 50);
       });
   }
+  toggleDropdown() {
+  this.dropdownOpen = !this.dropdownOpen;
+}
 
   ngOnInit() {
     const saved = localStorage.getItem('theme');

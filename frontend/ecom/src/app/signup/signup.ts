@@ -23,7 +23,7 @@ export class Signup implements AfterViewInit{
   constructor(private auth: Auth, private router: Router) {}
 
   ngAfterViewInit(): void {
-    const words = ['and Join the Marketplace', 'and Start Selling', 'and Grow with Scrappy'];
+    const words = ['and Start Selling', 'and Grow with Scrappy', 'and Start Browsing'];
     let i = 0;
     const el = document.getElementById('typewriter');
     const type = () => {
@@ -38,7 +38,7 @@ export class Signup implements AfterViewInit{
     };
     type();
   }
-  
+
   onRegister(){
     this.auth.register(this.user_creds).subscribe({
       next: (res:any) => {

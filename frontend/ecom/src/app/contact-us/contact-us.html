@@ -80,22 +80,45 @@
               />
             </div>
 
-            <div>
-              <label for="hs-enquiry-type" class="sr-only">Enquiry Type</label>
-              <select
-                id="hs-enquiry-type"
-                name="enquiry"
-                class="py-2.5 sm:py-3 px-4 block w-full border border-gray-200 rounded-lg sm:text-sm focus:border-[#4F46E5] focus:ring-[#4F46E5] dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-[#FFE135]"
-                [(ngModel)]="contact_data.contact_enquiry_type"
-              >
-                <option value="" disabled selected>Select Enquiry Type</option>
-                <option value="General_enquiry">General Enquiry</option>
-                <option value="Product_Support">Product Support</option>
-                <option value="Billing">Billing</option>
-                <option value="Selling_Art">Selling Art</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
+           <div class="relative">
+  <label for="hs-enquiry-type" class="sr-only">Enquiry Type</label>
+
+  <!-- Dropdown -->
+  <select
+    id="hs-enquiry-type"
+    name="enquiry"
+    [(ngModel)]="contact_data.contact_enquiry_type"
+    class="appearance-none py-2.5 sm:py-3 px-4 pr-10 block w-full border border-gray-200 rounded-lg sm:text-sm
+           text-gray-700 dark:text-neutral-300
+           bg-white dark:bg-neutral-900
+           focus:border-[#4F46E5] dark:focus:border-[#FFE135]
+           focus:ring-1 focus:ring-[#4F46E5] dark:focus:ring-[#FFE135]
+           transition-all duration-200"
+  >
+    <option value="" disabled selected>Select Enquiry Type</option>
+    <option value="General_enquiry">General Enquiry</option>
+    <option value="Product_Support">Product Support</option>
+    <option value="Billing">Billing</option>
+    <option value="Selling_Art">Selling Art</option>
+    <option value="Other">Other</option>
+  </select>
+
+  <!-- Custom arrow -->
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5
+           text-[#4F46E5] dark:text-[#FFE135]"
+  >
+    <path d="M6 9l6 6 6-6" />
+  </svg>
+</div>
+
 
             <div>
               <label for="hs-about-contacts-1" class="sr-only">Details</label>
