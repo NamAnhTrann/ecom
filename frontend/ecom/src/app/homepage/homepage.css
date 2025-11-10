@@ -72,3 +72,7 @@
 .animate-slideFade {
   animation: slideFade 0.45s ease-in-out;
 }
+
+summary svg {
+  flex-shrink: 0;
+}
