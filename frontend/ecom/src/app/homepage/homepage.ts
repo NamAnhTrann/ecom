@@ -7,8 +7,9 @@ import {
   CUSTOM_ELEMENTS_SCHEMA
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import 'swiper/css/bundle';
+import { Auth } from '../services/auth';
 
 @Component({
   selector: 'app-homepage',
@@ -25,13 +26,16 @@ export class Homepage implements OnInit, AfterViewInit, OnDestroy {
   private slideInterval = 6000;
   private observer?: IntersectionObserver;
 
-  constructor(private renderer: Renderer2) {}
+  constructor(private renderer: Renderer2, private auth:Auth,  private router: Router) {}
 
   ngOnInit() {
     if (this.autoSlide) {
       this.intervalId = setInterval(() => {
         this.nextTab();
       }, this.slideInterval);
+    }
+     if (this.auth.isLoggedIn()) {
+      this.router.navigate(['/marketplace-page']); 
     }
   }
 
