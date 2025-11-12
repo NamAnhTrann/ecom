@@ -20,7 +20,6 @@ module.exports = {
         console.log("No user found in req.user");
         return res.status(401).json({ message: "User not authenticated" });
       }
-
       if (user.user_role !== "seller") {
         console.log("Unauthorized role:", user.user_role);
         return res
@@ -73,6 +72,7 @@ module.exports = {
         .json({ message: "internal apis errors on delete" });
     }
   },
+
 
   //delete single chosen product based on params id
   deleteSingleProduct: async function (req, res) {

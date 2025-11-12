@@ -1,17 +1,31 @@
 import { CommonModule } from '@angular/common';
-import { Component, signal } from '@angular/core';
+import {
+  Component,
+  CUSTOM_ELEMENTS_SCHEMA,
+  ElementRef,
+  ViewChild,
+  signal,
+  AfterViewInit
+} from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-chat-page',
-  imports: [RouterLink, CommonModule],
+  standalone: true,
+  imports: [RouterLink, CommonModule, FormsModule],
   templateUrl: './chat-page.html',
-  styleUrl: './chat-page.css'
+  styleUrl: './chat-page.css',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ChatPage {
-sidebarCollapsed = signal(false);
-mobileSidebarOpen = signal(false);
+
+  sidebarCollapsed = signal(false);
+  mobileSidebarOpen = signal(false);
   isDarkMode = false;
+
+  @ViewChild('inputRef') inputRef!: ElementRef<HTMLInputElement>;
+  @ViewChild('picker') picker!: ElementRef<any>;
 
   ngOnInit() {
     const saved = localStorage.getItem('theme');
@@ -22,13 +36,17 @@ mobileSidebarOpen = signal(false);
     }
   }
 
-toggleSidebar() {
-  this.sidebarCollapsed.update(v => !v);
-}
 
-toggleMobile() {
-  this.mobileSidebarOpen.update(v => !v);
-}
+
+  
+
+  toggleSidebar() {
+    this.sidebarCollapsed.update((v) => !v);
+  }
+
+  toggleMobile() {
+    this.mobileSidebarOpen.update((v) => !v);
+  }
 
   toggleTheme() {
     const html = document.documentElement;
@@ -36,7 +54,4 @@ toggleMobile() {
     this.isDarkMode = html.classList.contains('dark');
     localStorage.setItem('theme', this.isDarkMode ? 'dark' : 'light');
   }
-
-
-
 }

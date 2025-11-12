@@ -1,16 +1,16 @@
-<section class="bg-white dark:bg-neutral-950 transition-colors duration-300">
+<div class="min-h-screen flex flex-col bg-white dark:bg-neutral-950 transition-colors duration-300">
   <!-- Header -->
-  @if(!hideHeaderFooter()){
+  @if (!hideHeaderFooter()) {
     <app-header></app-header>
   }
 
-  <!-- Main content -->
-  <main>
+  <!-- Main -->
+  <main class="flex-1">
     <router-outlet></router-outlet>
   </main>
 
   <!-- Footer -->
-  @if(!hideHeaderFooter()){
-    <app-footer class="mt-4"></app-footer>
+  @if (!hideHeaderFooter()) {
+    <app-footer></app-footer>
   }
-</section>
+</div>

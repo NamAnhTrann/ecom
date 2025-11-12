@@ -1,141 +1,179 @@
-<section class="py-12 relative">
+<section class="py-12 relative bg-white dark:bg-neutral-950 transition-colors duration-300">
   <div class="w-full max-w-7xl px-4 md:px-5 lg:px-6 mx-auto">
+
     <!-- Header -->
-    <h2
-      class="font-manrope font-bold text-3xl sm:text-4xl leading-10 text-black mb-11"
-    >
+    <h2 class="font-manrope font-bold text-3xl sm:text-4xl leading-10 
+               text-black dark:text-neutral-100 
+               mb-11 text-center sm:text-left">
       Your Order is Confirmed
     </h2>
 
-    <h6 class="font-medium text-xl leading-8 text-black mb-3">
+    <h6 class="font-medium text-xl leading-8 
+               text-black dark:text-neutral-100 
+               mb-3 text-center sm:text-left">
       Hello, {{ userName }}
     </h6>
 
-    <p class="font-normal text-lg leading-8 text-gray-500 mb-11">
-      Your order has been successfully completed!.
+    <p class="font-normal text-lg leading-8 
+              text-gray-500 dark:text-neutral-400 
+              mb-11 text-center sm:text-left">
+      Your order has been successfully completed!
     </p>
 
-    <!-- Order Info Summary -->
+    <!-- Order Summary -->
     <div
-      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-8 py-6 border-y border-gray-100 mb-6"
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 
+             gap-6 py-6 border-y border-gray-200 dark:border-neutral-800 mb-6 
+             text-center sm:text-left"
     >
       <div class="group">
-        <p class="text-gray-500 mb-3 group-hover:text-gray-700 transition-all">
+        <p class="text-gray-500 dark:text-neutral-400 mb-3 group-hover:text-gray-700 dark:group-hover:text-neutral-200 transition-all">
           Order Date
         </p>
-        <h6 class="font-semibold text-2xl text-black">
-          {{ order?.createdAt | date : "MMM d, y" }}
+        <h6 class="font-semibold text-2xl text-black dark:text-neutral-100">
+          {{ order?.createdAt | date: 'MMM d, y' }}
         </h6>
       </div>
 
-      <div class="group">
-        <p class="text-gray-500 mb-3 group-hover:text-gray-700 transition-all">
+      <div class="group break-all">
+        <p class="text-gray-500 dark:text-neutral-400 mb-3 group-hover:text-gray-700 dark:group-hover:text-neutral-200 transition-all">
           Order ID
         </p>
-        <h6 class="font-semibold text-2xl text-black break-all">
+        <h6 class="font-semibold text-2xl text-black dark:text-neutral-100">
           #{{ order?._id }}
         </h6>
       </div>
 
       <div class="group">
-        <p class="text-gray-500 mb-3 group-hover:text-gray-700 transition-all">
+        <p class="text-gray-500 dark:text-neutral-400 mb-3 group-hover:text-gray-700 dark:group-hover:text-neutral-200 transition-all">
           Payment Status
         </p>
-        <h6 class="font-semibold text-2xl text-black capitalize">
+        <h6 class="font-semibold text-2xl text-black dark:text-neutral-100 capitalize">
           {{ order?.order_status }}
         </h6>
       </div>
 
       <div class="group">
-        <p class="text-gray-500 mb-3 group-hover:text-gray-700 transition-all">
+        <p class="text-gray-500 dark:text-neutral-400 mb-3 group-hover:text-gray-700 dark:group-hover:text-neutral-200 transition-all">
           Total
         </p>
-        <h6 class="font-semibold text-2xl text-indigo-600">
+        <h6 class="font-semibold text-2xl text-[#4F46E5] dark:text-[#FFE135]">
           ${{ order?.total_amount }}
         </h6>
       </div>
     </div>
 
-    <!-- Ordered Items -->
-    @if (orderItems && orderItems.length > 0) { @for (item of orderItems; track
-    item) {
-    <div class="grid grid-cols-7 w-full py-6 border-b border-gray-100">
-      <div class="col-span-7 sm:col-span-2 md:col-span-1">
-        <img
-          [src]="
-            item.product_id?.product_img || 'https://via.placeholder.com/150'
-          "
-          [alt]="item.product_id?.product_title"
-          class="w-full rounded-xl object-cover"
-        />
-      </div>
-
-      <div
-        class="col-span-7 sm:col-span-5 md:col-span-6 sm:pl-5 max-sm:mt-5 flex flex-col justify-center"
-      >
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between">
-          <div>
-            <h5 class="font-manrope font-semibold text-2xl text-black mb-3">
-              {{ item.product_id?.product_title }}
-            </h5>
-            <p class="text-lg text-gray-500">
-              Quantity:
-              <span class="font-semibold text-black">
-                {{ item.quantity }}
-              </span>
-            </p>
-          </div>
-
-          <h5
-            class="font-manrope font-semibold text-2xl text-black sm:text-right mt-3"
-          >
-            ${{ item.price_at_purchase * item.quantity }}
-          </h5>
+    <!-- Order Items -->
+    @if (orderItems && orderItems.length > 0) {
+      @for (item of orderItems; track item) {
+      <div class="grid grid-cols-1 sm:grid-cols-7 gap-4 w-full py-6 
+                  border-b border-gray-200 dark:border-neutral-800
+                  text-center sm:text-left">
+        
+        <!-- Image -->
+        <div class="sm:col-span-2 md:col-span-1 mx-auto sm:mx-0">
+          <img
+            [src]="item.product_id?.product_img || 'https://via.placeholder.com/150'"
+            [alt]="item.product_id?.product_title"
+            class="w-32 h-32 sm:w-full sm:h-auto rounded-xl object-cover"
+          />
         </div>
+
+        <!-- Text -->
+        <div class="sm:col-span-5 md:col-span-6 flex flex-col justify-center sm:pl-5">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between">
+
+            <div>
+              <h5 class="font-manrope font-semibold text-2xl text-black dark:text-neutral-100 mb-3">
+                {{ item.product_id?.product_title }}
+              </h5>
+
+              <p class="text-lg text-gray-500 dark:text-neutral-400">
+                Quantity:
+                <span class="font-semibold text-black dark:text-neutral-100">
+                  {{ item.quantity }}
+                </span>
+              </p>
+            </div>
+
+            <h5 class="font-manrope font-semibold text-2xl 
+                       text-black dark:text-neutral-100 
+                       mt-4 sm:mt-0">
+              ${{ item.price_at_purchase * item.quantity }}
+            </h5>
+
+          </div>
+        </div>
+
       </div>
-    </div>
-    } } @else {
-    <div class="text-center text-gray-500 py-16">
-      <p>No items found in this order.</p>
-    </div>
+      } 
+    } @else {
+      <div class="text-center text-gray-500 dark:text-neutral-400 py-16">
+        <p>No items found in this order.</p>
+      </div>
     }
 
     <!-- Totals -->
-    @if (order) {
-    <div class="flex items-center justify-center sm:justify-end w-full my-6">
-      <div class="w-full sm:w-1/2">
-        <div class="flex justify-between mb-6">
-          <p class="text-gray-500 text-xl">Subtotal</p>
-          <p class="font-semibold text-xl text-gray-900">
-            ${{ order.total_amount }}
-          </p>
-        </div>
+   @if (order) {
+<div class="w-full my-6">
+  <div class="w-full max-sm:text-center">
 
-        <div class="flex justify-between py-6 border-y border-gray-100">
-          <p class="font-manrope font-semibold text-2xl text-gray-900">Total</p>
-          <p class="font-manrope font-bold text-2xl text-indigo-600">
-            ${{ order.total_amount }}
-          </p>
-        </div>
-      </div>
+    <div class="flex justify-between max-sm:flex-col max-sm:text-center mb-6">
+      <p class="text-gray-500 dark:text-neutral-400 text-xl mb-2 sm:mb-0">
+        Subtotal
+      </p>
+      <p class="font-semibold text-xl text-gray-900 dark:text-neutral-100">
+        ${{ order.total_amount }}
+      </p>
     </div>
-    }
+
+    <div class="flex justify-between max-sm:flex-col max-sm:text-center mb-6">
+      <p class="text-gray-500 dark:text-neutral-400 text-xl mb-2 sm:mb-0">
+        VAT
+      </p>
+      <p class="font-semibold text-xl text-gray-900 dark:text-neutral-100">
+        10%
+      </p>
+    </div>
+
+    <div
+      class="flex justify-between max-sm:flex-col max-sm:text-center py-6
+             border-y border-gray-200 dark:border-neutral-800"
+    >
+      <p class="font-manrope font-semibold text-2xl text-gray-900 dark:text-neutral-100 mb-2 sm:mb-0">
+        Total
+      </p>
+      <p class="font-manrope font-bold text-2xl text-[#4F46E5] dark:text-[#FFE135]">
+        ${{ order.total_amount }}
+      </p>
+    </div>
+
+  </div>
+</div>
+}
+
 
     <!-- Footer -->
-    <div class="mt-8 text-center sm:text-left">
-      <p class="text-gray-500 mb-6">
+    <div class="mt-10 text-center">
+      <p class="text-gray-500 dark:text-neutral-400 mb-6">
         We'll send a confirmation email for the receipt!
       </p>
 
-      <h6 class="font-manrope font-bold text-2xl text-black mb-2">
+      <h6 class="font-manrope font-bold text-2xl text-black dark:text-neutral-100 mb-2">
         Thank you for shopping with us!
       </h6>
 
-      <p class="font-medium text-xl text-indigo-600 mb-8">Team Scrappy</p>
+      <p class="font-medium text-xl text-[#4F46E5] dark:text-[#FFE135] mb-8">
+        Team Scrappy
+      </p>
 
       <a
         routerLink="/marketplace-page"
-        class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-lg px-6 py-3 rounded-lg shadow transition-all duration-200"
+        class="inline-block bg-[#4F46E5] dark:bg-[#FFE135] 
+               text-white dark:text-black font-semibold text-lg 
+               px-6 py-3 rounded-lg shadow 
+               hover:bg-[#4338CA] dark:hover:bg-[#E6C92F] 
+               transition-all duration-200"
       >
         Back to Shopping
       </a>

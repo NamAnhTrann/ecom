@@ -183,24 +183,21 @@
       <!-- =================== DARK MODE TOGGLE =================== -->
       <button
         (click)="toggleTheme()"
-        class="relative flex items-center justify-center w-10 h-10 rounded-full border border-gray-300 dark:border-neutral-700
-               bg-gray-100 dark:bg-neutral-800 text-gray-700 dark:text-neutral-200 hover:bg-gray-200 dark:hover:bg-neutral-700
+        class="relative flex items-center justify-center w-10 h-10 rounded-full border border-gray-400 dark:border-neutral-700
+                dark:bg-neutral-800 text-gray-700 dark:text-neutral-200 hover:bg-gray-200 dark:hover:bg-neutral-700
                transition-all duration-300"
         aria-label="Toggle dark mode"
       >
         @if (!isDarkMode) {
-     <svg
-    xmlns="http://www.w3.org/2000/svg"
-    class="w-5 h-5"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="2"
-    viewBox="0 0 24 24"
-  >
-    <path
-      d="M12 3v1m0 16v1m8.66-9h1M3.34 12h1m12.02 7.66l.7.7M5.34 5.34l.7.7m0 12.02l-.7.7m12.02-12.02l-.7.7M12 5a7 7 0 100 14 7 7 0 000-14z"
-    />
-  </svg>
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  class="w-5 h-5"
+  viewBox="0 0 48 48"
+  fill="currentColor"
+>
+  <path d="M 23.976562 3.9785156 A 1.50015 1.50015 0 0 0 22.5 5.5 L 22.5 8.5 A 1.50015 1.50015 0 1 0 25.5 8.5 L 25.5 5.5 A 1.50015 1.50015 0 0 0 23.976562 3.9785156 z M 10.902344 9.4042969 A 1.50015 1.50015 0 0 0 9.8574219 11.980469 L 11.978516 14.101562 A 1.5012202 1.5012202 0 0 0 14.101562 11.978516 L 11.980469 9.8574219 A 1.50015 1.50015 0 0 0 10.902344 9.4042969 z M 37.050781 9.4042969 A 1.50015 1.50015 0 0 0 36.019531 9.8574219 L 33.898438 11.978516 A 1.5012202 1.5012202 0 0 0 36.021484 14.101562 L 38.142578 11.980469 A 1.50015 1.50015 0 0 0 37.050781 9.4042969 z M 24 13 C 17.942632 13 13 17.942636 13 24 C 13 30.057364 17.942632 35 24 35 C 30.057368 35 35 30.057364 35 24 C 35 17.942636 30.057368 13 24 13 z M 24 16 C 28.436049 16 32 19.563954 32 24 C 32 28.436046 28.436049 32 24 32 C 19.563951 32 16 28.436046 16 24 C 16 19.563954 19.563951 16 24 16 z M 5.5 22.5 A 1.50015 1.50015 0 1 0 5.5 25.5 L 8.5 25.5 A 1.50015 1.50015 0 1 0 8.5 22.5 L 5.5 22.5 z M 39.5 22.5 A 1.50015 1.50015 0 1 0 39.5 25.5 L 42.5 25.5 A 1.50015 1.50015 0 1 0 42.5 22.5 L 39.5 22.5 z M 13.009766 33.445312 A 1.50015 1.50015 0 0 0 11.978516 33.898438 L 9.8574219 36.019531 A 1.501221 1.501221 0 1 0 11.980469 38.142578 L 14.101562 36.021484 A 1.50015 1.50015 0 0 0 13.009766 33.445312 z M 34.943359 33.445312 A 1.50015 1.50015 0 0 0 33.898438 36.021484 L 36.019531 38.142578 A 1.5012209 1.5012209 0 1 0 38.142578 36.019531 L 36.021484 33.898438 A 1.50015 1.50015 0 0 0 34.943359 33.445312 z M 23.976562 37.978516 A 1.50015 1.50015 0 0 0 22.5 39.5 L 22.5 42.5 A 1.50015 1.50015 0 1 0 25.5 42.5 L 25.5 39.5 A 1.50015 1.50015 0 0 0 23.976562 37.978516 z"></path>
+</svg>
+
         } @else {
           <!-- Moon Icon -->
           <svg
@@ -271,23 +268,28 @@
     class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden
            z-50 mt-2 w-48 bg-white dark:bg-neutral-800 border border-gray-100 dark:border-neutral-700 rounded-lg shadow-md p-2"
     aria-labelledby="hs-header-auth-dropdown"
-  >
+    >
     <a
       routerLink="/profile"
       class="flex items-center gap-x-2 px-3 py-2 text-sm rounded-md text-gray-700 hover:bg-gray-100
              dark:text-neutral-200 dark:hover:bg-neutral-700"
     >
-      <svg
-        class="size-4 text-gray-500 dark:text-neutral-400"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        stroke-width="2"
-      >
-        <path stroke-linecap="round" stroke-linejoin="round" d="M5.121 17.804A13.937 13.937 0 0112 15c2.485 0 4.774.635 6.879 1.804M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-      </svg>
+   <svg class="w-5 h-5 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-width="1.5" d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+</svg>
+
       Account Portal
+    </a>
+      <a
+      routerLink="/order-summary-page"
+      class="flex items-center gap-x-2 px-3 py-2 text-sm rounded-md text-gray-700 hover:bg-gray-100
+             dark:text-neutral-200 dark:hover:bg-neutral-700"
+    >
+<svg class="w-5 h-5 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312"/>
+</svg>
+
+      Your Purchases
     </a>
 
 @if (userRole() === 'seller') {
@@ -321,17 +323,10 @@
       class="flex items-center gap-x-2 px-3 py-2 text-sm rounded-md text-gray-700 hover:bg-gray-100
              dark:text-neutral-200 dark:hover:bg-neutral-700"
     >
-      <svg
-        class="size-4 text-gray-500 dark:text-neutral-400"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        stroke-width="2"
-      >
-        <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.591 1.085 1.724 1.724 0 012.376 2.376 1.724 1.724 0 001.085 2.591c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.085 2.591 1.724 1.724 0 01-2.376 2.376 1.724 1.724 0 00-2.591 1.085c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.591-1.085 1.724 1.724 0 01-2.376-2.376 1.724 1.724 0 00-1.085-2.591c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.085-2.591 1.724 1.724 0 012.376-2.376 1.724 1.724 0 002.591-1.085z" />
-        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-      </svg>
+  <svg class="w-5 h-5 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="square" stroke-linejoin="round" stroke-width="1.5" d="M10 19H5a1 1 0 0 1-1-1v-1a3 3 0 0 1 3-3h2m10 1a3 3 0 0 1-3 3m3-3a3 3 0 0 0-3-3m3 3h1m-4 3a3 3 0 0 1-3-3m3 3v1m-3-4a3 3 0 0 1 3-3m-3 3h-1m4-3v-1m-2.121 1.879-.707-.707m5.656 5.656-.707-.707m-4.242 0-.707.707m5.656-5.656-.707.707M12 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+</svg>
+
       Settings
     </a>
 
@@ -340,16 +335,10 @@
       class="flex items-center gap-x-2 w-full text-left px-3 py-2 text-sm rounded-md text-red-600 hover:bg-gray-100
              dark:text-red-400 dark:hover:bg-neutral-700"
     >
-      <svg
-        class="size-4 text-red-500 dark:text-red-400"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        stroke-width="2"
-      >
-        <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1m0-10V5m0 14h-1a2 2 0 01-2-2V7a2 2 0 012-2h1" />
-      </svg>
+     <svg class="w-5 h-5 text-red dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 12H8m12 0-4 4m4-4-4-4M9 4H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h2"/>
+</svg>
+
       Logout
     </button>
   </div>
