@@ -79,7 +79,7 @@ module.exports = {
       );
 
       if (!cart) {
-        return res.status(401).json({ message: "cart is not available" });
+        return res.status(404).json({ message: "cart is not available" });
       }
 
       return res.status(200).json({

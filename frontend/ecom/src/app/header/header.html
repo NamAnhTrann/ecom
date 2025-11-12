@@ -269,6 +269,32 @@
       Account Portal
     </a>
 
+@if (userRole() === 'seller') {
+  <a
+    routerLink="/seller-dashboard"
+    class="flex items-center gap-x-2 px-3 py-2 text-sm rounded-md text-gray-700 hover:bg-gray-100
+           dark:text-neutral-200 dark:hover:bg-neutral-700 transition-colors"
+  >
+    <svg
+      class="size-4 text-gray-500 dark:text-neutral-400"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      stroke-width="2"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M5.121 17.804A13.937 13.937 0 0112 15c2.485 0 4.774.635 6.879 1.804M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+      />
+    </svg>
+    Seller Dashboard
+  </a>
+}
+
+
+
     <a
       routerLink="/settings"
       class="flex items-center gap-x-2 px-3 py-2 text-sm rounded-md text-gray-700 hover:bg-gray-100
