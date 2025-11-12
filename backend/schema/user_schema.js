@@ -63,6 +63,13 @@ const user_schema = new mongoose.Schema({
     type: String,
   },
 
+  resetPasswordToken: {
+    type:String
+  },
+  resetPasswordExpires: {
+    type:Date
+  },
+
   products: [
     {
       type: mongoose.Schema.Types.ObjectId,

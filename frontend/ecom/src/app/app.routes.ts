@@ -14,6 +14,7 @@ import { CartPage } from './cart-page/cart-page';
 import { OrderSummaryPage } from './order-summary-page/order-summary-page';
 import { ChatPage } from './chat-page/chat-page';
 import { AboutUsPage } from './about-us-page/about-us-page';
+import { ResetPassword } from './reset-password/reset-password';
 
 export const routes: Routes = [
   { path: '', component: Homepage },
@@ -27,6 +28,7 @@ export const routes: Routes = [
   { path: 'chat-page', component: ChatPage},
   { path: 'login', component: Login },
   { path: 'signup', component: Signup },
+  { path : 'reset-password/:token', component: ResetPassword},
   {
     path: 'seller-dashboard',
     component: SellerDashboard,

@@ -1,6 +1,12 @@
 const User = require("../schema/user_schema");
 const jwt = require("jsonwebtoken");
-const bycrypt = require("bcrypt");
+const bcrypt = require("bcrypt");
+const crypto = require("crypto");
+
+const bodyParser = require("body-parser");
+const nodemailer = require("nodemailer");
+
+require("dotenv").config();
 
 //helper functions
 function generateTokens(user) {
@@ -30,7 +36,6 @@ module.exports = {
         user_last_name,
         user_phone_number,
         user_role,
-
       } = req.body;
       const existingUser = await User.findOne({ user_email });
       if (existingUser) {
@@ -39,7 +44,7 @@ module.exports = {
           .json({ message: "user already exists with that email" });
       }
 
-      const hashedPassword = await bycrypt.hash(user_password, 10);
+      const hashedPassword = await bcrypt.hash(user_password, 10);
       const newUser = new User({
         user_email,
         user_password: hashedPassword,
@@ -64,8 +69,7 @@ module.exports = {
       if (!user) {
         return res.status(400).json({ message: "No user authenticated" });
       }
-     console.log(user)
-
+      console.log(user);
 
       const { accessTokens, refreshTokens } = generateTokens(user);
 
@@ -98,47 +102,49 @@ module.exports = {
     }
   },
 
- refreshAccessToken: async function (req, res) {
-  const refreshToken = req.cookies.refreshTokens;
+  refreshAccessToken: async function (req, res) {
+    const refreshToken = req.cookies.refreshTokens;
 
-  if (!refreshToken) {
-    console.warn("[REFRESH] No token, not authenticated");
-    return res
-      .status(401)
-      .json({ message: "Not authenticated. Please log in again." });
-  }
-
-  try {
-    const decoded = jwt.verify(refreshToken, process.env.REFRESH_SECRET);
-    const user = await User.findById(decoded.id);
-
-    if (!user || user.refreshTokens !== refreshToken) {
-      console.warn("[REFRESH] Invalid or mismatched token for user:", decoded.id);
+    if (!refreshToken) {
+      console.warn("[REFRESH] No token, not authenticated");
       return res
-        .status(403)
-        .json({ message: "Invalid refresh token. Please log in again." });
+        .status(401)
+        .json({ message: "Not authenticated. Please log in again." });
     }
 
-    const newTokens = generateTokens(user);
-    user.refreshTokens = newTokens.refreshTokens;
-    await user.save();
+    try {
+      const decoded = jwt.verify(refreshToken, process.env.REFRESH_SECRET);
+      const user = await User.findById(decoded.id);
 
-    res.cookie("refreshTokens", newTokens.refreshTokens, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: process.env.NODE_ENV === "production" ? "Strict" : "Lax",
-      maxAge: 30 * 24 * 60 * 60 * 1000,
-    });
+      if (!user || user.refreshTokens !== refreshToken) {
+        console.warn(
+          "[REFRESH] Invalid or mismatched token for user:",
+          decoded.id
+        );
+        return res
+          .status(403)
+          .json({ message: "Invalid refresh token. Please log in again." });
+      }
 
-    return res.json({ accessTokens: newTokens.accessTokens });
-  } catch (error) {
-    console.error("[REFRESH ERROR]", error.message);
-    return res
-      .status(403)
-      .json({ message: "Session expired. Please log in again." });
-  }
-},
+      const newTokens = generateTokens(user);
+      user.refreshTokens = newTokens.refreshTokens;
+      await user.save();
 
+      res.cookie("refreshTokens", newTokens.refreshTokens, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: process.env.NODE_ENV === "production" ? "Strict" : "Lax",
+        maxAge: 30 * 24 * 60 * 60 * 1000,
+      });
+
+      return res.json({ accessTokens: newTokens.accessTokens });
+    } catch (error) {
+      console.error("[REFRESH ERROR]", error.message);
+      return res
+        .status(403)
+        .json({ message: "Session expired. Please log in again." });
+    }
+  },
 
   //google stuff
   //initiate google oauth
@@ -152,79 +158,196 @@ module.exports = {
   },
 
   //google callback with jwt tokens
-googleAuthCallback: async (req, res) => {
-  try {
-    const user = req.user;
-    const { accessTokens, refreshTokens } = generateTokens(user);
+  googleAuthCallback: async (req, res) => {
+    try {
+      const user = req.user;
+      const { accessTokens, refreshTokens } = generateTokens(user);
 
-    user.refreshTokens = refreshTokens;
-    await user.save();
+      user.refreshTokens = refreshTokens;
+      await user.save();
 
-    res.cookie("refreshTokens", refreshTokens, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "Strict",
-      maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
-    });
+      res.cookie("refreshTokens", refreshTokens, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "Strict",
+        maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+      });
 
-    // Detect environment dynamically
-    const isProd = process.env.NODE_ENV === "production";
-    const baseURL = isProd
-      ? "https://ecom-six-eosin.vercel.app"
-      : "http://localhost:4200";
+      // Detect environment dynamically
+      const isProd = process.env.NODE_ENV === "production";
+      const baseURL = isProd
+        ? "https://ecom-six-eosin.vercel.app"
+        : "http://localhost:4200";
 
-    const redirectURL = `${baseURL}/#/auth/callback?access_token=${accessTokens}&user_role=${user.user_role}`;
-    res.redirect(redirectURL);
-  } catch (error) {
-    console.error("Error during Google OAuth callback:", error);
-    res.redirect("http://localhost:4200/login?error=google");
-  }
-},
+      const redirectURL = `${baseURL}/#/auth/callback?access_token=${accessTokens}&user_role=${user.user_role}`;
+      res.redirect(redirectURL);
+    } catch (error) {
+      console.error("Error during Google OAuth callback:", error);
+      res.redirect("http://localhost:4200/login?error=google");
+    }
+  },
 
+  //reset password
+  sendRequestPassword: async function (req, res) {
+    try {
+      const { email } = req.body;
+      const user = await User.findOne({ user_email: email });
+      console.log("user email is: ", user);
 
+      if (!user) {
+        console.log("cannot find user", user);
+        return res.status(404).json({ message: "User not found", user });
+      }
+
+      const token = crypto.randomBytes(32).toString("hex");
+
+      user.resetPasswordToken = token;
+      user.resetPasswordExpires = Date.now() + 36000000;
+
+      await user.save();
+
+      //for now keep localhost for testing
+      const resetLink = `http://localhost:4200/#/reset-password/${token}`;
+
+      const transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: process.env.EMAIL_USER,
+          pass: process.env.EMAIL_PASS,
+        },
+      });
+
+      const mailOptions = {
+        from: `"Scrappy" <${process.env.EMAIL_USER}>`,
+        to: user.user_email,
+        subject: "Password Reset Request",
+        html: `
+        <p>You requested a password reset.</p>
+        <p>Click the link below to set a new password (valid for 1 hour):</p>
+        <a href="${resetLink}">${resetLink}</a>
+        <p>If you did not request this, please ignore this email.</p>
+      `,
+      };
+
+      await transporter.sendMail(mailOptions);
+
+      return res.status(200).json({
+        message: " reset password has been sent",
+      });
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({ message: "Internal Error", err });
+    }
+  },
+
+  verifyToken: async function (req, res) {
+    try {
+      const { token } = req.params;
+      const user = await User.findOne({
+        resetPasswordToken: token,
+        resetPasswordExpires: { $gt: Date.now() },
+      });
+
+      if (!user) {
+        console.log(token);
+        return res.status(401).json({ message: "invalid token or expired" });
+      }
+
+      return res
+        .status(200)
+        .json({ message: "Token is valid", email: user.email });
+    } catch (err) {
+      return res.status(500).json({ message: "Internal Error", err });
+    }
+  },
+
+  //reset password function
+  resetPassword: async function (req, res) {
+    try {
+      const { token } = req.params;
+      const { newPassword } = req.body;
+
+      // 1️Find the user whose reset token is valid
+      const user = await User.findOne({
+        resetPasswordToken: token,
+        resetPasswordExpires: { $gt: Date.now() },
+      });
+
+      if (!user) {
+        return res
+          .status(401)
+          .json({ message: "Invalid or expired reset token" });
+      }
+
+      // 2️⃣ Hash the new password
+      const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+      // 3️⃣ Replace old hash with new hash
+      user.user_password = hashedPassword;
+
+      // 4️⃣ Remove reset token & expiry
+      user.resetPasswordToken = undefined;
+      user.resetPasswordExpires = undefined;
+
+      // Save the user
+      await user.save();
+
+      // Verify the update
+      const verifyUser = await User.findById(user._id);
+
+      return res
+        .status(200)
+        .json({ message: "Password has been reset successfully" });
+    } catch (err) {
+      return res.status(500).json({ message: "Internal Error", err });
+    }
+  },
 
   //logout api
   logoutUser: async function (req, res) {
-  try {
-    const refreshToken = req.cookies.refreshTokens;
+    try {
+      const refreshToken = req.cookies.refreshTokens;
 
-    // 1️ If no cookie, just return OK
-    if (!refreshToken) {
-      return res.status(200).json({ message: "No refresh token found — already logged out" });
+      // 1️ If no cookie, just return OK
+      if (!refreshToken) {
+        return res
+          .status(200)
+          .json({ message: "No refresh token found — already logged out" });
+      }
+
+      // 2️ Find user by that token
+      const user = await User.findOne({ refreshTokens: refreshToken });
+      if (user) {
+        user.refreshTokens = null;
+        await user.save();
+      }
+
+      // 3️ Invalidate cookie explicitly (overwrite)
+      res.cookie("refreshTokens", "", {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production" ? true : false,
+        sameSite: process.env.NODE_ENV === "production" ? "Strict" : "Lax",
+        expires: new Date(0),
+        path: "/", // this is CRUCIAL
+      });
+
+      // 4️ Also clear cookie with same options just to be sure
+      res.clearCookie("refreshTokens", {
+        path: "/",
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production" ? true : false,
+        sameSite: process.env.NODE_ENV === "production" ? "Strict" : "Lax",
+      });
+
+      console.log("[LOGOUT] Cookie + DB cleared successfully");
+      return res.status(200).json({ message: "user logged out successfully" });
+    } catch (err) {
+      console.error("[LOGOUT ERROR]", err);
+      return res
+        .status(500)
+        .json({ message: "internal server error", error: err });
     }
-
-    // 2️ Find user by that token
-    const user = await User.findOne({ refreshTokens: refreshToken });
-    if (user) {
-      user.refreshTokens = null;
-      await user.save();
-    }
-
-    // 3️ Invalidate cookie explicitly (overwrite)
-    res.cookie("refreshTokens", "", {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production" ? true : false,
-      sameSite: process.env.NODE_ENV === "production" ? "Strict" : "Lax",
-      expires: new Date(0),
-      path: "/", // this is CRUCIAL
-    });
-
-    // 4️ Also clear cookie with same options just to be sure
-    res.clearCookie("refreshTokens", {
-      path: "/",
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production" ? true : false,
-      sameSite: process.env.NODE_ENV === "production" ? "Strict" : "Lax",
-    });
-
-    console.log("[LOGOUT] Cookie + DB cleared successfully");
-    return res.status(200).json({ message: "user logged out successfully" });
-  } catch (err) {
-    console.error("[LOGOUT ERROR]", err);
-    return res.status(500).json({ message: "internal server error", error: err });
-  }
-},
-
+  },
 
   //this can be use to list all users on the marketplace if they were to
   //display products from specific users

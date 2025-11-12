@@ -1,7 +1,7 @@
 const express = require("express");
 const passport = require("passport");
-const jwt = require("jsonwebtoken");
 
+const auth = require("../middleware/auth")
 const userController = require("../controller/user_controller");
 // const { verifyToken } = require("../middleware/auth");
 // const { authorizeRoles } = require("../middleware/authorizeRole");
@@ -23,6 +23,11 @@ router.get(
 // Refresh + Logout
 router.get("/refresh", userController.refreshAccessToken);
 router.post("/logout", userController.logoutUser);
+
+//reset passwords
+router.post("/send/reset/password/api/", userController.sendRequestPassword);
+router.get("/reset/password/verify/:token", userController.verifyToken);
+router.post("/reset/password/:token", userController.resetPassword);
 
 
 

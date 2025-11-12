@@ -62,9 +62,6 @@
   </div>
 </button>
 
-
-
-
     <!-- =================== DESKTOP NAV =================== -->
     <div class="hidden lg:flex grow items-center justify-end gap-x-7 ms-auto">
       @if (!auth.isLoggedIn()) {
@@ -154,7 +151,7 @@
                  active:after:w-full"
           (click)="closeMobile()"
         >
-          My Cart
+          Orders
         </a>
       }
 
@@ -255,7 +252,6 @@
 
 <!-- Spacer for fixed header -->
 <div class="h-16 lg:h-20"></div>
-
 
 <!-- =================== MOBILE PANEL =================== -->
 @if (mobileOpen) {
