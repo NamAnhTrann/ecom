@@ -49,12 +49,13 @@
       <swiper-container
         slides-per-view="3"
         pagination="true"
+        mousewheel='{"forceToAxis": true, "sensitivity": 0.8}'
         class="mySwiper"
         breakpoints='{
-          "0": { "slidesPerView": 1 },
-          "640": { "slidesPerView": 2 },
-          "1024": { "slidesPerView": 3 }
-        }'
+    "0": { "slidesPerView": 1 },
+    "640": { "slidesPerView": 2 },
+    "1024": { "slidesPerView": 3 }
+  }'
       >
         @for (product of seller.products; track product._id) {
         <swiper-slide>
