@@ -25,7 +25,7 @@ export class Login {
         const role = res.user.user_role;
 
         if (role === 'seller') {
-          this.router.navigate(['/seller-dashboard']);
+          this.router.navigate(['/marketplace-page']);
         } else if (role === 'admin') {
           this.router.navigate(['/admin-dashboard']);
         } else {

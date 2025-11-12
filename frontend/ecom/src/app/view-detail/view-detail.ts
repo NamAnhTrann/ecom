@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { Product } from '../models/product_model';
 import { DbService } from '../services/db-service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Cart } from '../models/cart_model';
 
 @Component({
   selector: 'app-view-detail',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './view-detail.html',
   styleUrl: './view-detail.css',
 })

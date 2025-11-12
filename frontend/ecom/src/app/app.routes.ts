@@ -21,14 +21,30 @@ export const routes: Routes = [
   { path: 'contact-us', component: ContactUs },
   { path: 'forum-page', component: ForumPage },
   { path: 'about-us-page', component: AboutUsPage },
-  { path: 'marketplace-page', component: Marketplace },
+  {
+    path: 'marketplace-page',
+    component: Marketplace,
+    canActivate: [authGuard],
+  },
   { path: 'view-detail-page/:id', component: ViewDetail },
-  { path: 'cart-page', component: CartPage },
-  { path: "order-summary-page", component: OrderSummaryPage},
-  { path: 'chat-page', component: ChatPage},
+  {
+    path: 'cart-page',
+    component: CartPage,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'order-summary-page',
+    component: OrderSummaryPage,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'chat-page',
+    component: ChatPage,
+    canActivate: [authGuard],
+  },
   { path: 'login', component: Login },
   { path: 'signup', component: Signup },
-  { path : 'reset-password/:token', component: ResetPassword},
+  { path: 'reset-password/:token', component: ResetPassword },
   {
     path: 'seller-dashboard',
     component: SellerDashboard,
@@ -37,5 +53,4 @@ export const routes: Routes = [
   },
   { path: 'forget-password', component: ForgetPassword },
   { path: 'auth/callback', component: AuthCallbackComponent },
-  
 ];

@@ -10,23 +10,24 @@
     class="relative max-w-7xl w-full h-full flex items-center px-4 md:px-6 lg:px-8 mx-auto"
   >
     <!-- Logo -->
-    <a
-      routerLink="/"
-      aria-label="Scrappy"
-      class="shrink-0 flex items-center font-semibold focus:outline-hidden focus:opacity-80"
-    >
-      <svg
-        class="h-8 lg:h-9 w-auto text-black dark:text-neutral-100"
-        viewBox="0 0 640 120"
-        xmlns="http://www.w3.org/2000/svg"
-        role="img"
-      >
-        <title>Scrappy</title>
-        <text x="0" y="85" font-weight="700" font-size="80" fill="currentColor">
-          Scrappy
-        </text>
-      </svg>
-    </a>
+  <a
+  [routerLink]="auth.isLoggedIn() ? '/marketplace-page' : '/'"
+  aria-label="Scrappy"
+  class="shrink-0 flex items-center font-semibold focus:outline-hidden focus:opacity-80"
+>
+  <svg
+    class="h-8 lg:h-9 w-auto text-black dark:text-neutral-100"
+    viewBox="0 0 640 120"
+    xmlns="http://www.w3.org/2000/svg"
+    role="img"
+  >
+    <title>Scrappy</title>
+    <text x="0" y="85" font-weight="700" font-size="80" fill="currentColor">
+      Scrappy
+    </text>
+  </svg>
+</a>
+
     <!-- ============ HAMBURGER (MOBILE ONLY) ============ -->
 <!-- Modern Minimal Hamburger -->
 <button
