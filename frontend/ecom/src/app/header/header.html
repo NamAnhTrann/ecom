@@ -15,6 +15,21 @@
   aria-label="Scrappy"
   class="shrink-0 flex items-center font-semibold focus:outline-hidden focus:opacity-80"
 >
+<div class="flex items-center gap-2 overflow-hidden">
+  <!-- Cube Icon -->
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="w-8 h-8 text-indigo-600 dark:text-amber-400 flex-shrink-0"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    viewBox="0 0 24 24"
+  >
+    <path d="M12 2L2 7l10 5 10-5-10-5z" />
+    <path d="M2 17l10 5 10-5" />
+  </svg>
+
+  <!-- Scrappy Text -->
   <svg
     class="h-8 lg:h-9 w-auto text-black dark:text-neutral-100"
     viewBox="0 0 640 120"
@@ -22,10 +37,19 @@
     role="img"
   >
     <title>Scrappy</title>
-    <text x="0" y="85" font-weight="700" font-size="80" fill="currentColor">
+    <text
+      x="0"
+      y="85"
+      font-weight="700"
+      font-size="80"
+      fill="currentColor"
+      letter-spacing="-2"
+    >
       Scrappy
     </text>
   </svg>
+</div>
+
 </a>
 
     <!-- ============ HAMBURGER (MOBILE ONLY) ============ -->
@@ -165,34 +189,30 @@
         aria-label="Toggle dark mode"
       >
         @if (!isDarkMode) {
-          <!-- Sun Icon -->
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="w-5 h-5"
-          >
-            <circle cx="12" cy="12" r="5" />
-            <path
-              d="M12 1v2m0 18v2m11-11h-2M3 12H1m17.66 5.66l-1.41-1.41M5.76 5.76L4.34 4.34m15.32 0l-1.42 1.42M5.76 18.24l-1.42 1.42"
-            />
-          </svg>
+     <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="w-5 h-5"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    viewBox="0 0 24 24"
+  >
+    <path
+      d="M12 3v1m0 16v1m8.66-9h1M3.34 12h1m12.02 7.66l.7.7M5.34 5.34l.7.7m0 12.02l-.7.7m12.02-12.02l-.7.7M12 5a7 7 0 100 14 7 7 0 000-14z"
+    />
+  </svg>
         } @else {
           <!-- Moon Icon -->
           <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            class="w-5 h-5"
-          >
-            <path
-              d="M21.752 15.002A9.718 9.718 0 0112 22a9.72 9.72 0 01-9.752-8.998A9.72 9.72 0 0112 2a9.72 9.72 0 019.752 8.998z"
-            />
-          </svg>
+    xmlns="http://www.w3.org/2000/svg"
+    class="w-5 h-5"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    viewBox="0 0 24 24"
+  >
+    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+  </svg>
         }
       </button>
 

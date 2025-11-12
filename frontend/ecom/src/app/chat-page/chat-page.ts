@@ -11,6 +11,16 @@ import { RouterLink } from '@angular/router';
 export class ChatPage {
 sidebarCollapsed = signal(false);
 mobileSidebarOpen = signal(false);
+  isDarkMode = false;
+
+  ngOnInit() {
+    const saved = localStorage.getItem('theme');
+    const html = document.documentElement;
+    if (saved === 'dark') {
+      html.classList.add('dark');
+      this.isDarkMode = true;
+    }
+  }
 
 toggleSidebar() {
   this.sidebarCollapsed.update(v => !v);
@@ -19,6 +29,13 @@ toggleSidebar() {
 toggleMobile() {
   this.mobileSidebarOpen.update(v => !v);
 }
+
+  toggleTheme() {
+    const html = document.documentElement;
+    html.classList.toggle('dark');
+    this.isDarkMode = html.classList.contains('dark');
+    localStorage.setItem('theme', this.isDarkMode ? 'dark' : 'light');
+  }
 
 
 
