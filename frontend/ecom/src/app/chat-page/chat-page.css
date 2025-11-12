@@ -1,0 +1,16 @@
+:host {
+  display: block;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Smooth scrollbars for chat areas */
+aside::-webkit-scrollbar,
+.flex-1.overflow-y-auto::-webkit-scrollbar {
+  width: 6px;
+}
+aside::-webkit-scrollbar-thumb,
+.flex-1.overflow-y-auto::-webkit-scrollbar-thumb {
+  background-color: rgba(120, 120, 120, 0.3);
+  border-radius: 8px;
+}

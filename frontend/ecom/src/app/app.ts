@@ -2,7 +2,7 @@ import { Component, signal } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { Header } from "./header/header";
 import { Footer } from "./footer/footer";
-
+import { filter } from 'rxjs/operators';
 import 'preline/dist/preline';
 
 @Component({
@@ -14,17 +14,22 @@ import 'preline/dist/preline';
 export class App {
   protected readonly title = signal('ecom');
 
-  constructor(private router:Router){
-    
-    
-    
+  hideHeaderFooterSignal = signal(false);
+
+  constructor(private router: Router) {
+    // Watch route changes
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        const hiddenRoutes = ['/chat-page']; // both header & footer hidden here
+        const shouldHide = hiddenRoutes.some(route =>
+          event.urlAfterRedirects.startsWith(route)
+        );
+        this.hideHeaderFooterSignal.set(shouldHide);
+      });
   }
-  
 
-  hideHeader(): boolean {
-    const hiddenRoutes = ['/seller-dashboard'];
-    return hiddenRoutes.includes(this.router.url);
+  hideHeaderFooter(): boolean {
+    return this.hideHeaderFooterSignal();
   }
-
-
 }
