@@ -26,7 +26,10 @@ export const routes: Routes = [
     component: Marketplace,
     canActivate: [authGuard],
   },
-  { path: 'view-detail-page/:id', component: ViewDetail },
+  { path: 'view-detail-page/:id', 
+    component: ViewDetail, 
+    canActivate:[authGuard],
+  },
   {
     path: 'cart-page',
     component: CartPage,

@@ -7,6 +7,7 @@ import { register } from 'swiper/element/bundle';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Cart } from '../models/cart_model';
+import Swal from 'sweetalert2';
 
 register();
 
@@ -40,11 +41,57 @@ export class Marketplace {
     this.db.addToCart(product_id, this.quantity).subscribe({
       next: (res: any) => {
         console.log('Added:', res.message);
-        alert('Product added to cart successfully!');
+        Swal.fire({
+          title: 'Added to Cart',
+          text: 'Your item is now in your cart.',
+          icon: 'success',
+
+          // Scrappy Light/Dark Mode Colors
+          background: document.documentElement.classList.contains('dark')
+            ? '#0c0a09'
+            : '#ffffff',
+
+          color: document.documentElement.classList.contains('dark')
+            ? '#f5f5f4'
+            : '#111827',
+
+          iconColor: document.documentElement.classList.contains('dark')
+            ? '#FFE135'
+            : '#4F46E5',
+
+          confirmButtonColor: document.documentElement.classList.contains(
+            'dark'
+          )
+            ? '#FFE135'
+            : '#4F46E5',
+        });
       },
       error: (err) => {
         console.error('Add to cart error:', err);
-        alert('FAILED');
+        Swal.fire({
+          title: 'Added to Cart',
+          text: 'Your item is now in your cart.',
+          icon: 'error',
+
+          // Scrappy Light/Dark Mode Colors
+          background: document.documentElement.classList.contains('dark')
+            ? '#0c0a09'
+            : '#ffffff',
+
+          color: document.documentElement.classList.contains('dark')
+            ? '#f5f5f4'
+            : '#111827',
+
+          iconColor: document.documentElement.classList.contains('dark')
+            ? '#FFE135'
+            : '#4F46E5',
+
+          confirmButtonColor: document.documentElement.classList.contains(
+            'dark'
+          )
+            ? '#FFE135'
+            : '#4F46E5',
+        });
       },
     });
   }
