@@ -31,6 +31,11 @@ let productSchema = new mongoose.Schema({
     required: false,
   },
 
+  product_extra_img:{
+    type:String,
+    required:false
+  },
+  
   user_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",

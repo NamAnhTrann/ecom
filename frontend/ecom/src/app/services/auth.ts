@@ -7,23 +7,38 @@ import { tap } from 'rxjs';
   providedIn: 'root',
 })
 export class Auth {
-  private apiUrl = 'http://localhost:3030';
+  private apiUrl: string;
+
   isLoggedIn = signal<boolean>(!!localStorage.getItem('access_token'));
   userRole = signal<string | null>(localStorage.getItem('user_role'));
-  
 
   constructor(private db: DbService, private router: Router) {
+    
+    // Auto-select backend based on environment
+    const hostname = window.location.hostname;
+
+    if (hostname === 'localhost' || hostname === '127.0.0.1') {
+      // Local development
+      this.apiUrl = 'http://localhost:3030';
+    } else {
+      // Production (EC2)
+      this.apiUrl = 'http://3.25.169.180:3030';
+    }
+
+    console.log('API URL in use:', this.apiUrl);
+
+    // existing logic
     const token = localStorage.getItem('access_token');
     if (!token) {
       this.isLoggedIn.set(false);
       this.userRole.set(null);
     }
-     window.addEventListener('storage', () => {
+
+    window.addEventListener('storage', () => {
       this.userRole.set(localStorage.getItem('user_role'));
     });
-    console.log('AuthService initialized — userRole:', this.userRole());
-     this.logActiveUserFromToken();
 
+    this.logActiveUserFromToken();
   }
 
   setUserRole(role: string) {
@@ -38,9 +53,7 @@ export class Auth {
   loginWithGoogle(): void {
     window.location.href = `${this.apiUrl}/auth/google`;
   }
-  //1. call backend to login
-  //2. store the token in localStorage
-  //3. update the signals
+
   login(credentials: any) {
     return this.db.loginUser(credentials).pipe(
       tap((res: any) => {
@@ -52,66 +65,45 @@ export class Auth {
     );
   }
 
-  //1. logout user
-  //2. calls the backend to clear cookie
-  //3. removes token from localStorage
-  //4. navigate to homepage
-logout() {
-  this.db.logoutUser().subscribe({
-    next: () => {
-      // 1️ Clear browser-stored JWTs
-      localStorage.removeItem('access_token');
-      localStorage.removeItem('user_role');
+  logout() {
+    this.db.logoutUser().subscribe({
+      next: () => {
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('user_role');
+        document.cookie = 'refreshTokens=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        this.isLoggedIn.set(false);
+        this.userRole.set(null);
+        this.router.navigate(['/']);
+      },
+      error: () => {
+        localStorage.clear();
+        document.cookie = 'refreshTokens=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        this.router.navigate(['/']);
+      }
+    });
+  }
 
-      // 2️ Force-remove persistent cookie manually
-      document.cookie = 'refreshTokens=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-
-      // 3️ Update signals
-      this.isLoggedIn.set(false);
-      this.userRole.set(null);
-
-      // 4️ Navigate out
-      console.log(' Logout complete — localStorage + cookie cleared.');
-      this.router.navigate(['/']);
-    },
-    error: (err) => {
-      console.warn(' Backend logout failed, forcing local cleanup anyway', err);
-      localStorage.clear();
-      document.cookie = 'refreshTokens=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-      this.router.navigate(['/']);
-    }
-  });
-}
-
-
-  //return the current jwt from localStrorage
   getToken(): string | null {
     return localStorage.getItem('access_token');
   }
 
-  //return true if the user has a token
   isAuthenticated(): boolean {
     return !!localStorage.getItem('access_token');
   }
 
-  //return the user role
   getUserRole(): string | null {
     return localStorage.getItem('user_role');
   }
 
-  //chatgpt code for logs
   private logActiveUserFromToken() {
-  const token = localStorage.getItem('access_token');
-  if (!token) {
-    console.log('🔴 No access_token in localStorage');
-    return;
-  }
-  try {
-    const payload = JSON.parse(atob(token.split('.')[1])); // { id, role, iat, exp }
-    console.log('🟢 Active user (from JWT):', payload);
-  } catch (e) {
-    console.log('🔴 Failed to decode JWT:', e);
-  }
-}
+    const token = localStorage.getItem('access_token');
+    if (!token) return;
 
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      console.log('Active user (from JWT):', payload);
+    } catch (e) {
+      console.log('Failed to decode JWT:', e);
+    }
+  }
 }
