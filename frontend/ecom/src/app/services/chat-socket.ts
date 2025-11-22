@@ -12,6 +12,14 @@ export class ChatSocket {
       transports: ['websocket'],
       withCredentials: true,
     });
+
+    this.socket.on('connect', () => {
+      const userId = localStorage.getItem('user_id'); //do a cleanup
+      if (userId) {
+        this.socket.emit('user_online', { user_id: userId });
+        console.log('EMIT user_online:', userId);
+      }
+    });
   }
 
   userOnline(user_id: string) {
