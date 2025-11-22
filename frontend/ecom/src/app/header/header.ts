@@ -43,15 +43,25 @@ export class Header {
   toggleDropdown() {
   this.dropdownOpen = !this.dropdownOpen;
 }
+ngOnInit() {
+  // Restore login state if token exists
+  const token = localStorage.getItem('access_token');
+  const role = localStorage.getItem('user_role');
 
-  ngOnInit() {
-    const saved = localStorage.getItem('theme');
-    const html = document.documentElement;
-    if (saved === 'dark') {
-      html.classList.add('dark');
-      this.isDarkMode = true;
-    }
+  if (token && role) {
+    this.auth.isLoggedIn.set(true);
+    this.auth.userRole.set(role);
   }
+
+  // Dark mode
+  const saved = localStorage.getItem('theme');
+  const html = document.documentElement;
+  if (saved === 'dark') {
+    html.classList.add('dark');
+    this.isDarkMode = true;
+  }
+}
+
 
   toggleTheme() {
     const html = document.documentElement;

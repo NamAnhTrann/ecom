@@ -28,31 +28,22 @@ export class AuthCallbackComponent implements OnInit {
 
     if (token && role && userRaw) {
 
-      // Parse user JSON from callback
-      const user = JSON.parse(userRaw);
+  const user = JSON.parse(userRaw);
 
-      // Save access token + role + full user object
-      localStorage.setItem('access_token', token);
-      localStorage.setItem('user_role', role);
-      localStorage.setItem('user', JSON.stringify(user));
+  localStorage.setItem('access_token', token);
+  localStorage.setItem('user_role', role);
+  localStorage.setItem('user', JSON.stringify(user));
+  localStorage.setItem('user_id', user._id);  
 
-      // Update Angular signals
-      this.auth.isLoggedIn.set(true);
-      this.auth.userRole.set(role);
+  this.auth.isLoggedIn.set(true);
+  this.auth.userRole.set(role);
 
-      console.log("Saved Google user into localStorage:", user);
-
-      // Navigate based on role
-      if (role === 'seller') {
-        this.router.navigate(['/seller-dashboard']);
-      } else {
-        this.router.navigate(['/']);
-      }
-
-    } else {
-      this.router.navigate(['/']);
-    }
+  if (role === 'seller') {
+    this.router.navigate(['/seller-dashboard']);
+  } else {
+    this.router.navigate(['/marketplace-page']);
+  }
+}
   });
 }
-
 }

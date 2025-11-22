@@ -179,7 +179,9 @@ module.exports = {
         ? "https://ecom-six-eosin.vercel.app"
         : "http://localhost:4200";
 
-      const redirectURL = `${baseURL}/#/auth/callback?access_token=${accessTokens}&user_role=${user.user_role}`;
+      const redirectURL = `${baseURL}#/auth/callback?access_token=${accessTokens}&user_role=${
+        user.user_role
+      }&user=${encodeURIComponent(JSON.stringify(user))}`;
       res.redirect(redirectURL);
     } catch (error) {
       console.error("Error during Google OAuth callback:", error);
