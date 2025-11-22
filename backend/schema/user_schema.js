@@ -76,6 +76,13 @@ const user_schema = new mongoose.Schema({
       ref: "Product",
     },
   ],
+
+  //user status for media
+  user_status: {
+    type:String,
+    enum: ["online", "offline", "idle", "do not disturb"],
+    default: "offline",
+  }
 });
 
 module.exports = mongoose.model("User", user_schema);

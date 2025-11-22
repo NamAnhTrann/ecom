@@ -44,7 +44,10 @@ const contactRouter = require("./router/contact_us_router");
 const mediaRouter = require("./router/media_router");
 const cartRouter = require("./router/cart_router");
 const orderRouter = require("./router/order_router");
+const chattingRouter = require("./router/chatting_router");
 
+const chatSocket = require("./controller/chatting_controller");
+chatSocket.start_chat(io);
 
 app.use(productRouter);
 app.use(userRouter);
@@ -52,6 +55,7 @@ app.use(contactRouter);
 app.use(mediaRouter);
 app.use(cartRouter);
 app.use(orderRouter);
+app.use(chattingRouter);
 
 app.get("/", (req, res) => res.send("Backend is running"));
 
