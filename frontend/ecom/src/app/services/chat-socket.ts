@@ -9,8 +9,8 @@ export class ChatSocket {
 
   constructor() {
     this.socket = io('http://localhost:3030', {
-      withCredentials: true, // this is socket.io setting (not httpOptions)
       transports: ['websocket'],
+      withCredentials: true,
     });
   }
 
@@ -18,39 +18,31 @@ export class ChatSocket {
     this.socket.emit('user_online', { user_id });
   }
 
-  userJoinConversation(conversation_id: string) {
-    this.socket.emit('join_conversation', { conversation_id });
+  joinConversation(conversation_id: string) {
+    this.socket.emit('join_conversation', conversation_id);
   }
 
-  sendMessage(msg_data: any) {
-    this.socket.emit('send_message', msg_data);
+  sendMessage(msg: any) {
+    this.socket.emit('send_message', msg);
   }
 
-  typing(conversation_id: string, user_id: string) {
-    this.socket.emit('typing', { conversation_id, user_id });
+  emitTyping(data: any) {
+    this.socket.emit('typing', data);
   }
 
-  stopTyping(conversation_id: string, user_id: string) {
-    this.socket.emit('stop_typing', { conversation_id, user_id });
+  stopTyping(data: any) {
+    this.socket.emit('stop_typing', data);
   }
 
   onReceiveMessage(callback: Function) {
-    this.socket.on('receive_message', (data) => callback(data));
+    this.socket.on('receive_message', (msg) => callback(msg));
   }
 
   onTyping(callback: Function) {
     this.socket.on('typing', (data) => callback(data));
   }
 
-  onStopTyping(callback: Function) {
-    this.socket.on('stop_typing', (data) => callback(data));
-  }
-
   onStatusUpdate(callback: Function) {
     this.socket.on('user_status_update', (data) => callback(data));
-  }
-
-  disconnect() {
-    this.socket.disconnect();
   }
 }

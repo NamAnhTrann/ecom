@@ -193,30 +193,23 @@ export class DbService {
       newPassword,
     });
   }
+
+  //chatting functions
+  getConversations() {
+    return this.http.get(`${this.baseUrl}/chat/list/api`, this.authHeader());
+  }
+  getMessages(conversation_id: string) {
+    return this.http.get(
+      `${this.baseUrl}/chat/messages/${conversation_id}/api`,
+      this.authHeader()
+    );
+  }
+
+  startConversation(receiver_id: string) {
+    return this.http.post(
+      `${this.baseUrl}/chat/start/api`,
+      { receiver_id },
+      this.authHeader()
+    );
+  }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

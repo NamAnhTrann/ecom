@@ -19,36 +19,40 @@ export class AuthCallbackComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      const token = params['access_token'];
-      const role  = params['user_role'];
+  this.route.queryParams.subscribe(params => {
+    const token = params['access_token'];
+    const role  = params['user_role'];
+    const userRaw = params['user']; // backend sends this encoded
 
-      console.log(' Google OAuth callback params:', { token, role });
+    console.log('Google OAuth callback params:', { token, role, userRaw });
 
-      if (token && role) {
-        // Save token + role
-        localStorage.setItem('access_token', token);
-        localStorage.setItem('user_role', role);
+    if (token && role && userRaw) {
 
-        // Log before updating signal
-        console.log('Before set → userRole():', this.auth.userRole());
+      // Parse user JSON from callback
+      const user = JSON.parse(userRaw);
 
-        // Update signals immediately
-        this.auth.isLoggedIn.set(true);
-        this.auth.userRole.set(role);
+      // Save access token + role + full user object
+      localStorage.setItem('access_token', token);
+      localStorage.setItem('user_role', role);
+      localStorage.setItem('user', JSON.stringify(user));
 
-        // Log after updating signal
-        console.log('After set → userRole():', this.auth.userRole());
+      // Update Angular signals
+      this.auth.isLoggedIn.set(true);
+      this.auth.userRole.set(role);
 
-        // Navigate based on role
-        if (role === 'seller') {
-          this.router.navigate(['/seller-dashboard']);
-        } else {
-          this.router.navigate(['/']);
-        }
+      console.log("Saved Google user into localStorage:", user);
+
+      // Navigate based on role
+      if (role === 'seller') {
+        this.router.navigate(['/seller-dashboard']);
       } else {
         this.router.navigate(['/']);
       }
-    });
-  }
+
+    } else {
+      this.router.navigate(['/']);
+    }
+  });
+}
+
 }

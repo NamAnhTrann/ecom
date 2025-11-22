@@ -58,21 +58,20 @@ module.exports = {
       });
 
       //simulate sending messages
+      // simulate sending messages
       socket.on("send_message", async function (msg_data) {
         console.log("send_message received:", msg_data);
         try {
-          //both sender and receiver id exist
           if (!msg_data.sender_id || !msg_data.receiver_id) {
             console.error("Missing sender_id or receiver_id");
             return;
           }
-          //Find or create the conversation
+
           const conversation = await chatHelper.getOrCreateConversation(
             msg_data.sender_id,
             msg_data.receiver_id
           );
 
-          //this is going to create a message object,
           const saved_message = await Message.create({
             messages_content: msg_data.messages_content,
             sender_id: msg_data.sender_id,
@@ -82,7 +81,6 @@ module.exports = {
             message_status: "sent",
           });
 
-          //update the conversation with the last message and its time
           await Conversation.findByIdAndUpdate(conversation._id, {
             last_message: msg_data.messages_content,
             last_updatedAt: Date.now(),
@@ -90,10 +88,20 @@ module.exports = {
 
           socket.join(conversation._id.toString());
 
-          // emit the new message to the room
+          // populate sender and receiver here
+          const populatedMessage = await Message.findById(saved_message._id)
+            .populate(
+              "sender_id",
+              "user_first_name user_last_name user_profile_img user_status"
+            )
+            .populate(
+              "receiver_id",
+              "user_first_name user_last_name user_profile_img user_status"
+            );
+
           io.to(conversation._id.toString()).emit(
             "receive_message",
-            saved_message //this is the new message object
+            populatedMessage
           );
         } catch (err) {
           console.error("Error sending message:", err);
@@ -149,6 +157,33 @@ module.exports = {
     });
   },
 
+  startConversation: async function (req, res) {
+    try {
+      const userId = req.user._id;
+      const { receiver_id } = req.body;
+
+      if (!receiver_id) {
+        console.log("testing receiver", receiver_id);
+        return res.status(400).json({ message: "Receiver ID is required" });
+      }
+      let convo = await Conversation.findOne({
+        participants: { $all: [userId, receiver_id] },
+      });
+
+      if (!convo) {
+        convo = await Conversation.create({
+          participants: [userId, receiver_id],
+          last_updatedAt: Date.now(),
+        });
+      }
+
+      return res.status(200).json({ conversation: convo });
+    } catch (err) {
+      console.error("Error starting conversation:", err);
+      return res.status(500).json({ message: "Internal server error" });
+    }
+  },
+
   // List conversations for a user
   listConversations: async function (req, res) {
     try {
@@ -163,6 +198,8 @@ module.exports = {
           select: "user_first_name user_last_name user_profile_img user_status",
         })
         .sort({ last_updatedAt: -1 });
+
+      console.log("DEBUG found conversations:", conversations);
 
       return res.status(200).json({ conversations });
     } catch (error) {
@@ -185,7 +222,7 @@ module.exports = {
       if (!conversations) {
         return res.status(404).json({ message: "Conversation not found" });
       }
-      
+
       //this part here is confusing
       // conversation.participants is an array of ObjectIds of users.
       // the .some() method check if AT LEAST one elemnt in the array matches the condition
@@ -214,7 +251,10 @@ module.exports = {
         )
         .sort({ message_createdAt: 1 });
 
-      return res.status(200).json({ messages });
+      return res.status(200).json({
+        messages,
+        conversation: conversations,
+      });
     } catch (error) {
       console.error("Error listing messages:", error);
       return res.status(500).json({ error: "Internal server error" });

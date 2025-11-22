@@ -40,11 +40,18 @@ export const routes: Routes = [
     component: OrderSummaryPage,
     canActivate: [authGuard],
   },
-  {
-    path: 'chat-page',
-    component: ChatPage,
-    canActivate: [authGuard],
-  },
+{
+  path: 'chat-page',
+  component: ChatPage,
+  canActivate: [authGuard],
+},
+{
+  path: 'chat-page/:conversation_id',
+  component: ChatPage,
+  canActivate: [authGuard],
+},
+
+
   { path: 'login', component: Login },
   { path: 'signup', component: Signup },
   { path: 'reset-password/:token', component: ResetPassword },

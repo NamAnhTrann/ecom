@@ -21,7 +21,7 @@ export class Login {
   onLogin() {
     this.auth.login(this.creds).subscribe({
       next: (res: any) => {
-        // res.user.user_role comes from backend (buyer/seller/admin)
+        localStorage.setItem('user_id', res.user.id);
         const role = res.user.user_role;
 
         if (role === 'seller') {

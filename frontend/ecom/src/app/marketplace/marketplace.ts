@@ -106,6 +106,7 @@ export class Marketplace {
 
         if (!acc[sellerId]) {
           acc[sellerId] = {
+            user_id: sellerId,
             user_first_name: product.user_id.user_first_name,
             user_last_name: product.user_id.user_last_name,
             user_email: product.user_id.user_email,
@@ -183,4 +184,15 @@ export class Marketplace {
       });
     }
   }
+
+
+startChat(receiverId: string) {
+  this.db.startConversation(receiverId).subscribe((res: any) => {
+    const convId = res.conversation._id;
+    this.router.navigate(['/chat-page', convId]);
+  });
+}
+
+
+
 }

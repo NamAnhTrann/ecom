@@ -54,16 +54,22 @@ export class Auth {
     window.location.href = `${this.apiUrl}/auth/google`;
   }
 
-  login(credentials: any) {
-    return this.db.loginUser(credentials).pipe(
-      tap((res: any) => {
-        localStorage.setItem('access_token', res.accessTokens);
-        localStorage.setItem('user_role', res.user.user_role);
-        this.isLoggedIn.set(true);
-        this.userRole.set(res.user.user_role);
-      })
-    );
-  }
+login(credentials: any) {
+  return this.db.loginUser(credentials).pipe(
+    tap((res: any) => {
+
+      console.log("DEBUG LOGIN RESPONSE:", res);  // <--- ADD THIS
+
+      localStorage.setItem('access_token', res.accessTokens);
+      localStorage.setItem('user_role', res.user.user_role);
+      localStorage.setItem('user_id', res.user.id);
+
+      this.isLoggedIn.set(true);
+      this.userRole.set(res.user.user_role);
+    })
+  );
+}
+
 
   logout() {
     this.db.logoutUser().subscribe({
