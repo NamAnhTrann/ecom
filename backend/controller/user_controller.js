@@ -174,7 +174,7 @@ module.exports = {
       });
 
       // Detect environment dynamically or not lol
-      const baseURL = "https://missscrappy.com/#";
+      const baseURL = "https://missscrappy.com";
 
       const redirectURL = `${baseURL}#/auth/callback?access_token=${accessTokens}&user_role=${
         user.user_role
