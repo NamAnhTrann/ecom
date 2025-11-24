@@ -31,12 +31,16 @@ passport.use(
 
 
 // Google Strategy
+const isProd = process.env.NODE_ENV === "production";
+
 passport.use(
   new GoogleStrategy(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "/auth/google/callback",
+      callbackURL: isProd
+        ? "https://api.missscrappy.com/auth/google/callback"
+        : "http://localhost:3030/auth/google/callback",
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
@@ -59,6 +63,7 @@ passport.use(
     }
   )
 );
+
 
 //JWT Strategy
 passport.use(
