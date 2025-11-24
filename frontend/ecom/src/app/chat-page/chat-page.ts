@@ -3,31 +3,24 @@ import {
   Component,
   CUSTOM_ELEMENTS_SCHEMA,
   ElementRef,
-  ViewChild,
   signal,
-  AfterViewInit,
+  ViewChild
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ChatSocket } from '../services/chat-socket';
 import { DbService } from '../services/db-service';
+import { WhatsappDatePipe } from '../whatsapp-date-pipe';
 
 @Component({
   selector: 'app-chat-page',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink, WhatsappDatePipe],
   templateUrl: './chat-page.html',
   styleUrl: './chat-page.css',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ChatPage {
-  constructor(
-    private chatSocket: ChatSocket,
-    private db: DbService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {}
-
   conversation_id = '';
   messages: any[] = [];
   messageContent = '';
@@ -36,7 +29,7 @@ export class ChatPage {
   conversations: any[] = [];
   selectedReceiver: any = null;
 
-  sidebarCollapsed = signal(false);
+sidebarCollapsed = signal(false);
   mobileSidebarOpen = signal(false);
   isDarkMode = false;
   myId: string | null = localStorage.getItem('user_id');
@@ -44,172 +37,139 @@ export class ChatPage {
   @ViewChild('inputRef') inputRef!: ElementRef<HTMLInputElement>;
   @ViewChild('picker') picker!: ElementRef<any>;
 
-ngOnInit() {
-  this.route.params.subscribe(params => {
-  this.conversation_id = params['conversation_id'];
+  constructor(
+    private chatSocket: ChatSocket,
+    private db: DbService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
-  if (this.conversations.length > 0) {
-    this.updateSelectedReceiver();
-  }
-});
-  const savedTheme = localStorage.getItem('theme');
-  if (savedTheme === 'dark') {
-    document.documentElement.classList.add('dark');
-    this.isDarkMode = true;
-  }
-
-  this.conversation_id = this.route.snapshot.params['conversation_id'];
-
-  this.db.getConversations().subscribe({
-    next: (res: any) => {
-      this.conversations = res.conversations || [];
-      const myId = localStorage.getItem('user_id');
-
-      // No conversations
-      if (this.conversations.length === 0) {
-        this.latestChat = [];
-        return;
-      }
-
-      // Build the full "Latest Chats" list
-      this.latestChat = this.conversations.map((convo: any) => {
-        const receiver = convo.participants.find((p: any) => p._id !== myId);
-
-        return {
-          convo_id: convo._id,
-          user: receiver,
-          last_message: convo.last_message,
-        };
-      });
-
-      console.log("LATEST CHAT ARRAY:", this.latestChat);
-
-      // Auto redirect to first conversation if none in URL
-      if (!this.conversation_id) {
-        this.router.navigate(['/chat-page', this.conversations[0]._id]);
-        return;
-      }
-
-      this.updateSelectedReceiver();
-
-
-      // Join socket room + load messages
-      this.chatSocket.joinConversation(this.conversation_id);
-      this.loadMessages();
-    },
-    error: (err) => console.error(err),
-  });
-
-  this.chatSocket.onReceiveMessage((msg: any) => {
-    this.messages.push(msg);
-  });
-}
-
-updateSelectedReceiver() {
-  const myId = localStorage.getItem('user_id');
-
-  const convo = this.conversations.find(
-    (c: any) => c._id === this.conversation_id
-  );
-
-  if (!convo) {
-    this.selectedReceiver = null;
-    return;
-  }
-
-  this.selectedReceiver = convo.participants.find(
-    (p: any) => p._id !== myId
-  );
-}
-
-
-
-  openConversation(conversationId: string) {
-    const convo = this.conversations.find((c) => c._id === conversationId);
-
-    if (convo) {
-      const myId = localStorage.getItem('user_id');
-      this.selectedReceiver = convo.participants.find(
-        (p: any) => p._id !== myId
-      );
+  ngOnInit() {
+    // Theme
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      document.documentElement.classList.add('dark');
+      this.isDarkMode = true;
     }
 
-    // Correct Angular navigation
-    this.router.navigate(['/chat-page', conversationId]);
-  }
+    // Listen for route changes first
+    this.route.params.subscribe(params => {
+      this.conversation_id = params['conversation_id'];
 
-  loadMessages() {
-    this.db.getMessages(this.conversation_id).subscribe({
+      if (this.conversations.length > 0) {
+        this.updateSelectedReceiver();
+        this.chatSocket.joinConversation(this.conversation_id);
+        this.loadMessages();
+      }
+    });
+
+    // Load conversations initially
+    this.db.getConversations().subscribe({
       next: (res: any) => {
-        // messages
-        this.messages = res.messages;
+        this.conversations = res.conversations || [];
 
-        // DEBUG LOGS
-        console.log('DEBUG FULL RESPONSE:', res);
-
-        const myId = localStorage.getItem('user_id');
-        console.log('DEBUG myId:', myId);
-
-        const participants = res.conversation?.participants || [];
-        console.log('DEBUG participants (raw):', participants);
-
-        // FIX: participants is an array of strings, not objects
-        for (const p of participants) {
-          console.log('DEBUG participant value:', p);
+        if (this.conversations.length === 0) {
+          this.latestChat = [];
+          return;
         }
 
-        // FIND receiver
-        if (myId) {
-          this.receiver_id = participants.find((p: any) => p !== myId) || '';
+        this.buildLatestChatList();
+
+        // If no convo selected in URL, open first
+        if (!this.conversation_id) {
+          const firstId = this.conversations[0]._id;
+          this.router.navigate(['/chat-page', firstId]);
+          return;
         }
 
-        console.log('DEBUG receiver_id:', this.receiver_id);
-
-        if (!this.receiver_id) {
-          console.error('NO receiver_id detected');
-        }
+        // Select receiver and load messages
+        this.updateSelectedReceiver();
+        this.chatSocket.joinConversation(this.conversation_id);
+        this.loadMessages();
       },
+      error: (err) => console.error(err),
+    });
+
+    // Receive new message
+    this.chatSocket.onReceiveMessage((msg: any) => {
+      this.messages.push(msg);
+      this.reloadConversationsLatest();
     });
   }
 
-loadLatestChat() {
-  this.db.getConversations().subscribe({
-    next: (res: any) => {
-      this.conversations = res.conversations || [];
+  /*
+   * Build list of latest chats similar to Instagram/Messenger
+   */
+  private buildLatestChatList() {
+    const myId = localStorage.getItem('user_id');
 
-      const myId = localStorage.getItem('user_id');
+    this.latestChat = this.conversations.map((convo: any) => {
+      const receiver = convo.participants.find((p: any) => p._id !== myId);
+      return {
+        convo_id: convo._id,
+        user: receiver,
+        last_message: convo.last_message,
+        last_updatedAt: convo.last_updatedAt 
+      };
+    });
+  }
 
-      // No conversations
-      if (this.conversations.length === 0) {
-        this.latestChat = [];
-        return;
-      }
+  /*
+   * Reload conversations when messages update
+   */
+  private reloadConversationsLatest() {
+    this.db.getConversations().subscribe({
+      next: (res: any) => {
+        this.conversations = res.conversations || [];
+        this.buildLatestChatList();
+      },
+      error: (err) => console.error(err),
+    });
+  }
 
-      // Build a list of chat previews
-      this.latestChat = this.conversations.map((convo: any) => {
-        const receiver = convo.participants.find((p: any) => p._id !== myId);
-        return {
-          convo_id: convo._id,
-          user: receiver,
-          last_message: convo.last_message,
-        };
-      });
+  /*
+   * Update who the receiver is for the current conversation
+   */
+  updateSelectedReceiver() {
+    const myId = localStorage.getItem('user_id');
 
-      // Auto-select first convo if not already selected
-      if (!this.conversation_id) {
-        const firstId = this.conversations[0]._id;
-        this.router.navigate(['/chat-page', firstId]);
-        return;
-      }
+    const convo = this.conversations.find(
+      (c: any) => c._id === this.conversation_id
+    );
 
-      // Join selected conversation
-      this.chatSocket.joinConversation(this.conversation_id);
-      this.loadMessages();
-    },
-    error: (err) => console.error(err),
-  });
-}
+    if (!convo) {
+      this.selectedReceiver = null;
+      return;
+    }
 
+    this.selectedReceiver = convo.participants.find(
+      (p: any) => p._id !== myId
+    );
+  }
+
+  /*
+   * When user clicks another chat from sidebar
+   */
+  openConversation(conversationId: string) {
+    this.router.navigate(['/chat-page', conversationId]);
+  }
+
+  /*
+   * Load chat messages for selected conversation
+   */
+  loadMessages() {
+    this.db.getMessages(this.conversation_id).subscribe({
+      next: (res: any) => {
+        this.messages = res.messages;
+
+        const myId = localStorage.getItem('user_id');
+        const participants = res.conversation?.participants || [];
+
+        this.receiver_id = participants.find((p: any) => p !== myId) || '';
+      },
+      error: (err) => console.error(err),
+    });
+  }
 
   send() {
     if (!this.messageContent.trim()) return;
@@ -217,15 +177,7 @@ loadLatestChat() {
     const sender = localStorage.getItem('user_id');
     const receiver = this.receiver_id;
 
-    if (!sender) {
-      console.error('NO sender_id found in localStorage');
-      return;
-    }
-
-    if (!receiver) {
-      console.error('NO receiver_id detected');
-      return;
-    }
+    if (!sender || !receiver) return;
 
     const msg = {
       sender_id: sender,
@@ -239,12 +191,11 @@ loadLatestChat() {
     this.messageContent = '';
   }
 
-  toggleSidebar() {
-    this.sidebarCollapsed.update((v) => !v);
-  }
-
+toggleSidebar() {
+  this.sidebarCollapsed.update(v => !v);
+}
   toggleMobile() {
-    this.mobileSidebarOpen.update((v) => !v);
+    this.mobileSidebarOpen.update(v =>!v)
   }
 
   toggleTheme() {

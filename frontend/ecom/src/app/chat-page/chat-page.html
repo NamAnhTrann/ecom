@@ -251,9 +251,13 @@
             {{ chat.user?.user_first_name }} {{ chat.user?.user_last_name }}
           </p>
 
-          <p class="text-xs text-gray-500 dark:text-neutral-400">
-            {{ chat.last_message }}
-          </p>
+       <p class="text-xs text-gray-500 dark:text-neutral-400 truncate">
+  {{ chat.last_message }}
+  <span class="ml-1 text-gray-400">
+    {{ chat.last_updatedAt | whatsappDate }}
+  </span>
+</p>
+
         </div>
       }
     </div>

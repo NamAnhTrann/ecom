@@ -41,7 +41,6 @@ export class Marketplace {
   addToCart(product_id: string) {
     this.db.addToCart(product_id, this.quantity).subscribe({
       next: (res: any) => {
-        console.log('Added:', res.message);
         Swal.fire({
           title: 'Added to Cart',
           text: 'Your item is now in your cart.',
