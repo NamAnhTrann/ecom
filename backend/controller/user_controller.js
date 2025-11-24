@@ -65,6 +65,7 @@ module.exports = {
   //login route
   loginUser: async function (req, res) {
     try {
+      console.log("NODE_ENV =", process.env.NODE_ENV);
       const user = req.user;
       if (!user) {
         return res.status(400).json({ message: "No user authenticated" });
@@ -113,6 +114,7 @@ module.exports = {
     }
 
     try {
+      console.log("NODE_ENV =", process.env.NODE_ENV);
       const decoded = jwt.verify(refreshToken, process.env.REFRESH_SECRET);
       const user = await User.findById(decoded.id);
 
@@ -305,6 +307,7 @@ module.exports = {
   //logout api
   logoutUser: async function (req, res) {
     try {
+      console.log("NODE_ENV =", process.env.NODE_ENV);
       const refreshToken = req.cookies.refreshTokens;
 
       // 1️ If no cookie, just return OK
