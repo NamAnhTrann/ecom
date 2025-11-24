@@ -8,7 +8,13 @@ export class ChatSocket {
   private socket: Socket;
 
   constructor() {
-    this.socket = io('http://localhost:3030', {
+      const isDev = window.location.hostname === 'localhost';
+
+    const SOCKET_URL = isDev
+      ? 'http://localhost:3030'
+      : 'https://backend-scrappy.vercel.app';
+
+    this.socket = io(SOCKET_URL, {
       transports: ['websocket'],
       withCredentials: true,
     });
