@@ -85,4 +85,12 @@ const user_schema = new mongoose.Schema({
   }
 });
 
+// Indexes
+user_schema.index({ user_email: 1 }, { unique: true });     
+user_schema.index({ googleId: 1 });                           
+user_schema.index({ user_role: 1 });                         
+user_schema.index({ refreshTokens: 1 });                  
+user_schema.index({ user_status: 1 });                       
+
+
 module.exports = mongoose.model("User", user_schema);

@@ -21,8 +21,11 @@ let comment_schema = new mongoose.Schema({
     default: Date.now,
   },
 });
+
 comment_schema.index({
   product_id: 1,
   createdAt: -1,
 });
+comment_schema.index({ user_id: 1 });
+
 module.exports = mongoose.model("Comment", comment_schema);

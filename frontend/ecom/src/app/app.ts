@@ -21,7 +21,7 @@ export class App {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
-        const hiddenRoutes = ['/chat-page']; // both header & footer hidden here
+        const hiddenRoutes = ['/chat-page','/seller-dashboard']; // both header & footer hidden here
         const shouldHide = hiddenRoutes.some(route =>
           event.urlAfterRedirects.startsWith(route)
         );

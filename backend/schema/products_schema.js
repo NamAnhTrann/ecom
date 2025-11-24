@@ -58,4 +58,12 @@ let productSchema = new mongoose.Schema({
   // }
 });
 
+
+//add indexes
+productSchema.index({ user_id: 1 });           
+productSchema.index({ productUpdated: -1 });    
+productSchema.index({ likes_count: -1 });         
+productSchema.index({ comments_count: -1 });      
+productSchema.index({ product_title: "text" }); 
+
 module.exports = mongoose.model("Product", productSchema);

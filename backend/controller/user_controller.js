@@ -141,7 +141,7 @@ module.exports = {
 
       return res.json({ accessTokens: newTokens.accessTokens });
     } catch (error) {
-      console.error("[REFRESH ERROR]", error.message);
+      console.error("REFRESH ERROR", error.message);
       return res
         .status(403)
         .json({ message: "Session expired. Please log in again." });
@@ -280,13 +280,10 @@ module.exports = {
           .json({ message: "Invalid or expired reset token" });
       }
 
-      // 2️⃣ Hash the new password
       const hashedPassword = await bcrypt.hash(newPassword, 10);
 
-      // 3️⃣ Replace old hash with new hash
       user.user_password = hashedPassword;
 
-      // 4️⃣ Remove reset token & expiry
       user.resetPasswordToken = undefined;
       user.resetPasswordExpires = undefined;
 

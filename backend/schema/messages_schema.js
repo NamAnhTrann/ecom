@@ -42,4 +42,9 @@ let messageSchema = new mongoose.Schema({
   
 });
 
+messageSchema.index({ conversation_id: 1, message_createdAt: 1 });
+messageSchema.index({ sender_id: 1 });
+messageSchema.index({ receiver_id: 1 });
+
+
 module.exports = mongoose.model("Message", messageSchema);
