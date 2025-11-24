@@ -31,32 +31,15 @@ passport.use(
 
 
 // Google Strategy
-const isProd = process.env.NODE_ENV === "production";
-
 passport.use(
   new GoogleStrategy(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "/auth/google/callback", 
-      passReqToCallback: true
+      callbackURL: "https://api.missscrappy.com/auth/google/callback"
     },
-
-    async (req, accessToken, refreshToken, profile, done) => {
+    async (accessToken, refreshToken, profile, done) => {
       try {
-        const host = req.get("host");
-
-        // Auto-detect environment
-        const isLocal =
-          host.includes("localhost") ||
-          host.includes("127.0.0.1");
-
-        // Set correct callback URL
-        req.oauthCallbackURL = isLocal
-          ? "http://localhost:3030/auth/google/callback"
-          : "https://api.missscrappy.com/auth/google/callback";
-
-        // Normal user creation or lookup
         let user = await User.findOne({ googleId: profile.id });
 
         if (!user) {
@@ -76,8 +59,6 @@ passport.use(
     }
   )
 );
-
-
 
 //JWT Strategy
 passport.use(
