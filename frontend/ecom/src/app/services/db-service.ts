@@ -18,7 +18,7 @@ export class DbService {
     if (hostname === 'localhost' || hostname === '127.0.0.1') {
       this.baseUrl = 'http://localhost:3030';
     } else {
-      this.baseUrl = 'https://backend-scrappy.vercel.app';
+      this.baseUrl = 'https://api.missscrappy.com';
     }
 
     console.log('DbService using backend:', this.baseUrl);

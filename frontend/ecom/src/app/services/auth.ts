@@ -22,7 +22,7 @@ export class Auth {
       this.apiUrl = 'http://localhost:3030';
     } else {
       // Production (EC2)
-      this.apiUrl = 'https://backend-scrappy.vercel.app';
+      this.apiUrl = 'https://api.missscrappy.com';
     }
 
     console.log('API URL in use:', this.apiUrl);

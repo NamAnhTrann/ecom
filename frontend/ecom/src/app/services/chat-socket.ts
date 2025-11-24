@@ -12,7 +12,7 @@ export class ChatSocket {
 
     const SOCKET_URL = isDev
       ? 'http://localhost:3030'
-      : 'https://backend-scrappy.vercel.app';
+      : 'https://api.missscrappy.com';
 
     this.socket = io(SOCKET_URL, {
       transports: ['websocket'],
