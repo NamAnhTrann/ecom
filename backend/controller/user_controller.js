@@ -182,7 +182,7 @@ module.exports = {
       res.redirect(redirectURL);
     } catch (error) {
       console.error("Error during Google OAuth callback:", error);
-      res.redirect("http://localhost:4200/login?error=google");
+      res.redirect("https://missscrappy.com/login?error=google");
     }
   },
 
@@ -206,7 +206,7 @@ module.exports = {
       await user.save();
 
       //for now keep localhost for testing
-      const resetLink = `http://localhost:4200/#/reset-password/${token}`;
+      const resetLink = `https://missscrappy.com/#/reset-password/${token}`;
 
       const transporter = nodemailer.createTransport({
         service: "gmail",
