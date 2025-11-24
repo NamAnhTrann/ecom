@@ -158,36 +158,45 @@ module.exports = {
   },
 
   //google callback with jwt tokens
-  googleAuthCallback: async (req, res) => {
-    try {
-      const user = req.user;
-      const { accessTokens, refreshTokens } = generateTokens(user);
+googleAuthCallback: async (req, res) => {
+  try {
+    const user = req.user;
+    const { accessTokens, refreshTokens } = generateTokens(user);
 
-      user.refreshTokens = refreshTokens;
-      await user.save();
+    user.refreshTokens = refreshTokens;
+    await user.save();
 
-      res.cookie("refreshTokens", refreshTokens, {
-        httpOnly: true,
-        secure: true,
-        sameSite: "Strict",
-        maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
-      });
+    res.cookie("refreshTokens", refreshTokens, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "Strict",
+      maxAge: 30 * 24 * 60 * 60 * 1000,
+    });
 
-      // Detect environment dynamically
-      const isProd = process.env.NODE_ENV === "production";
-      const baseURL = isProd
-        ? "https://ecom-six-eosin.vercel.app"
-        : "http://localhost:4200";
+    // Detect whether request came from localhost or production
+    const host = req.get("host");
 
-      const redirectURL = `${baseURL}#/auth/callback?access_token=${accessTokens}&user_role=${
-        user.user_role
-      }&user=${encodeURIComponent(JSON.stringify(user))}`;
-      res.redirect(redirectURL);
-    } catch (error) {
-      console.error("Error during Google OAuth callback:", error);
-      res.redirect("http://localhost:4200/login?error=google");
-    }
-  },
+    const isLocal =
+      host.includes("localhost") ||
+      host.includes("127.0.0.1");
+
+    // Choose frontend redirect URL automatically
+    const baseURL = isLocal
+      ? "http://localhost:4200"
+      : "https://ecom-six-eosin.vercel.app";
+
+    const redirectURL = `${baseURL}#/auth/callback?access_token=${accessTokens}&user_role=${
+      user.user_role
+    }&user=${encodeURIComponent(JSON.stringify(user))}`;
+
+    return res.redirect(redirectURL);
+
+  } catch (error) {
+    console.error("Error during Google OAuth callback:", error);
+    return res.redirect("http://localhost:4200/login?error=google");
+  }
+},
+
 
   //reset password
   sendRequestPassword: async function (req, res) {

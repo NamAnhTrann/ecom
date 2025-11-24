@@ -38,12 +38,25 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: isProd
-        ? "https://api.missscrappy.com/auth/google/callback"
-        : "http://localhost:3030/auth/google/callback",
+      callbackURL: "/auth/google/callback", 
+      passReqToCallback: true
     },
-    async (accessToken, refreshToken, profile, done) => {
+
+    async (req, accessToken, refreshToken, profile, done) => {
       try {
+        const host = req.get("host");
+
+        // Auto-detect environment
+        const isLocal =
+          host.includes("localhost") ||
+          host.includes("127.0.0.1");
+
+        // Set correct callback URL
+        req.oauthCallbackURL = isLocal
+          ? "http://localhost:3030/auth/google/callback"
+          : "https://api.missscrappy.com/auth/google/callback";
+
+        // Normal user creation or lookup
         let user = await User.findOne({ googleId: profile.id });
 
         if (!user) {
@@ -63,6 +76,7 @@ passport.use(
     }
   )
 );
+
 
 
 //JWT Strategy
