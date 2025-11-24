@@ -12,7 +12,7 @@ const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server, {
   cors: {
-    origin: ["http://localhost:4200", "https://ecom-six-eosin.vercel.app"],
+    origin: ["http://localhost:4200", "https://ecom-six-eosin.vercel.app", "https://missscrappy.com"],
     methods: ["GET", "POST"],
     credentials: true
   }
@@ -30,7 +30,7 @@ app.use(passport.initialize());
 
 app.use(
   cors({
-    origin: ["http://localhost:4200", "https://ecom-six-eosin.vercel.app"],
+    origin: ["http://localhost:4200", "https://ecom-six-eosin.vercel.app", "https://missscrappy.com"],
     methods: "GET, POST, PUT, DELETE",
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
