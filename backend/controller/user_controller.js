@@ -173,7 +173,7 @@ module.exports = {
         maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
       });
 
-      // Detect environment dynamically
+      // Detect environment dynamically or not lol
       const baseURL = "https://ecom-six-eosin.vercel.app";
 
       const redirectURL = `${baseURL}#/auth/callback?access_token=${accessTokens}&user_role=${
