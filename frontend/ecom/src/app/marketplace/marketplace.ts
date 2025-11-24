@@ -24,6 +24,7 @@ export class Marketplace {
   comments: Comment[] = [];
   new_comment: string = '';
   loading = true;
+  myId = localStorage.getItem('user_id');
 
   //carts
   cart: Cart | null = null;

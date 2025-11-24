@@ -32,7 +32,7 @@ export class ChatPage {
   messages: any[] = [];
   messageContent = '';
   receiver_id = '';
-  latestChat: any = null;
+  latestChat: any[] = [];
   conversations: any[] = [];
   selectedReceiver: any = null;
 
@@ -44,51 +44,85 @@ export class ChatPage {
   @ViewChild('inputRef') inputRef!: ElementRef<HTMLInputElement>;
   @ViewChild('picker') picker!: ElementRef<any>;
 
-  ngOnInit() {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-      document.documentElement.classList.add('dark');
-      this.isDarkMode = true;
-    }
+ngOnInit() {
+  this.route.params.subscribe(params => {
+  this.conversation_id = params['conversation_id'];
 
-    // read param
-    this.conversation_id = this.route.snapshot.params['conversation_id'];
-
-    // load conversations first
-    this.db.getConversations().subscribe({
-      next: (res: any) => {
-        this.conversations = res.conversations || [];
-
-        if (this.conversations.length === 0) {
-          this.latestChat = null;
-          return;
-        }
-
-        const myId = localStorage.getItem('user_id');
-        const convo = this.conversations[0];
-
-        const receiver = convo.participants.find((p: any) => p._id !== myId);
-        this.latestChat = receiver;
-        this.selectedReceiver = receiver;
-
-        // if URL has no conversation id, auto open the latest one
-        if (!this.conversation_id) {
-          const firstId = convo._id;
-          this.router.navigate(['/chat-page', firstId]);
-          return;
-        }
-
-        // if conversation selected already
-        this.chatSocket.joinConversation(this.conversation_id);
-        this.loadMessages();
-      },
-      error: (err) => console.error(err),
-    });
-
-    this.chatSocket.onReceiveMessage((msg: any) => {
-      this.messages.push(msg);
-    });
+  if (this.conversations.length > 0) {
+    this.updateSelectedReceiver();
   }
+});
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'dark') {
+    document.documentElement.classList.add('dark');
+    this.isDarkMode = true;
+  }
+
+  this.conversation_id = this.route.snapshot.params['conversation_id'];
+
+  this.db.getConversations().subscribe({
+    next: (res: any) => {
+      this.conversations = res.conversations || [];
+      const myId = localStorage.getItem('user_id');
+
+      // No conversations
+      if (this.conversations.length === 0) {
+        this.latestChat = [];
+        return;
+      }
+
+      // Build the full "Latest Chats" list
+      this.latestChat = this.conversations.map((convo: any) => {
+        const receiver = convo.participants.find((p: any) => p._id !== myId);
+
+        return {
+          convo_id: convo._id,
+          user: receiver,
+          last_message: convo.last_message,
+        };
+      });
+
+      console.log("LATEST CHAT ARRAY:", this.latestChat);
+
+      // Auto redirect to first conversation if none in URL
+      if (!this.conversation_id) {
+        this.router.navigate(['/chat-page', this.conversations[0]._id]);
+        return;
+      }
+
+      this.updateSelectedReceiver();
+
+
+      // Join socket room + load messages
+      this.chatSocket.joinConversation(this.conversation_id);
+      this.loadMessages();
+    },
+    error: (err) => console.error(err),
+  });
+
+  this.chatSocket.onReceiveMessage((msg: any) => {
+    this.messages.push(msg);
+  });
+}
+
+updateSelectedReceiver() {
+  const myId = localStorage.getItem('user_id');
+
+  const convo = this.conversations.find(
+    (c: any) => c._id === this.conversation_id
+  );
+
+  if (!convo) {
+    this.selectedReceiver = null;
+    return;
+  }
+
+  this.selectedReceiver = convo.participants.find(
+    (p: any) => p._id !== myId
+  );
+}
+
+
 
   openConversation(conversationId: string) {
     const convo = this.conversations.find((c) => c._id === conversationId);
@@ -138,31 +172,44 @@ export class ChatPage {
     });
   }
 
-  loadLatestChat() {
-    this.db.getConversations().subscribe({
-      next: (res: any) => {
-        this.conversations = res.conversations || [];
+loadLatestChat() {
+  this.db.getConversations().subscribe({
+    next: (res: any) => {
+      this.conversations = res.conversations || [];
 
-        if (this.conversations.length === 0) {
-          this.latestChat = null;
-          return;
-        }
+      const myId = localStorage.getItem('user_id');
 
-        const myId = localStorage.getItem('user_id');
+      // No conversations
+      if (this.conversations.length === 0) {
+        this.latestChat = [];
+        return;
+      }
 
-        // conversations already sorted by last_updatedAt DESC in backend
-        const convo = this.conversations[0];
-
-        // receiver is anyone who is NOT me
+      // Build a list of chat previews
+      this.latestChat = this.conversations.map((convo: any) => {
         const receiver = convo.participants.find((p: any) => p._id !== myId);
+        return {
+          convo_id: convo._id,
+          user: receiver,
+          last_message: convo.last_message,
+        };
+      });
 
-        this.latestChat = receiver;
-        this.selectedReceiver = receiver;
-        console.log('LATEST CHAT:', this.latestChat);
-      },
-      error: (err) => console.error(err),
-    });
-  }
+      // Auto-select first convo if not already selected
+      if (!this.conversation_id) {
+        const firstId = this.conversations[0]._id;
+        this.router.navigate(['/chat-page', firstId]);
+        return;
+      }
+
+      // Join selected conversation
+      this.chatSocket.joinConversation(this.conversation_id);
+      this.loadMessages();
+    },
+    error: (err) => console.error(err),
+  });
+}
+
 
   send() {
     if (!this.messageContent.trim()) return;
