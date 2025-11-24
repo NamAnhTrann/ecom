@@ -111,7 +111,7 @@ module.exports = {
 
       //for prod and dev environment
       // const BASE_URL_prod ="http://localhost4200"
-      const BASE_URL ="https://ecom-six-eosin.vercel.app/#"
+      const BASE_URL ="https://missscrappy.com/#"
 
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ["card"],
