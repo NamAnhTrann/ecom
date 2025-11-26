@@ -1,25 +1,37 @@
-const mongoose =require("mongoose");
+const mongoose = require("mongoose");
 
 const like_schema = new mongoose.Schema({
-    user_id: {
-        type: mongoose.Schema.ObjectId,
-        ref:"User",
-        required: true
-    },
-
-    product_id:{
-        type: mongoose.Schema.ObjectId,
-        ref:"Product",
-        required: true
-    },
-
-    createdAt: {
-        type:Date,
-        default:Date.now
+  user_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+    validate: {
+      validator: v => mongoose.Types.ObjectId.isValid(v),
+      message: "Invalid user reference"
     }
-})
+  },
 
-//prevent duplicate issue from the same user (fuck this issue)
-like_schema.index({user_id:1, product_id: 1}, {unique:true});
+  product_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Product",
+    required: true,
+    validate: {
+      validator: v => mongoose.Types.ObjectId.isValid(v),
+      message: "Invalid product reference"
+    }
+  },
 
-module.exports=mongoose.model("Like", like_schema)
+  createdAt: {
+    type: Date,
+    default: Date.now,
+    validate: {
+      validator: v => v instanceof Date,
+      message: "Invalid like creation date"
+    }
+  }
+});
+
+// prevent duplicate like from same user
+like_schema.index({ user_id: 1, product_id: 1 }, { unique: true });
+
+module.exports = mongoose.model("Like", like_schema);
