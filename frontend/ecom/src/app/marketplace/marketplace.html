@@ -98,12 +98,15 @@
               <div
                 class="absolute inset-0 flex flex-col items-center justify-center gap-3 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300"
               >
+                @if (seller.user_id !== myId) {
+
                 <button
                   class="w-2/3 py-2 bg-[#4F46E5] text-white font-semibold rounded-md shadow-md hover:bg-[#4338CA] dark:bg-[#FFE135] dark:text-black dark:hover:bg-[#E6C92F] transition-all duration-300"
                   (click)="addToCart(product._id)"
                 >
                   Buy Now
                 </button>
+                }
 
                 <a
                   [routerLink]="['/view-detail-page', product._id]"
@@ -216,6 +219,7 @@
                     <input
                       [(ngModel)]="product.new_comment"
                       placeholder="Add a comment..."
+                      (keydown.enter)="addComment(product)" 
                       class="flex-1 border border-gray-300 dark:border-neutral-700 rounded-lg px-3 py-1 text-sm bg-white dark:bg-neutral-900 text-gray-800 dark:text-neutral-100 focus:ring-2 focus:ring-indigo-300 dark:focus:ring-amber-300"
                     />
                     <button
