@@ -14,7 +14,7 @@ export class ContactUs {
   contact: Contact[] = [];
   contact_data: Contact = new Contact;
 
-  constructor(private db:DbService, private router:Router){}
+  constructor(private db:DbService){}
 
   addContact(){
     this.db.addContact(this.contact_data).subscribe({

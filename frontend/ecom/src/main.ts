@@ -5,6 +5,8 @@ import 'preline/preline';
 import 'emoji-mart';
 
 
+
+
 bootstrapApplication(App, appConfig)
   .then(() => {
     // Dispatch Angular ready event

@@ -76,3 +76,6 @@
 summary svg {
   flex-shrink: 0;
 }
+swiper-slide {
+  will-change: opacity, transform;
+}

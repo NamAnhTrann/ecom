@@ -11,24 +11,33 @@ const user_schema = new mongoose.Schema({
   },
 
   // Only required if not Google auth
-  user_password: {
-    type: String,
-    required: function () {
-      return !this.googleId;
-    },
-    validate: {
-      validator: function (value) {
-        if (this.googleId) return true;
-        return /^(?=.*[A-Za-z])(?=.*\d).{6,}$/.test(value);
-      },
-      message:
-        "Password must be at least 6 characters and contain both letters and numbers.",
-    },
+user_password: {
+  type: String,
+  required: function () {
+    return !this.googleId;
   },
+  // validate: {
+  //   validator: function (value) {
+  //     // Skip validation if logging in with Google
+  //     if (this.googleId) return true;
+
+  //     // Password must have:
+  //     // - 1 uppercase
+  //     // - 1 lowercase
+  //     // - 1 number
+  //     // - 1 special character
+  //     // - min length 8
+  //     return /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/.test(value);
+  //   },
+  //   message:
+  //     "Password must be at least 8 characters long and contain one uppercase letter, one lowercase letter, one number, and one special character.",
+  // },
+},
+
 
   user_first_name: {
     type: String,
-    required: false,
+    required: true,
     trim: true,
     validate: {
       validator: v => !v || /^[A-Za-z]+(?: [A-Za-z]+)*$/.test(v),
@@ -38,7 +47,7 @@ const user_schema = new mongoose.Schema({
 
   user_last_name: {
     type: String,
-    required: false,
+    required: true,
     trim: true,
     validate: {
       validator: v => !v ||/^[A-Za-z]+(?: [A-Za-z]+)*$/.test(v),

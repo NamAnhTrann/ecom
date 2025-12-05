@@ -89,7 +89,7 @@ module.exports = {
     //check if user role is a seller
     if (user.user_role !== "seller") {
       return res
-        .status(401)
+        .status(400)
         .json({ message: "user is not a seller, thus cannot sell" });
     }
 
