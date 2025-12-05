@@ -231,7 +231,7 @@
       (click)="openConversation(chat.convo_id)"
     >
       <img
-        [src]="chat.user?.user_profile_img || ('https://i.pravatar.cc/100?u=' + chat.user?._id)"
+        [src]="chat.user?.user_profile_img"
         class="w-8 h-8 rounded-full ring-2 ring-indigo-100 dark:ring-amber-300/40"
       />
 
@@ -342,8 +342,7 @@
       >
         <img
           [src]="
-            chat.user?.user_profile_img ||
-            ('https://i.pravatar.cc/100?u=' + chat.user?._id)
+            chat.user?.user_profile_img
           "
           class="w-8 h-8 rounded-full ring-2 ring-indigo-100 dark:ring-amber-300/40"
         />
@@ -405,8 +404,7 @@
           @if (selectedReceiver) {
           <img
             [src]="
-              selectedReceiver.user_profile_img ||
-              'https://i.pravatar.cc/100?u=' + selectedReceiver._id
+              selectedReceiver.user_profile_img
             "
             class="w-10 h-10 rounded-full ring-2 ring-indigo-100 dark:ring-amber-300/40"
           />
@@ -441,8 +439,7 @@
         <div class="flex items-start gap-3">
           <img
             [src]="
-              m.sender_id.user_profile_img ||
-              'https://i.pravatar.cc/100?u=' + m.sender_id._id
+              m.sender_id.user_profile_img
             "
             class="w-8 h-8 rounded-full"
           />

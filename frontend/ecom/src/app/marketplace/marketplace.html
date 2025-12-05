@@ -7,29 +7,11 @@
     <div class="mb-12 border-b border-gray-200 dark:border-neutral-800 pb-8">
       <!-- Seller Header -->
       <div class="flex items-center justify-between mb-6">
-        <div class="flex items-center gap-3">
-          <img
-            [src]="
-              seller.user_profile_img ||
-              'https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?auto=format&fit=crop&w=400&q=60'
-            "
-            class="w-12 h-12 rounded-full object-cover ring-2 ring-indigo-100 dark:ring-amber-200/40"
-            alt="Seller"
-          />
-          <div>
-            <p
-              class="font-semibold text-gray-900 dark:text-neutral-100 text-lg"
-            >
-              {{ seller.user_first_name }} {{ seller.user_last_name }}
-            </p>
-            <p class="text-sm text-gray-500 dark:text-neutral-400">
-              {{ seller.user_email }}
-            </p>
-          </div>
-        </div>
-
         <!-- 3-dot menu -->
-        <div class="relative" (click)="seller.menuOpen = !seller.menuOpen">
+        <div
+          class="relative ml-auto"
+          (click)="seller.menuOpen = !seller.menuOpen"
+        >
           <button
             class="text-gray-500 hover:text-indigo-600 dark:text-neutral-400 dark:hover:text-amber-300 transition"
             title="More options"
@@ -46,20 +28,22 @@
             </svg>
           </button>
 
-          <!-- Dropdown -->
           @if (seller.menuOpen) {
           <div
             class="absolute right-0 mt-2 w-40 bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-700 rounded-lg shadow-lg z-30"
           >
-            @if (seller.user_id !== myId) {
-
             <button
               class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-neutral-200 hover:bg-gray-100 dark:hover:bg-neutral-800 transition"
-              (click)="startChat(seller.user_id)"
+              
             >
-              Message seller
+              Remove
             </button>
-            }
+            <button
+              class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-neutral-200 hover:bg-gray-100 dark:hover:bg-neutral-800 transition"
+              
+            >
+              Edit
+            </button>
           </div>
           }
         </div>
@@ -187,8 +171,9 @@
 
               <!-- Comments Section -->
               <div
-                class="mt-3 border-t border-gray-200 dark:border-neutral-800 pt-3"
+                class="mt-3 border-t border-gray-200 dark:border-neutral-800 pt-3 flex items-center justify-between"
               >
+                <!-- Left: Comments Toggle -->
                 <button
                   (click)="toggleComments(product)"
                   class="text-sm text-gray-500 dark:text-neutral-400 hover:underline"
@@ -200,39 +185,14 @@
                   {{ product.comments_count || 0 }} comments }
                 </button>
 
-                @if (product.showComments) {
-                <div
-                  class="mt-3 max-h-60 overflow-y-auto border rounded-lg p-3 bg-gray-50 dark:bg-neutral-800 scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-neutral-600"
+                <!-- Right: Message Seller -->
+                @if (seller.user_id !== myId) {
+                <button
+                  (click)="startChat(product.user_id)"
+                  class="text-sm font-semibold text-indigo-600 dark:text-amber-300 hover:underline transition"
                 >
-                  @for (comment of product.comments; track comment._id) {
-                  <div class="text-sm text-gray-700 dark:text-neutral-200 mb-2">
-                    <span
-                      class="font-semibold text-gray-900 dark:text-neutral-100"
-                      >{{ comment.user_id?.user_first_name }}:</span
-                    >
-                    {{ comment.text }}
-                  </div>
-                  }
-
-                  <!-- Add Comment -->
-                  <div class="flex items-center mt-2">
-                    <input
-                      [(ngModel)]="product.new_comment"
-                      placeholder="Add a comment..."
-                      (keydown.enter)="addComment(product)" 
-                      class="flex-1 border border-gray-300 dark:border-neutral-700 rounded-lg px-3 py-1 text-sm bg-white dark:bg-neutral-900 text-gray-800 dark:text-neutral-100 focus:ring-2 focus:ring-indigo-300 dark:focus:ring-amber-300"
-                    />
-                    <button
-                      (click)="addComment(product)"
-                      [disabled]="
-                        !product.new_comment || !product.new_comment.trim()
-                      "
-                      class="ml-2 text-indigo-600 dark:text-amber-300 text-sm font-semibold hover:underline disabled:text-gray-400 disabled:cursor-not-allowed"
-                    >
-                      Post
-                    </button>
-                  </div>
-                </div>
+                  Message
+                </button>
                 }
               </div>
             </div>
